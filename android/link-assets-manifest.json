@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Gluten-SemiBold.ttf",
+      "sha1": "742f1789224fe4a6745c178b4f004fa137c2c3e6"
+    },
+    {
+      "path": "assets/fonts/Gluten.ttf",
+      "sha1": "ea05ce5ef834f923f7a5afdb39b55473b4e2bc95"
+    },
+    {
+      "path": "assets/fonts/Roboto-Light.ttf",
+      "sha1": "18788c5d630fa695f9283f6393bfa541b2031508"
+    },
+    {
+      "path": "assets/fonts/Roboto-Medium.ttf",
+      "sha1": "3c6a09fcc6a454924c81af7dff94fc6d399ed79b"
+    },
+    {
+      "path": "assets/fonts/Roboto-Regular.ttf",
+      "sha1": "56c5c0d38bde4c1f1549dda43db37b09c608aad3"
+    },
+    {
+      "path": "assets/fonts/RobotoSlab-SemiBold.ttf",
+      "sha1": "bfa8c530ab10e9db394bc3d1f57a46c5a4e7c859"
+    }
+  ]
+}
