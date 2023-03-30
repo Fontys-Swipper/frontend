@@ -1,5 +1,5 @@
 import React from "react";
-import {Image, Text, View } from "react-native";
+import {Image, Text, View, StyleSheet } from "react-native";
 import { COLORS } from "../../assets/colors";
 import dogimage from "../../assets/images/dog_image.jpg"
 
@@ -9,40 +9,20 @@ import dogimage from "../../assets/images/dog_image.jpg"
 
 const Matchcard = ({fromtop, fromleft}) => {
     return (
-        <View style={{
-            position: "absolute",
-            top: fromtop,
-            left: fromleft,
-            backgroundColor: COLORS.background,
-            borderRadius: 5,
-            borderWidth: 3,
-            borderColor: COLORS.primary,
-            height: 489,
-            width: 262,
-          }}>
-            <View style={{
-                flexDirection: "column",
-            }}>
-                <Image source={dogimage}
-                    style={{
-                        alignSelf: "center",
-                        marginTop: 5,
-                        maxHeight: 400,
-                        maxWidth: 248
-                    }} 
-                />
-                <View style={{
-                    flexDirection: "row",
-                    marginTop: 15
-                }}>
-                    <View style={{flex: 2, marginLeft: 12}}>
-                        <Text style={{
-                            fontFamily: "RobotoSlab-SemiBold",
-                            fontSize: 20
-                            }}>Name</Text>
-                        <Text style={{
-                            fontFamily: "Roboto-Medium"
-                        }}>Other info</Text>
+        <View style={[
+            styles.container,
+            {
+                position: "absolute",
+                top: fromtop,
+                left: fromleft,
+            }
+        ]}>
+            <View style={{flexDirection: "column"}}>
+                <Image source={dogimage} style={[styles.image]}/>
+                <View style={[styles.row]}>
+                    <View style={[styles.textcontainer]}>
+                        <Text style={[styles.nametext]}>Name</Text>
+                        <Text style={[styles.infotext]}>Other info</Text>
                     </View>
                     <View style={{flex: 0.5}}>
                         <Text>Like</Text>
@@ -53,4 +33,38 @@ const Matchcard = ({fromtop, fromleft}) => {
     )
 }
 
+const styles = StyleSheet.create({
+    container: {       
+        backgroundColor: COLORS.background,
+        borderRadius: 5,
+        borderWidth: 3,
+        borderColor: COLORS.primary,
+        height: 489,
+        width: 262,
+    },
+    image: {
+        alignSelf: "center",
+        marginTop: 5,
+        maxHeight: 400,
+        maxWidth: 248
+    },
+    row: {
+        flexDirection: "row",
+        marginTop: 15  
+    },
+    textcontainer: {
+        flex: 2, 
+        marginLeft: 12
+    },
+    nametext: {
+        fontFamily: "RobotoSlab-SemiBold",
+        fontSize: 20
+    },
+    infotext: {
+        fontFamily: "Roboto-Medium"
+    },
+
+})
+
 export default Matchcard;
+

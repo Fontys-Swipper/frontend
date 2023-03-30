@@ -3,15 +3,11 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import { COLORS } from "../../assets/colors";
 import dogimage from "../../assets/images/dog_image.jpg"
 
-
-const Feedcard = () => {
+const Listingcard = () => {
     return (
         <View style={[styles.container]}>
-            <Image source={dogimage} style={[styles.image]}/>
-            <View style={{marginTop: 12}}>
-                <Text style={[styles.nametext]}>Name</Text>
-                <Text style={[styles.infotext]}>Type</Text>
-            </View>
+            <Image source={dogimage} style={[styles.image]}/>         
+            <Text style={[styles.nametext]}>Name</Text>
         </View>
     )
 }
@@ -19,28 +15,26 @@ const Feedcard = () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: COLORS.background,
-        height: 113,
+        height: 67,
         width: 308,
         borderRadius: 5,
         borderWidth: 2,
         borderColor: COLORS.primary,
         flexDirection: "row",
-        gap: 20,
+        gap: 45,
     },
     image: {
-        marginLeft: 20,
         alignSelf: "center",
-        maxHeight: 80,
-        maxWidth: 80,  
+        marginLeft: 20,
+        maxHeight: 50,
+        maxWidth: 50,  
         borderRadius: 50,
     },
     nametext: {
-        fontFamily: "RobotoSlab-SemiBold",
+        fontFamily: "Roboto-Regular",
         fontSize: 20,
-    },
-    infotext: {
-        fontFamily: "Roboto-Regular"
+        alignSelf: "center",
     },
 })
 
-export default Feedcard;
+export default Listingcard;
