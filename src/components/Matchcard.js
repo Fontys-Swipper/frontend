@@ -21,11 +21,11 @@ const Matchcard = ({fromtop, fromleft}) => {
                 <Image source={dogimage} style={[styles.image]}/>
                 <View style={[styles.row]}>
                     <View style={[styles.textcontainer]}>
-                        <Text style={[styles.nametext]}>Name</Text>
+                        <Text adjustsFontSizeToFit numberOfLines={1} style={[styles.nametext]}>Strawberry</Text>
                         <Text style={[styles.infotext]}>Other info</Text>
                     </View>
-                    <View style={{flex: 0.5}}>
-                        <Text>Like</Text>
+                    <View style={{flex: 0.5, alignSelf: "center"}}>
+                        <Text style={{}}>Like</Text>
                     </View>
                 </View>
             </View>
