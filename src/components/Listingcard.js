@@ -7,7 +7,8 @@ const Listingcard = () => {
     return (
         <View style={[styles.container]}>
             <Image source={dogimage} style={[styles.image]}/>         
-            <Text style={[styles.nametext]}>Name</Text>
+            <Text adjustsFontSizeToFit numberOfLines={1} 
+            style={[styles.nametext]}>Strawberry</Text>
         </View>
     )
 }
@@ -31,9 +32,10 @@ const styles = StyleSheet.create({
         borderRadius: 50,
     },
     nametext: {
-        fontFamily: "Roboto-Regular",
+        fontFamily: "RobotoSlab-SemiBold",
         fontSize: 20,
         alignSelf: "center",
+        width: 180,
     },
 })
 

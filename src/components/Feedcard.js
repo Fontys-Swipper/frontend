@@ -11,10 +11,12 @@ const Feedcard = () => {
                 <View style={{flexDirection: "row"}}>
                     <Text adjustsFontSizeToFit numberOfLines={1} 
                     style={[styles.nametext]}>Strawberry</Text>
-                    <Text style={[styles.pricetext]}>50$</Text>
+                    <Text adjustsFontSizeToFit numberOfLines={1}
+                    style={[styles.pricetext]}>50€</Text>
                 </View>
                 <Text style={[styles.infotext]}>Type</Text>
-                <Text style={{marginTop: 15}}>31.3.2023</Text>
+                <Text style={[styles.infotext]}>Young</Text>
+                <Text style={{marginTop: 10, alignSelf: "flex-start"}}>31.3.2023</Text>
             </View>
         </View>
     )
@@ -41,17 +43,18 @@ const styles = StyleSheet.create({
     nametext: {
         fontFamily: "RobotoSlab-SemiBold",
         fontSize: 20,
-        width: 135,
+        width: 130,
     },
     infotext: {
         fontFamily: "Roboto-Regular"
     },
     pricetext: {
         position: "absolute",
-        left: 135,
+        left: 130,
         fontFamily: "Roboto-Regular", 
         fontSize: 15,
         alignSelf: "center",
+        maxWidth: 55,
     },
 })
 

@@ -2,11 +2,8 @@ import React from "react";
 import {Image, Text, View, StyleSheet } from "react-native";
 import { COLORS } from "../../assets/colors";
 import dogimage from "../../assets/images/dog_image.jpg"
-
-// var dogimage = this.props.active 
-// ? require("../../assets/images/dog_image.jpg")
-// : require("")
-
+import Btn_like from "./buttons/Btn_like";
+ 
 const Matchcard = ({fromtop, fromleft}) => {
     return (
         <View style={[
@@ -21,11 +18,18 @@ const Matchcard = ({fromtop, fromleft}) => {
                 <Image source={dogimage} style={[styles.image]}/>
                 <View style={[styles.row]}>
                     <View style={[styles.textcontainer]}>
-                        <Text adjustsFontSizeToFit numberOfLines={1} style={[styles.nametext]}>Strawberry</Text>
-                        <Text style={[styles.infotext]}>Other info</Text>
+                        <View style={{flexDirection: "row", gap: 20}}>
+                            <Text adjustsFontSizeToFit numberOfLines={1} 
+                                style={[styles.nametext]}>Strawberry
+                            </Text>
+                            <Text adjustsFontSizeToFit numberOfLines={1} 
+                            style={[styles.price]}>50€</Text>
+                        </View>
+                        <Text style={[styles.infotext]}>Type</Text>
+                        <Text style={[styles.infotext]}>Young</Text>
                     </View>
-                    <View style={{flex: 0.5, alignSelf: "center"}}>
-                        <Text style={{}}>Like</Text>
+                    <View style={[styles.buttoncontainer]}>
+                        <Btn_like/>
                     </View>
                 </View>
             </View>
@@ -50,20 +54,30 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: "row",
-        marginTop: 15  
     },
     textcontainer: {
         flex: 2, 
-        marginLeft: 12
+        marginLeft: 12,
+        alignSelf: "center"
     },
     nametext: {
         fontFamily: "RobotoSlab-SemiBold",
-        fontSize: 20
+        fontSize: 20,
+        maxWidth: 140,
     },
     infotext: {
         fontFamily: "Roboto-Medium"
     },
-
+    price: {
+        fontFamily: "Roboto-Medium", 
+        fontSize: 15,
+        alignSelf: "center",
+        maxWidth: 50,
+    },
+    buttoncontainer: {
+        flex: 0.7, 
+        marginTop: 5,
+    }
 })
 
 export default Matchcard;
