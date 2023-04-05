@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialIcons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 // Screens
+import Home from '../views/Home';
 import Feed from '../views/Feed';
 import Match from '../views/Match';
 import Favorites from '../views/Favorites';
@@ -14,7 +15,13 @@ function NavigationBarContainer() {
       <Tab.Navigator
         initialRouteName="Feed"
         screenOptions={{
-          tabBarActiveTintColor: '#e91e63',
+          tabBarShowLabel: false,
+          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: 'black',
+          tabBarStyle: {
+            height: 56,
+            backgroundColor: '#FAAF6C',
+          }
         }}
       >
         <Tab.Screen
