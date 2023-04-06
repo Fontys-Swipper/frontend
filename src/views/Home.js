@@ -1,9 +1,6 @@
 import React from "react"; 
-
 import {Text, View, ToastAndroid, Button} from "react-native"
-
 import { COLORS } from "../../assets/colors.js"
-
 
 const Home = ({navigation}) => {
 
@@ -11,7 +8,7 @@ const Home = ({navigation}) => {
         <View>
             <Text>
                 This is home screen
-            </Text> */}
+            </Text> 
         </View>      
     );
 }
