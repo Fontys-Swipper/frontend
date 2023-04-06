@@ -11,7 +11,7 @@ const Home = ({navigation}) => {
         <View>
             <Text>
                 This is home screen
-            </Text> */}
+            </Text> 
         </View>      
     );
 }
