@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Carousel, { getInputRangeFromIndexes } from 'react-native-snap-carousel';
 import { Text, View, StyleSheet, Image, Dimensions} from 'react-native';
 import { COLORS } from "../../assets/colors";
-import dogimage from "../../assets/images/dog_image.jpg"
 import Btn_like from "./buttons/Btn_like";
 
 export default class Cardcarousel extends Component {
@@ -14,28 +13,46 @@ export default class Cardcarousel extends Component {
           // Mock data
           carouselItems: [
           {
-              title:"Item 1",
-              text: "Text 1",
+              name:"Daisy",
+              type: "Border Terrier",
+              age: "Young",
+              price: "100€",
+              image: require("../../assets/images/dog-gba5dc7061_1920.jpg"),
           },
           {
-              title:"Item 2",
-              text: "Text 2",
-          },
-          {
-              title:"Item 3",
-              text: "Text 3",
-          },
-          {
-              title:"Item 4",
-              text: "Text 4",
-          },
-          {
-              title:"Item 5",
-              text: "Text 5",
-          },
-          {
-            title:"Item 6",
-            text: "Text 5",
+            name:"Luna",
+            type: "Boxer",
+            age: "Old",
+            price: "50€",
+            image: require("../../assets/images/akita-g893e7ab22_1920.jpg"),
+        },
+        {
+            name:"Cooper",
+            type: "American Bulldog",
+            age: "Old",
+            price: "500€",
+            image: require("../../assets/images/labrador-retriever-gb2d619e6b_1920.jpg"),
+        },
+        {
+            name:"Milo",
+            type: "Spaniel",
+            age: "Young",
+            price: "150€",
+            image: require("../../assets/images/dog_image.jpg"),
+        },
+        {
+            name:"Lucy",
+            type: "Terrier",
+            age: "Young",
+            price: "200€",
+            image: require("../../assets/images/malinois-g4dd9f780d_1920.jpg"),
+        },
+        {
+            name:"Bella",
+            type: "Alaskan Husky",
+            age: "Old",
+            price: "250€",
+            image: require("../../assets/images/jack-russell-g49275d8de_1920.jpg"),
         },
         ],
         }
@@ -55,8 +72,8 @@ export default class Cardcarousel extends Component {
         const sizeRef = carouselProps.vertical ? carouselProps.itemHeight : carouselProps.itemWidth;
         const translateProp = carouselProps.vertical ? 'translateY' : 'translateX';
     
-        const card1Scale = 0.9;
-        const card2Scale = 0.8;
+        const card1Scale = 1;
+        const card2Scale = 1;
     
         cardOffset = !cardOffset && cardOffset !== 0 ? 18 : cardOffset;
     
@@ -106,18 +123,18 @@ export default class Cardcarousel extends Component {
                 styles.container,
             ]}>
                 <View style={{flexDirection: "column"}}>
-                    <Image source={dogimage} style={[styles.image]}/>
+                    <Image source={item.image} style={[styles.image]}/>
                     <View style={[styles.row]}>
                         <View style={[styles.textcontainer]}>
                             <View style={{flexDirection: "row", gap: 20}}>
                                 <Text adjustsFontSizeToFit numberOfLines={1} 
-                                    style={[styles.nametext]}>{item.title}
+                                    style={[styles.nametext]}>{item.name}
                                 </Text>
                                 <Text adjustsFontSizeToFit numberOfLines={1} 
-                                style={[styles.price]}>50€</Text>
+                                style={[styles.price]}>{item.price}</Text>
                             </View>
-                            <Text style={[styles.infotext]}>Type</Text>
-                            <Text style={[styles.infotext]}>Young</Text>
+                            <Text style={[styles.infotext]}>{item.type}</Text>
+                            <Text style={[styles.infotext]}>{item.age}</Text>
                         </View>
                         <View style={[styles.buttoncontainer]}>
                             <Btn_like/>
