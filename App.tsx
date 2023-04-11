@@ -14,7 +14,11 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen
           name = "Home"
-          component={Home}
+          component={NavigationBarContainer}
+          options={{
+            title:"Home",
+            headerShown: false
+          }}
           
         />
       </Stack.Navigator>
