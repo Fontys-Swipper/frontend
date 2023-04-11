@@ -4,6 +4,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/views/Home';
 import NavigationBarContainer from './src/components/NavigationBarContainer';
+import AddListing from './src/views/AddListingPageOne';
+import AddListingPageTwo from './src/views/AddListingPageTwo';
+import AddListingPageOne from './src/views/AddListingPageOne';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,9 +16,9 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name = "Home"
-          component={NavigationBarContainer}
-          options={{title:"Home"}}
+          name = "Add Listing"
+          component={AddListingPageOne}
+          
         />
       </Stack.Navigator>
     </NavigationContainer>

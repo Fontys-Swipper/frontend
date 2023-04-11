@@ -6,7 +6,7 @@ const InputField = ({text_title=""}) => {
 
   return (
     
-    <View>
+    <View style={{}}>
       <Text style={styles.text}> {text_title}</Text>
       <TextInput
         required
@@ -21,22 +21,22 @@ const InputField = ({text_title=""}) => {
 
 const styles = StyleSheet.create({
   input: {
-
+    alignSelf:'center',
+    justifyContent:'center',
     fontFamily:"Roboto-Regular",
     fontSize: 15,
-    height: 40,
-    marginTop:1,
-    marginLeft: "12%",
-    marginRight:'12%',
+    height: 43,
+    width:258,
     borderBottomWidth:1,
-    borderBottomColor:COLORS.primary,
-    padding: 10, 
+    borderBottomColor:COLORS.primary, 
     
   },
   text:{
     fontFamily:"RobotoSlab-Regular",
     fontSize: 13,
-    marginLeft:"15%",
+    width:137,
+    height:37,
+    marginLeft:90,
     fontWeight:"bold",
     textDecorationColor: COLORS.black
  }
