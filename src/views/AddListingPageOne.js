@@ -6,33 +6,23 @@ import Btn_solid_regular from '../components/buttons/Btn_solid_regular';
 import NavigationBarContainer from '../components/NavigationBarContainer';
 import {COLORS} from '../../assets/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import TextHeading from './TextHeading';
 
 const AddListingPageOne = ({navigation}) => {
   return (
-    <SafeAreaView style={{flex: 1, position: 'relative'}}>
+    <SafeAreaView style={{flex: 1, position: 'absolute', height:"100%" , width:"100%"}}>
       <View
         style={{
           flex: 1,
           backgroundColor: COLORS.background,
         }}>
-        <Text
-          style={{
-            // flex: 1,
-            fontFamily: 'Roboto-Regular',
-            fontSize: 32,
-            marginLeft: '4%',
-            padding: 20,
-            fontWeight: 'bold',
-            fontStyle: 'normal',
-            textDecorationColor: COLORS.black,
-          }}>
-          
-          Add Listing
-        </Text>
-        <View style={{marginBottom:31}}>
+       <View>
+        <TextHeading text_title='Add Listing'/>
+       </View>
+        <View style={{marginBottom:33}}>
           <DropDown placehoder="Type" choice={['Dog', 'Cat']} />
         </View>
-        <View style={{marginBottom:31}}>
+        <View style={{marginBottom:24}}>
           <DropDown
             search="true"
             searchPlaceholder="search for breed... "
@@ -40,7 +30,7 @@ const AddListingPageOne = ({navigation}) => {
             choice={['Golden Retriever', 'BullDog', 'Huskey']}
           />
         </View>
-        <View style={{marginBottom:31}}>
+        <View style={{marginBottom:24}}>
           <InputField text_title="Name" />
         </View>
         <View style={{marginBottom:28}}>

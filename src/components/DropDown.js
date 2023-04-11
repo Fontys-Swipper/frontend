@@ -16,7 +16,7 @@ const DropDown = ({choice = [], placehoder = '' ,searchPlaceholder='' , search='
           borderColor: COLORS.primary,
           borderWidth: 0,
           marginRight: '16%',
-          marginLeft:'16%',
+          marginLeft:'16%'
         
         }}
         dropdownItemStyles={{
