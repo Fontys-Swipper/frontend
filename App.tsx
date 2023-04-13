@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/views/Home';
 import Start from './src/views/Start';
 import Login from './src/views/Login';
+import NavigationBarContainer from './src/components/NavigationBarContainer';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,8 +20,12 @@ const App = () => {
       >
         <Stack.Screen
           name = "Home"
-          component={Home}
-          options={{title:"Home"}}
+          component={NavigationBarContainer}
+          options={{
+            title:"Home",
+            headerShown: false
+          }}
+          
         />
         <Stack.Screen
           name = 'Start'
