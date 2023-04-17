@@ -24,7 +24,7 @@ export default class Cardcarousel extends Component {
             type: "Boxer",
             age: "Old",
             price: "50€",
-            image: require("../../assets/images/akita-g893e7ab22_1920.jpg"),
+            image: require("../../assets/images/akita.jpg"),
         },
         {
             name:"Cooper",

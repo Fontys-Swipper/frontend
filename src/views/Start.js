@@ -19,7 +19,7 @@ const Start = ({ navigation }) => {
                     <Text style={styles.text}>Swipper</Text>
                     <View style={styles.buttonsContainer}>
                         <Btn_solid_big onPress={() => navigation.navigate('Login')} title="Login"/>
-                        <Btn_outline_big  title="Sign up"/>
+                        <Btn_outline_big onPress={() => navigation.navigate('SignUp')}  title="Sign up"/>
                     </View>
                 </View>
             </ImageBackground>     
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     innerContainer: {
         flex: 1,
-        backgroundColor: COLORS.black + '70',
+        backgroundColor: COLORS.black + 90,
         alignItems: "center",
         justifyContent: "space-between",
     },
