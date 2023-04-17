@@ -1,18 +1,21 @@
 import React from 'react';
 import {View, StyleSheet, TextInput, Text} from 'react-native';
 import { COLORS } from '../../assets/colors'
-const InputField = ({text_title=""}) => {
+
+const InputField = ({text_title="", text_color=COLORS.black, onChangeText, defaultValue = '', value }) => {
   const [text, setText] = React.useState('');
 
+
   return (
-    
     <View style={{}}>
-      <Text style={styles.text}> {text_title}</Text>
+      <Text style={[styles.text, styles.text.color = text_color]}> {text_title}</Text>
       <TextInput
         required
         style={styles.input}
-        onChangeText={newText=> setText(newText)}
-        defaultValue={text}
+        color={text_color}
+        value={value}
+        onChangeText={onChangeText}
+        defaultValue= {defaultValue}
       />
     
     </View>
@@ -23,22 +26,19 @@ const styles = StyleSheet.create({
   input: {
     alignSelf:'center',
     justifyContent:'center',
-    fontFamily:"Roboto-Regular",
+    fontFamily:"Roboto-Light",
     fontSize: 15,
     height: 43,
     width:258,
     borderBottomWidth:1,
     borderBottomColor:COLORS.primary, 
-    
   },
   text:{
-    fontFamily:"RobotoSlab-Regular",
-    fontSize: 13,
+    fontFamily:"Roboto-Light",
+    fontSize: 15,
     width:137,
-    height:37,
-    marginLeft:90,
-    fontWeight:"bold",
-    textDecorationColor: COLORS.black
+    marginLeft:80,
+    color: COLORS.black, 
  }
 });
 
