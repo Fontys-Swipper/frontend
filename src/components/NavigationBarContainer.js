@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { COLORS } from "../../assets/colors";
 
 // Screens
 import Home from '../views/Home';
@@ -16,11 +17,11 @@ function NavigationBarContainer() {
         initialRouteName="Feed"
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarActiveTintColor: 'white',
-          tabBarInactiveTintColor: 'black',
+          tabBarActiveTintColor: COLORS.white,
+          tabBarInactiveTintColor: COLORS.black,
           tabBarStyle: {
             height: 56,
-            backgroundColor: '#FAAF6C',
+            backgroundColor: COLORS.primary,
           }
         }}
       >
@@ -28,6 +29,7 @@ function NavigationBarContainer() {
           name="Feed"
           component={Feed}
           options={{
+            headerShown: false,
             tabBarLabel: 'Feed',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="paw" color={color} size={size} />
@@ -38,6 +40,7 @@ function NavigationBarContainer() {
           name="Match"
           component={Match}
           options={{
+            headerShown: false,
             tabBarLabel: 'Match',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="gesture-swipe" color={color} size={size} />
@@ -48,6 +51,7 @@ function NavigationBarContainer() {
           name="Favorites"
           component={Favorites}
           options={{
+            headerShown: false,
             tabBarLabel: 'Favorites',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="cards-heart-outline" color={color} size={size} />
@@ -58,6 +62,7 @@ function NavigationBarContainer() {
           name="Chat"
           component={Chat}
           options={{
+            headerShown: false,
             tabBarLabel: 'Chat',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="chat" color={color} size={size} />
