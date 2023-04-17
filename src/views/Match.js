@@ -1,12 +1,21 @@
 import React from "react"; 
 import {Text, View} from "react-native"
 import Cardcarousel from "../components/CardCarousel";
+import CardDeck from "../components/CardDeck";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const Match = ({navigation}) => {
     return (
-        <View style={{marginLeft: 30, marginTop: 70}}>
-            <Cardcarousel/>
-        </View>        
+        <SafeAreaView>
+        <View style={{    flex:1,
+            width:"100%",
+            alignItems: 'center',
+            }}>
+            {/* <Cardcarousel/> */}
+            <CardDeck/>
+        </View>       
+        </SafeAreaView> 
     );
 }
 

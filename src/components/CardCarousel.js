@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Carousel, { getInputRangeFromIndexes } from 'react-native-snap-carousel';
-import { Text, View, StyleSheet, Image, Dimensions} from 'react-native';
+import { Text, View, StyleSheet, Image, Dimensions, Alert} from 'react-native';
 import { COLORS } from "../../assets/colors";
 import Btn_like from "./buttons/Btn_like";
+
 
 export default class Cardcarousel extends Component {
 
@@ -116,7 +117,7 @@ export default class Cardcarousel extends Component {
         }
     }
 
- 
+
     _renderItem = ({item, index}) => {
         return (
             <View style={[
@@ -137,7 +138,12 @@ export default class Cardcarousel extends Component {
                             <Text style={[styles.infotext]}>{item.age}</Text>
                         </View>
                         <View style={[styles.buttoncontainer]}>
-                            <Btn_like/>
+                            <Btn_like onPress={() => {
+                                var array = [...this.state.carouselItems]
+                                array.splice(index, 1)
+                                this.setState({carouselItems: array})
+                                this.carousel.snapToItem(index - 1, false)                                
+                            }}/>
                         </View>
                     </View>
                 </View>
