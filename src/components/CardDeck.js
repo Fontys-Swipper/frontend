@@ -1,10 +1,9 @@
-import { SafeAreaView } from 'react-native-safe-area-context';
-import React, {useState} from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import {PanGestureHandler, PanGestureHandlerGestureEvent} from 'react-native-gesture-handler';
+import React from "react"
+import { StyleSheet, Text, View, Image, PanResponder, Animated, Dimensions, Pressable} from 'react-native';
 import { COLORS } from "../../assets/colors";
 import Btn_like from "./buttons/Btn_like";
-import Animated, { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+
+const screen_widht = Dimensions.get("window").width
 
 const cards = [
     {
@@ -19,7 +18,7 @@ const cards = [
       type: "Boxer",
       age: "Old",
       price: "50€",
-      image: require("../../assets/images/akita-g893e7ab22_1920.jpg"),
+      image: require("../../assets/images/akita.jpg"),
   },
   {
       name:"Cooper",
@@ -52,68 +51,285 @@ const cards = [
   ]
 
 
-const CardDeck = () => {
-    const [card, setCard] = useState(cards[0])
-    const translateX = useSharedValue(0)
-    // const translateY = new Animated.Value(0)
+export default class AnimalCards extends React.Component {
 
-    // const handlePan = Animated.event(
-    //     [{nativeEvent:{translationX:translateX,translationY:translateY}}],{useNativeDriver:true}
-    // )
+    constructor(){
+        super()
 
-    const panGestureEvent = useAnimatedGestureHandler({
-      onStart: (event, context) => {
-        context.translateX = translateX.value
-      },
-      onActive: (event, context) => {
-        translateX.value = event.translationX + context.translateX
-      },  
-    })
-
-    const rStyle = useAnimatedStyle(() => {
-        return {
-            transform: [
-                {
-                    translateX: translateX.value
-                }
-            ]
+        this.position = new Animated.ValueXY()
+        this.state = {
+            currentIndex: 0
         }
-    })
 
-    return(
-        <PanGestureHandler onGestureEvent={panGestureEvent}>
-            <Animated.View style={[
-                styles.container,
-                rStyle
-            ]}>
-                <View style={{flexDirection: "column"}}>
-                    <Image source={card.image} style={[styles.image]}/>
-                    <View style={[styles.row]}>
-                        <View style={[styles.textcontainer]}>
-                            <View style={{flexDirection: "row", gap: 20}}>
-                                <Text adjustsFontSizeToFit numberOfLines={1} 
-                                    style={[styles.nametext]}>{card.name}
-                                </Text>
-                                <Text adjustsFontSizeToFit numberOfLines={1} 
-                                style={[styles.price]}>{card.price}</Text>
+
+        this.showAnimalProfile = () => {
+            console.log("Showing "+cards[this.state.currentIndex].name+"'s profile")
+        }
+
+        this.addToFavorites = (name) => {
+            console.log(name+ " added to favorites")
+        }  
+
+        this.rotate = this.position.x.interpolate({
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:["-5deg", "0deg","5deg"],
+            extrapolate: "clamp"
+        })
+
+        this.rotateAndTranslate = {
+            transform: [{
+                rotate: this.rotate   
+            },
+            {
+                translateX: this.position.x
+            }
+        ],
+            ...this.position.getTranslateTransform()
+        }
+
+        // Card1 animations
+        this.nextCardPositionX = this.position.x.interpolate({
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:[0, -13, 0],
+            extrapolate: "clamp"
+        })
+        this.nextCardPositionY = this.position.x.interpolate({
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:[0, -10, 0],
+            extrapolate: "clamp"
+        })
+        //=================
+
+        // Card2 animations
+        this.card2Opacity = this.position.x.interpolate({
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:[1, 0.6, 1],
+            extrapolate: "clamp"
+        })
+        this.card2PositionX = this.position.x.interpolate({
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:[-13, -23, -13],
+            extrapolate: "clamp"
+        })
+        this.card2PositionY = this.position.x.interpolate({
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:[-10, -20, -10],
+            extrapolate: "clamp"
+        })
+        //=================
+
+        // Card3 animations
+        this.card3Opacity = this.position.x.interpolate({
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:[0.6, 0, 0.6],
+            extrapolate: "clamp"
+        })
+        this.card3PositionX = this.position.x.interpolate({
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:[-23, -10, -23],
+            extrapolate: "clamp"
+        })
+        this.card3PositionY = this.position.x.interpolate({
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:[-20, -10, -20],
+            extrapolate: "clamp"
+        })
+        //=================
+
+        this.PanResponder = PanResponder.create({
+            onStartShouldSetPanResponder:(event, gestureState) => true,
+            onPanResponderMove:(event, gestureState) => {
+                this.position.setValue({x: gestureState.dx, y: gestureState.dy})
+            },
+            onPanResponderRelease:(event, gestureState) => {
+                console.log(gestureState.dx)
+                if (gestureState.dx > 120) {
+                    this.addToFavorites(cards[this.state.currentIndex].name)
+                    Animated.spring(this.position, {
+                        toValue: {x: screen_widht + 100, y: gestureState.dy},
+                        useNativeDriver: true
+                    }).start(() => {
+                        this.setState({ currentIndex: this.state.currentIndex + 1}, () => {
+                            this.position.setValue({x: 0, y: 0})
+                        })
+                    })
+                }
+                else if (gestureState.dx < -120) {
+                    Animated.spring(this.position, {
+                        toValue: {x: -screen_widht - 100, y: gestureState.dy},
+                        useNativeDriver: true
+                    }).start(() => {
+                        this.setState({ currentIndex: this.state.currentIndex + 1}, () => {
+                            this.position.setValue({x: 0, y: 0})
+                        })
+                    })
+                }
+                else {
+                    Animated.spring(this.position, {
+                        toValue: { x: 0, y: 0},
+                        friction: 4,
+                        useNativeDriver: true
+                    }).start()
+                }
+            }
+        })
+    }
+
+
+
+    renderAnimal = () => {
+        return cards.map((item, i) => {
+            if (i < this.state.currentIndex) {
+                return null
+            }
+            else if (i == this.state.currentIndex) {         
+            return (
+                <Animated.View key={this.state.currentIndex}
+                {...this.PanResponder.panHandlers}
+                style={[
+                    this.rotateAndTranslate,
+                    styles.container,
+                ]}>
+                    <View style={{flexDirection: "column"}}>
+                        <Image source={item.image} style={[styles.image]}/>
+                        <View style={[styles.row]}>
+                            <View style={[styles.textcontainer]}>
+                                <View style={{flexDirection: "row", gap: 20}}>
+                                    <Pressable onPress={this.showAnimalProfile}>
+                                    <Text adjustsFontSizeToFit numberOfLines={1} 
+                                        style={[styles.nametext]}>{item.name}
+                                    </Text>
+                                    </Pressable>
+                                    <Text adjustsFontSizeToFit numberOfLines={1} 
+                                    style={[styles.price]}>{item.price}</Text>
+                                </View>
+                                <Text style={[styles.infotext]}>{item.type}</Text>
+                                <Text style={[styles.infotext]}>{item.age}</Text>
                             </View>
-                            <Text style={[styles.infotext]}>{card.type}</Text>
-                            <Text style={[styles.infotext]}>{card.age}</Text>
-                        </View>
-                        <View style={[styles.buttoncontainer]}>
-                            <Btn_like onPress={() => {                                
-                            }}/>
+                            <View style={[styles.buttoncontainer]}>
+                                <Btn_like onPress={() => {   
+                                    this.addToFavorites(item.name) 
+                                    Animated.spring(this.position, {
+                                        toValue: {x: screen_widht + 100, y: 0},
+                                        useNativeDriver: true
+                                    }).start(() => {
+                                        this.setState({ currentIndex: this.state.currentIndex + 1}, () => {
+                                            this.position.setValue({x: 0, y: 0})
+                                        })
+                                    })               
+                                }}/>
+                            </View>
                         </View>
                     </View>
-                </View>
-              </Animated.View>
-        </PanGestureHandler>
+                </Animated.View>
+              )
+            }
+            else if (i == this.state.currentIndex + 1){
+                return(
+                    <Animated.View 
+                    style={[
+                        {transform: [{translateX: this.nextCardPositionX},
+                        {translateY: this.nextCardPositionY}]},
+                        styles.container,
+                    ]}>
+                        <View style={{flexDirection: "column"}}>
+                                <Image source={item.image} style={[styles.image]}/>
+                            <View style={[styles.row]}>
+                                <View style={[styles.textcontainer]}>
+                                    <View style={{flexDirection: "row", gap: 20}}>
+                                        <Text adjustsFontSizeToFit numberOfLines={1} 
+                                            style={[styles.nametext]}>{item.name}
+                                        </Text>
+                                        <Text adjustsFontSizeToFit numberOfLines={1} 
+                                        style={[styles.price]}>{item.price}</Text>
+                                    </View>
+                                    <Text style={[styles.infotext]}>{item.type}</Text>
+                                    <Text style={[styles.infotext]}>{item.age}</Text>
+                                </View>
+                                <View style={[styles.buttoncontainer]}>
+                                    <Btn_like onPress={() => {                                
+                                    }}/>
+                                </View>
+                            </View>
+                        </View>
+                    </Animated.View>
+                )
+            }
+            else if (i == this.state.currentIndex + 2){
+                return(
+                    <Animated.View 
+                    style={[
+                        {opacity: this.card2Opacity},
+                        {transform: [{translateX: this.card2PositionX},
+                        {translateY: this.card2PositionY}]},
+                        styles.container,
+                    ]}>
+                        <View style={{flexDirection: "column"}}>
+                            <Image source={item.image} style={[styles.image]}/>
+                            <View style={[styles.row]}>
+                                <View style={[styles.textcontainer]}>
+                                    <View style={{flexDirection: "row", gap: 20}}>
+                                        <Text adjustsFontSizeToFit numberOfLines={1} 
+                                            style={[styles.nametext]}>{item.name}
+                                        </Text>
+                                        <Text adjustsFontSizeToFit numberOfLines={1} 
+                                        style={[styles.price]}>{item.price}</Text>
+                                    </View>
+                                    <Text style={[styles.infotext]}>{item.type}</Text>
+                                    <Text style={[styles.infotext]}>{item.age}</Text>
+                                </View>
+                                <View style={[styles.buttoncontainer]}>
+                                    <Btn_like onPress={() => {                                
+                                    }}/>
+                                </View>
+                            </View>
+                        </View>
+                    </Animated.View>
+                )
+            }
+            else if (i == this.state.currentIndex + 3){
+                return(
+                    <Animated.View 
+                    style={[
+                        {opacity: this.card3Opacity},
+                        {transform: [{translateX: this.card3PositionX},
+                        {translateY: this.card3PositionY}]},
+                        styles.container,
+                    ]}>
+                        <View style={{flexDirection: "column"}}>
+                            <Image source={item.image} style={[styles.image]}/>
+                            <View style={[styles.row]}>
+                                <View style={[styles.textcontainer]}>
+                                    <View style={{flexDirection: "row", gap: 20}}>
+                                        <Text adjustsFontSizeToFit numberOfLines={1} 
+                                            style={[styles.nametext]}>{item.name}
+                                        </Text>
+                                        <Text adjustsFontSizeToFit numberOfLines={1} 
+                                        style={[styles.price]}>{item.price}</Text>
+                                    </View>
+                                    <Text style={[styles.infotext]}>{item.type}</Text>
+                                    <Text style={[styles.infotext]}>{item.age}</Text>
+                                </View>
+                                <View style={[styles.buttoncontainer]}>
+                                    <Btn_like onPress={() => {                                
+                                    }}/>
+                                </View>
+                            </View>
+                        </View>
+                    </Animated.View>
+                )
+            }
+        }).reverse()
+    }
+
+    render(){
+    return (
+        <>
+        {this.renderAnimal()}
+        </>
     )
 }
-
-
-export default CardDeck;
-
+}
 
 
 const styles = StyleSheet.create({
@@ -124,6 +340,8 @@ const styles = StyleSheet.create({
         borderColor: COLORS.primary,
         height: 489,
         width: 262,
+        position: "absolute",
+        marginTop: 150
     },
     image: {
         alignSelf: "center",
@@ -158,4 +376,3 @@ const styles = StyleSheet.create({
         marginTop: 5,
     }
 })
-
