@@ -17,7 +17,6 @@ const DropDown = ({choice = [], placehoder = '' ,searchPlaceholder='' , search='
           borderWidth: 0,
           marginRight: '16%',
           marginLeft:'16%'
-        
         }}
         dropdownItemStyles={{
           padding: 10,

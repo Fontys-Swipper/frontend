@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
         height: 489,
         width: 262,
         position: "absolute",
-        marginTop: 150
+        marginTop: 100
     },
     image: {
         alignSelf: "center",

@@ -1,14 +1,18 @@
 import React from "react"; 
 import {StyleSheet, Text, View} from "react-native"
+import TopBar from '../components/TopBar'
 import { SafeAreaView } from "react-native-safe-area-context";
 import AnimalCards from "../components/CardDeck";
 
 const Match = ({navigation}) => {
     return (
         <SafeAreaView>
-        <View style={[styles.container]}>
-            <AnimalCards/>
-        </View>       
+            <View>
+                <TopBar/>
+            </View>
+            <View style={[styles.container]}>
+                <AnimalCards/>
+            </View>       
         </SafeAreaView> 
     );
 }
