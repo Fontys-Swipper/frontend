@@ -2,6 +2,7 @@ import React from "react"
 import { StyleSheet, Text, View, Image, PanResponder, Animated, Dimensions, Pressable} from 'react-native';
 import { COLORS } from "../../assets/colors";
 import Btn_like from "./buttons/Btn_like";
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const screen_widht = Dimensions.get("window").width
 
@@ -87,6 +88,12 @@ export default class AnimalCards extends React.Component {
             ...this.position.getTranslateTransform()
         }
 
+        this.likingOpacity = this.position.x.interpolate({
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:[0, 0, 1],
+            extrapolate: "clamp"
+        })
+
         // Card1 animations
         this.nextCardPositionX = this.position.x.interpolate({
             inputRange:[-screen_widht / 2, 0, screen_widht / 2],
@@ -108,7 +115,7 @@ export default class AnimalCards extends React.Component {
         })
         this.card2PositionX = this.position.x.interpolate({
             inputRange:[-screen_widht / 2, 0, screen_widht / 2],
-            outputRange:[-13, -23, -13],
+            outputRange:[-13, -26, -13],
             extrapolate: "clamp"
         })
         this.card2PositionY = this.position.x.interpolate({
@@ -126,7 +133,7 @@ export default class AnimalCards extends React.Component {
         })
         this.card3PositionX = this.position.x.interpolate({
             inputRange:[-screen_widht / 2, 0, screen_widht / 2],
-            outputRange:[-23, -10, -23],
+            outputRange:[-26, -10, -26],
             extrapolate: "clamp"
         })
         this.card3PositionY = this.position.x.interpolate({
@@ -190,6 +197,10 @@ export default class AnimalCards extends React.Component {
                     this.rotateAndTranslate,
                     styles.container,
                 ]}>
+                    <Animated.View 
+                    style={{position: "absolute", zIndex: 1000, top: 170, right: 70, opacity: this.likingOpacity}}>
+                        <Icon name="favorite" size={100} color={"#FF3333"}></Icon>
+                    </Animated.View>
                     <View style={{flexDirection: "column"}}>
                         <Image source={item.image} style={[styles.image]}/>
                         <View style={[styles.row]}>
