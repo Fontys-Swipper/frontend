@@ -4,18 +4,7 @@ import { COLORS } from "../../assets/colors";
 import logo from "../../assets/images/swipper-logo.png";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-// Screens
-import Profile from '../views/Profile';
-import Settings from '../views/Settings';
-
-const Stack = createStackNavigator();
-
-<Stack.Navigator>
-    <Stack.Screen name="Profile" component={Profile} />
-    <Stack.Screen name="Settings" component={Settings} />
-</Stack.Navigator>
 
 const TopBar = () => {
   const navigation = useNavigation();
