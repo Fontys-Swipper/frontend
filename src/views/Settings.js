@@ -1,5 +1,5 @@
 import React from "react"; 
-import {Text, View, ToastAndroid, Pressable} from "react-native"
+import {Text, View, Pressable} from "react-native"
 import { COLORS } from "../../assets/colors.js"
 import TopBar from '../components/TopBar'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -20,9 +20,8 @@ const Settings = ({navigation}) => {
                     <Text style={{fontFamily: "RobotoSlab-SemiBold", fontSize: 26}}>Settings</Text>
                 </View>
                 <View style={{alignItems: "center", marginTop: 50}}>
-                    <Btn_menu_underline title="Setting" icon="edit"/>
-                    <Btn_menu_underline title="E-mail" icon="edit"/>
-                    <Btn_menu_underline title="Password" icon="edit"/>
+                    <Btn_menu_underline onPress={() => navigation.navigate('ChangeMail')} title="E-mail" icon="edit"/>
+                    <Btn_menu_underline onPress={() => navigation.navigate('ChangePassword')} title="Password" icon="edit"/>
                     <Btn_menu_underline onPress={() => navigation.navigate('UserInfo')} title="User Information"/>
                     <Btn_menu_underline onPress={() => navigation.navigate('TermsOfService')} title="Terms of Service"/>
                 </View>
