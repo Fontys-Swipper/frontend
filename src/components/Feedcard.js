@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         borderColor: COLORS.primary,
         flexDirection: "row",
         gap: 20,
+        marginVertical: 2,
     },
     image: {
         marginLeft: 20,

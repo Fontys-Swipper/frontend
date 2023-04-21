@@ -10,6 +10,7 @@ import AddListingPageOne from './src/views/AddListingPageOne';
 import AddListingPageTwo from './src/views/AddListingPageTwo';
 import SignUp from './src/views/SignUp';
 import AddListingPageThree from './src/views/AddListingPageThree';
+import Feed from './src/views/Feed';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +33,7 @@ const App = () => {
         />
         <Stack.Screen
           name = 'Start'
-          component={Start}
+          component={NavigationBarContainer}
           options={{title:"Start"}}
         />
         <Stack.Screen
