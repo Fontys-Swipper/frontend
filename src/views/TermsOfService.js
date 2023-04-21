@@ -1,24 +1,17 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import TopBar from "../components/TopBar";
-import Icon from 'react-native-vector-icons/MaterialIcons'
-import { COLORS } from "../../assets/colors.js"
+import Btn_back_arrow from "../components/buttons/Btn_back_arrow";
 
 const TermsOfService = ({navigation}) => {
-
-
     return (
         <View>
             <View>
                 <TopBar/>
             </View>
-            <Pressable style={{marginLeft: 17, marginTop: 15}} onPress={() => navigation.navigate('Settings')}>
-                    <Icon name="arrow-back" size={24} color={COLORS.black}/>
-            </Pressable>
-            <View style={{marginLeft: 47, marginTop: 25}}>
-                    <Text style={{fontFamily: "RobotoSlab-SemiBold", fontSize: 26}}>Terms Of Service</Text>
-            </View>
-            <Text style={{marginHorizontal: 45, marginTop: 50}}>
+            <Btn_back_arrow onPress={() => navigation.navigate('Settings')}/>
+            <Text style={[styles.heading]}>Terms Of Service</Text>           
+            <Text style={[styles.text]}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Maecenas convallis fermentum nibh a porttitor. 
             Ut imperdiet vel ante quis sollicitudin. 
@@ -34,3 +27,16 @@ const TermsOfService = ({navigation}) => {
 }
 
 export default TermsOfService;
+
+const styles = StyleSheet.create({
+    heading: {
+        marginLeft: 47, 
+        marginTop: 25,
+        fontFamily: "RobotoSlab-SemiBold", 
+        fontSize: 26,
+    },
+    text: {
+        marginHorizontal: 45, 
+        marginTop: 50,
+    },
+})

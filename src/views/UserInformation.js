@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { View, Pressable, Text, ToastAndroid } from "react-native";
+import React, {useState } from "react";
+import { View, Text, ToastAndroid, StyleSheet } from "react-native";
 import TopBar from "../components/TopBar";
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { COLORS } from "../../assets/colors.js"
 import InputField from "../components/InputField";
 import Btn_outline_big from "../components/buttons/Btn_outline_big";
+import Btn_back_arrow from "../components/buttons/Btn_back_arrow";
 
 // User mockdata
 const UserInfo = [
@@ -49,45 +49,41 @@ const UserInformation = ({navigation}) => {
                 <TopBar/>
             </View>
             <View>
-                <Pressable style={{marginLeft: 17, marginTop: 15}} onPress={() => navigation.navigate('Settings')}>
-                    <Icon name="arrow-back" size={24} color={COLORS.black}/>
-                </Pressable>
-                <View style={{marginLeft: 47, marginTop: 25}}>
-                    <Text style={{fontFamily: "RobotoSlab-SemiBold", fontSize: 26}}>User Information</Text>
-                </View>
-                <View style={{marginTop: 50, gap: 20}}>
+                <Btn_back_arrow onPress={() => navigation.navigate('Settings')}/>              
+                <Text style={[styles.heading]}>User Information</Text>               
+                <View style={[styles.inputfiels]}>
                     <InputField 
                     text_title="Username" 
                     defaultValue=""
                     onChangeText={text => setUsername(text) + SetChanges(true)}
                     value={username}/>
-                    <View style={{position: "absolute", right: 70 ,top: -5}}>
+                    <View style={[styles.Icon1]}>
                         <Icon name="edit" size={24}/>
                     </View>
                     <InputField 
                     text_title="Fistname" 
                     onChangeText={text => setFirstname(text) + SetChanges(true)} 
                     value={firstname}/>
-                    <View style={{position: "absolute", right: 70 ,top: 75}}>
+                    <View style={[styles.Icon2]}>
                         <Icon name="edit" size={24}/>
                     </View>
                     <InputField 
                     text_title="Lasname" 
                     onChangeText={text => setLastname(text) + SetChanges(true)}
                     value={lastname}/>
-                    <View style={{position: "absolute", right: 70 ,top: 160}}>
+                    <View style={[styles.Icon3]}>
                         <Icon name="edit" size={24}/>
                     </View>
                     <InputField 
                     text_title="Address" 
                     onChangeText={text => setAddress(text) + SetChanges(true)} 
                     value={address}/>
-                    <View style={{position: "absolute", right: 70 ,top: 245}}>
+                    <View style={[styles.Icon4]}>
                         <Icon name="edit" size={24}/>
                     </View>
                 </View>
                 {changes && (
-                <View style={{alignItems: "center", marginTop: 70}}>
+                <View style={[styles.button]}>
                     <Btn_outline_big onPress={handleSave} title="Save Changes"/>
                 </View>
                 )}
@@ -99,3 +95,40 @@ const UserInformation = ({navigation}) => {
 
 
 export default UserInformation;
+
+const styles = StyleSheet.create({
+    heading: {
+        marginLeft: 47, 
+        marginTop: 25,
+        fontFamily: "RobotoSlab-SemiBold", 
+        fontSize: 26,
+    },
+    inputfiels: {
+        marginTop: 50, 
+        gap: 20,
+    },
+    Icon1: {
+        position: "absolute", 
+        right: 70,
+        top: -5,
+    },
+    Icon2: {
+        position: "absolute", 
+        right: 70,
+        top: 75,
+    },
+    Icon3: {
+        position: "absolute", 
+        right: 70,
+        top: 160,
+    },
+    Icon4: {
+        position: "absolute", 
+        right: 70,
+        top: 245,
+    },
+    button: {
+        alignItems: "center", 
+        marginTop: 70,
+    },
+})

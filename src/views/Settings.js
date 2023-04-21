@@ -1,9 +1,8 @@
 import React from "react"; 
-import {Text, View, Pressable} from "react-native"
-import { COLORS } from "../../assets/colors.js"
+import {Text, View, StyleSheet} from "react-native"
 import TopBar from '../components/TopBar'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 import Btn_menu_underline from "../components/buttons/Btn_menu_underline.js";
+import Btn_back_arrow from "../components/buttons/Btn_back_arrow.js";
 
 const Settings = ({navigation}) => {
 
@@ -13,13 +12,9 @@ const Settings = ({navigation}) => {
                 <TopBar/>
             </View>
             <View style={{flexDirection: "column"}}>
-                <Pressable style={{marginLeft: 17, marginTop: 15}} onPress={() => navigation.navigate('Home')}>
-                    <Icon name="arrow-back" size={24} color={COLORS.black}/>
-                </Pressable>
-                <View style={{marginLeft: 47, marginTop: 25}}>
-                    <Text style={{fontFamily: "RobotoSlab-SemiBold", fontSize: 26}}>Settings</Text>
-                </View>
-                <View style={{alignItems: "center", marginTop: 50}}>
+                <Btn_back_arrow onPress={() => navigation.navigate('Home')}/>               
+                <Text style={[styles.heading]}>Settings</Text>               
+                <View style={[styles.buttonlist]}>
                     <Btn_menu_underline onPress={() => navigation.navigate('ChangeMail')} title="E-mail" icon="edit"/>
                     <Btn_menu_underline onPress={() => navigation.navigate('ChangePassword')} title="Password" icon="edit"/>
                     <Btn_menu_underline onPress={() => navigation.navigate('UserInfo')} title="User Information"/>
@@ -31,3 +26,16 @@ const Settings = ({navigation}) => {
 }
 
 export default Settings;
+
+const styles = StyleSheet.create({
+    heading: {
+        marginLeft: 47, 
+        marginTop: 25,
+        fontFamily: "RobotoSlab-SemiBold", 
+        fontSize: 26,
+    },
+    buttonlist: {
+        alignItems: "center", 
+        marginTop: 50,
+    },
+})
