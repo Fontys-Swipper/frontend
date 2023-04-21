@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: COLORS.black + 90,
         justifyContent: "space-between",
+        alignItems: 'center'
     },
     buttonsContainer: {
         alignItems: "center",
