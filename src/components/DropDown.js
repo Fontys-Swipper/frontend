@@ -17,7 +17,6 @@ const DropDown = ({choice = [{key, value}], placehoder = '' ,searchPlaceholder='
           borderWidth: 0,
           marginRight: '16%',
           marginLeft:'16%'
-        
         }}
         inputStyles={{
           fontFamily: 'Roboto-Medium',
