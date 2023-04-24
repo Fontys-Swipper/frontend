@@ -1,10 +1,12 @@
-import React from "react"; 
-import {StyleSheet, Text, View} from "react-native"
+import React,{useState,useEffect} from "react"; 
+import {StyleSheet, View,} from "react-native"
 import TopBar from '../components/TopBar'
 import { SafeAreaView } from "react-native-safe-area-context";
 import AnimalCards from "../components/CardDeck";
 
+
 const Match = ({navigation}) => {
+
     return (
         <SafeAreaView>
             <View>
@@ -12,7 +14,7 @@ const Match = ({navigation}) => {
             </View>
             <View style={[styles.container]}>
                 <AnimalCards/>
-            </View>       
+            </View>
         </SafeAreaView> 
     );
 }
@@ -22,7 +24,6 @@ export default Match;
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
         width:"100%",
         height: "100%",
         alignItems: 'center',

@@ -29,7 +29,7 @@ const App = () => {
       }}
       >
         <Stack.Screen
-          name = "Home"
+          name = "Navigationbar"
           component={NavigationBarContainer}
           options={{
             title:"Home",

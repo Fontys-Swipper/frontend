@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, PanResponder, Animated, Dimensions, Pres
 import { COLORS } from "../../assets/colors";
 import Btn_like from "./buttons/Btn_like";
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import LinearGradient from "react-native-linear-gradient";
 
 const screen_widht = Dimensions.get("window").width
 
@@ -56,12 +57,12 @@ export default class AnimalCards extends React.Component {
 
     constructor(){
         super()
-
+        
         this.position = new Animated.ValueXY()
+        
         this.state = {
-            currentIndex: 0
-        }
-
+            currentIndex: 0,
+        } 
 
         this.showAnimalProfile = () => {
             console.log("Showing "+cards[this.state.currentIndex].name+"'s profile")
@@ -89,10 +90,17 @@ export default class AnimalCards extends React.Component {
         }
 
         this.likingOpacity = this.position.x.interpolate({
-            inputRange:[-screen_widht / 2, 0, screen_widht / 2],
-            outputRange:[0, 0, 1],
+            inputRange:[-screen_widht / 2, 0, screen_widht / 2, screen_widht],
+            outputRange:[0, 0, 1, 0],
             extrapolate: "clamp"
         })
+
+        this.leftSwipeOpacity = this.position.x.interpolate({
+            inputRange:[-screen_widht,-screen_widht / 2, 0, screen_widht / 2],
+            outputRange:[0, 1, 0, 0],
+            extrapolate: "clamp"
+        })
+
 
         // Card1 animations
         this.nextCardPositionX = this.position.x.interpolate({
@@ -149,7 +157,6 @@ export default class AnimalCards extends React.Component {
                 this.position.setValue({x: gestureState.dx, y: gestureState.dy})
             },
             onPanResponderRelease:(event, gestureState) => {
-                console.log(gestureState.dx)
                 if (gestureState.dx > 120) {
                     this.addToFavorites(cards[this.state.currentIndex].name)
                     Animated.spring(this.position, {
@@ -191,7 +198,7 @@ export default class AnimalCards extends React.Component {
             }
             else if (i == this.state.currentIndex) {         
             return (
-                <Animated.View key={this.state.currentIndex}
+                <Animated.View key={i}
                 {...this.PanResponder.panHandlers}
                 style={[
                     this.rotateAndTranslate,
@@ -237,7 +244,7 @@ export default class AnimalCards extends React.Component {
             }
             else if (i == this.state.currentIndex + 1){
                 return(
-                    <Animated.View 
+                    <Animated.View key={i}
                     style={[
                         {transform: [{translateX: this.nextCardPositionX},
                         {translateY: this.nextCardPositionY}]},
@@ -268,7 +275,7 @@ export default class AnimalCards extends React.Component {
             }
             else if (i == this.state.currentIndex + 2){
                 return(
-                    <Animated.View 
+                    <Animated.View key={i}
                     style={[
                         {opacity: this.card2Opacity},
                         {transform: [{translateX: this.card2PositionX},
@@ -300,7 +307,7 @@ export default class AnimalCards extends React.Component {
             }
             else if (i == this.state.currentIndex + 3){
                 return(
-                    <Animated.View 
+                    <Animated.View key={i}
                     style={[
                         {opacity: this.card3Opacity},
                         {transform: [{translateX: this.card3PositionX},
@@ -334,10 +341,34 @@ export default class AnimalCards extends React.Component {
     }
 
     render(){
-    return (
+    return (      
         <>
-        {this.renderAnimal()}
-        </>
+        {this.renderAnimal()}       
+        <Animated.View 
+        style={{width: screen_widht/4, height: "100%", left: -150, opacity: this.leftSwipeOpacity}}>
+            <LinearGradient 
+                colors={['rgba(219,219,219,1)' ,'rgba(255,255,255,0)']}
+                style={{
+                    width: "100%",
+                    height: "100%",                 
+                }}
+                start={{x: 0.2, y:0.5}}
+                end={{x: 1, y:0.5}}
+            />
+        </Animated.View>
+        <Animated.View 
+        style={{width: screen_widht/4, height: "100%", position: "absolute" ,right: 0, opacity: this.likingOpacity}}>
+            <LinearGradient 
+                colors={['rgba(255,255,255,0)', 'rgba(103,255,98,0.9)']}
+                style={{
+                    width: "100%",
+                    height: "100%",                 
+                }}
+                start={{x: 0, y:0.5}}
+                end={{x: 1, y:0.5}}
+            />
+        </Animated.View>
+        </>   
     )
 }
 }
