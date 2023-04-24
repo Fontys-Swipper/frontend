@@ -48,6 +48,17 @@ function NavigationBarContainer() {
           }}
         />
         <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerShown: false,
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
           name="Favorites"
           component={Favorites}
           options={{
