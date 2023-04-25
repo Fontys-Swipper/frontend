@@ -24,13 +24,13 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home' 
+      <Stack.Navigator initialRouteName='Start' 
       screenOptions={{
         headerShown: false
       }}
       >
         <Stack.Screen
-          name = "Home"
+          name = "NavigationBar"
           component={NavigationBarContainer}
           options={{
             title:"Home",
@@ -39,7 +39,7 @@ const App = () => {
         />
         <Stack.Screen
           name = 'Start'
-          component={NavigationBarContainer}
+          component={Start}
           options={{title:"Start"}}
         />
         <Stack.Screen

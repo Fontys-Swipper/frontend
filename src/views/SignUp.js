@@ -68,7 +68,7 @@ const SignUp = ({navigation}) => {
                             
                         </View>
                         <View style={styles.buttonsContainer}>
-                            <Btn_solid_big onPress={() => navigation.navigate('Home')} title="Login"/>
+                            <Btn_solid_big onPress={() => navigation.navigate('NavigationBar')} title="Login"/>
                             <Btn_outline_big onPress={()=> setView(0)} title="Back"/>
                         </View>
                     </View>
