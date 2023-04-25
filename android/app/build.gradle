@@ -95,6 +95,7 @@ android {
 
     namespace "com.swipper_frontend"
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.swipper_frontend"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
