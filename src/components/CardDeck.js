@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import LinearGradient from "react-native-linear-gradient";
 
 const screen_widht = Dimensions.get("window").width
+const screen_height = Dimensions.get("window").height
 
 const cards = [
     {
@@ -62,6 +63,7 @@ export default class AnimalCards extends React.Component {
         
         this.state = {
             currentIndex: 0,
+            animals: []
         } 
 
         this.showAnimalProfile = () => {
@@ -169,6 +171,10 @@ export default class AnimalCards extends React.Component {
                     })
                 }
                 else if (gestureState.dx < -120) {
+                    let items = this.state.animals
+                    let currentitem = cards[this.state.currentIndex]
+                    let updatedAnimals = [...items, currentitem]
+                    this.setState({animals: updatedAnimals})
                     Animated.spring(this.position, {
                         toValue: {x: -screen_widht - 100, y: gestureState.dy},
                         useNativeDriver: true
@@ -189,10 +195,14 @@ export default class AnimalCards extends React.Component {
         })
     }
 
+    componentDidMount() {
+        this.setState({animals: cards})
+    }
+
 
 
     renderAnimal = () => {
-        return cards.map((item, i) => {
+        return this.state.animals.map((item, i) => {
             if (i < this.state.currentIndex) {
                 return null
             }
@@ -383,7 +393,7 @@ const styles = StyleSheet.create({
         height: 489,
         width: 262,
         position: "absolute",
-        marginTop: 100
+        marginTop: screen_height/5.5,
     },
     image: {
         alignSelf: "center",

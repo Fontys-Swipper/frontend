@@ -8,12 +8,12 @@ import AnimalCards from "../components/CardDeck";
 const Match = ({navigation}) => {
 
     return (
-        <SafeAreaView>
-            <View>
-                <TopBar/>
-            </View>
+        <SafeAreaView>   
             <View style={[styles.container]}>
                 <AnimalCards/>
+            </View>
+            <View>
+                <TopBar/>
             </View>
         </SafeAreaView> 
     );
@@ -27,5 +27,8 @@ const styles = StyleSheet.create({
         width:"100%",
         height: "100%",
         alignItems: 'center',
+        position: "absolute",
+        top: 0,
+        left: 0,
     }
 })
