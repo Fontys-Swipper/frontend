@@ -1,19 +1,30 @@
 import React from "react"; 
-import {Text, View} from "react-native"
+import {StyleSheet, Text, View} from "react-native"
 import TopBar from '../components/TopBar'
-import Cardcarousel from "../components/CardCarousel";
+import { SafeAreaView } from "react-native-safe-area-context";
+import AnimalCards from "../components/CardDeck";
 
 const Match = ({navigation}) => {
     return (
-        <View>
+        <SafeAreaView>
             <View>
                 <TopBar/>
             </View>
-            <View style={{marginLeft: 30, marginTop: 70}}>
-                <Cardcarousel/>
-            </View>
-        </View>        
+            <View style={[styles.container]}>
+                <AnimalCards/>
+            </View>       
+        </SafeAreaView> 
     );
 }
 
 export default Match;
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex:1,
+        width:"100%",
+        height: "100%",
+        alignItems: 'center',
+    }
+})

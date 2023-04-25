@@ -10,6 +10,12 @@ import AddListingPageOne from './src/views/AddListingPageOne';
 import AddListingPageTwo from './src/views/AddListingPageTwo';
 import SignUp from './src/views/SignUp';
 import AddListingPageThree from './src/views/AddListingPageThree';
+import Profile from './src/views/Profile';
+import Settings from './src/views/Settings';
+import UserInformation from './src/views/UserInformation'
+import TermsOfService from './src/views/TermsOfService';
+import ChangeMail from './src/views/ChangeMail';
+import ChangePassword from './src/views/ChangePassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +23,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Start' 
+      <Stack.Navigator initialRouteName='Home' 
       screenOptions={{
         headerShown: false
       }}
@@ -30,7 +36,7 @@ const App = () => {
             headerShown: false
           }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name = 'Start'
           component={Start}
           options={{title:"Start"}}
@@ -42,7 +48,13 @@ const App = () => {
         <Stack.Screen 
           name = "SignUp"
           component={SignUp}
-        /> */}
+        />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="UserInfo" component={UserInformation} />
+        <Stack.Screen name="TermsOfService" component={TermsOfService} />
+        <Stack.Screen name="ChangeMail" component={ChangeMail} />
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );
