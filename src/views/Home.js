@@ -1,5 +1,5 @@
 import React from "react"; 
-import {Text, View, StyleSheet, Image, TouchableOpacity} from "react-native"
+import {Text, View, StyleSheet, Image, TouchableOpacity, ScrollView} from "react-native"
 import { COLORS } from "../../assets/colors.js"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Start from "./Start.js";
@@ -29,37 +29,39 @@ const HomePage = ({navigation}) => {
   };
 
     return (
-      <View>
+      <View style={{flex: 1}}>
         <View>
           <TopBar/>
         </View>
-        <View style={styles.container}>
-            <Image style={styles.first_container} source={require('../../assets/images/malinois-g4dd9f780d_1920.jpg')}/>
-            <View style={styles.content}>
-              <View style={styles.second_container}>
-                  <Text style={styles.text}>Find animals you like</Text>
-                  <View style={styles.circle_container}>
-                    <TouchableOpacity onPress={handlePressCircle1} style={styles.circle}>
-                      <Image source={require('../../assets/images/dog-gba5dc7061_1920.jpg')} style={styles.image_circle}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={handlePressCircle2} style={styles.circle}>
-                      <Image source={require('../../assets/images/cat-g2ff4963cc_1920.jpg')} style={styles.image_circle}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={handlePressCircle3} style={styles.circle}>
-                      <Image source={require('../../assets/images/rabbit.jpg')} style={styles.image_circle}/>
-                    </TouchableOpacity>
-                  </View>
-              </View>
-              <View style={styles.third_container}>
-                  <Text style={styles.text}>Add your own listing</Text>
-                  <View style={styles.circle_container_2}>
-                    <TouchableOpacity onPress={handlePressCircle4} style={styles.circle_button}>
-                        <MaterialCommunityIcons name="plus" size={42} color={COLORS.white}/>
-                    </TouchableOpacity>
-                  </View>
-              </View>
-            </View>
-        </View> 
+        <ScrollView>
+          <View style={styles.container}>
+              <Image style={styles.first_container} source={require('../../assets/images/malinois-g4dd9f780d_1920.jpg')}/>
+              {/* <View style={styles.content}> */}
+                <View style={styles.second_container}>
+                    <Text style={styles.text}>Find animals you like</Text>
+                    <View style={styles.circle_container}>
+                      <TouchableOpacity onPress={handlePressCircle1} style={styles.circle}>
+                        <Image source={require('../../assets/images/dog-gba5dc7061_1920.jpg')} style={styles.image_circle}/>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={handlePressCircle2} style={styles.circle}>
+                        <Image source={require('../../assets/images/cat-g2ff4963cc_1920.jpg')} style={styles.image_circle}/>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={handlePressCircle3} style={styles.circle}>
+                        <Image source={require('../../assets/images/rabbit.jpg')} style={styles.image_circle}/>
+                      </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={styles.third_container}>
+                    <Text style={styles.text}>Add your own listing</Text>
+                    <View style={styles.circle_container_2}>
+                      <TouchableOpacity onPress={handlePressCircle4} style={styles.circle_button}>
+                          <MaterialCommunityIcons name="plus" size={42} color={COLORS.white}/>
+                      </TouchableOpacity>
+                    </View>
+                </View>
+              {/* </View> */}
+          </View>
+        </ScrollView>
       </View>     
     );
 }
@@ -71,7 +73,10 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: COLORS.white
+      backgroundColor: COLORS.white,
+      // height: 810,
+      paddingTop: 10,
+      paddingBottom: 30
     },
     first_container: {
       height: 159,
@@ -79,7 +84,6 @@ const styles = StyleSheet.create({
       borderRadius: 4,
       justifyContent: 'center',
       alignItems: 'center',
-      top: 95,
     },
     image: {
       flex: 1,
@@ -88,10 +92,10 @@ const styles = StyleSheet.create({
       borderRadius: 4,
     },
     second_container: {
-      height: 435,
+      height: 435, 
       width: 365,
       backgroundColor: '#F6F1DD',
-      top: 105,
+      top: 9,
       borderRadius: 4,
     },
     circle_container: {
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
       height: 199,
       width: 365,
       backgroundColor: COLORS.secondary,
-      top: 115,
+      top: 18,
       borderRadius: 4
     },
     circle_container_2: {
