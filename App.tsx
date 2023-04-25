@@ -24,13 +24,13 @@ const App = () => {
       >
         <Stack.Screen
           name = "Home"
-          component={NavigationBarContainer}
+          component={Home}
           options={{
             title:"Home",
             headerShown: false
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name = 'Start'
           component={Start}
           options={{title:"Start"}}
@@ -42,7 +42,7 @@ const App = () => {
         <Stack.Screen 
           name = "SignUp"
           component={SignUp}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
