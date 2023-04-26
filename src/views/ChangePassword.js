@@ -61,14 +61,14 @@ const ChangePassword = ({navigation}) => {
             <View style={{flexDirection: "column"}}>
                 <Btn_back_arrow onPress={() => navigation.navigate('Settings')}/>               
                 <Text style={[styles.heading]}>Change Password</Text>               
-                <View style={{marginTop: 50}}>
+                <View style={{marginTop: 50, alignItems: 'center'}}>
                     <InputField 
                     text_title="Password"
                     onChangeText={text => setPassword(text)}
                     value={password}
                     />
                 </View>
-                <View style={{marginTop: 60, gap: 20}}>
+                <View style={{marginTop: 60, gap: 20, alignItems: 'center'}}>
                     <InputField 
                     text_title="New Password"
                     onChangeText={text => setNewPassword(text)}
