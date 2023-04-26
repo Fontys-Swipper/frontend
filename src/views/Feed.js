@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        wlisting_idth: 'animal_100%',
+        width: '100%',
         height: '100%',
         backgroundColor: COLORS.black + '99'
     },
