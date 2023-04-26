@@ -1,10 +1,12 @@
-import { Button, StyleSheet, Text, View , Pressable, ToastAndroid, TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, Pressable, ToastAndroid, View} from 'react-native'
 import React from 'react'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+
 
 import { COLORS } from '../../../assets/colors'
 
 
-const Btn_solid_small = ({ onPress, title = 'Small' }) => {
+const Btn_solid_small = ({ onPress, title = 'Small' , icon}) => {
 
     onPressDefault= () => {
         console.log('Small button pressed')
@@ -15,6 +17,7 @@ const Btn_solid_small = ({ onPress, title = 'Small' }) => {
 
     return (
         <Pressable style={styles.button} onPress={onPress? onPress: this.onPressDefault}>
+            {icon}
             <Text style={styles.text}>{title}</Text>
         </Pressable>
     )
@@ -34,11 +37,13 @@ const styles = StyleSheet.create({
         width: 100,
         height: 38,
         margin: 10,
+        flexDirection: 'row',
     }],
     text: {
         fontFamily: 'Roboto-Regular',
         fontSize: 15,
         color: COLORS.white,
         lineHeight: 24,
-    }
+        marginHorizontal: 5,
+    },
 })

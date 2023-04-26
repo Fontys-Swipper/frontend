@@ -15,20 +15,21 @@ import UserInformation from './src/views/UserInformation';
 import TermsOfService from './src/views/TermsOfService';
 import ChangeMail from './src/views/ChangeMail';
 import ChangePassword from './src/views/ChangePassword';
+import Feed from './src/views/Feed';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerShown: false,
-        }}>
+      <Stack.Navigator initialRouteName='Start' 
+      screenOptions={{
+        headerShown: false
+      }}
+      >
         <Stack.Screen
-          name="Home"
-          component={AddListingPageThree}
+          name = "NavigationBar"
+          component={NavigationBarContainer}
           options={{
             title: 'Home',
             headerShown: false,

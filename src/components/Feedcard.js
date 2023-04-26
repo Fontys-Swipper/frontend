@@ -3,20 +3,20 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import { COLORS } from "../../assets/colors";
 import dogimage from "../../assets/images/dog_image.jpg"
 
-const Feedcard = () => {
+const Feedcard = ({image = dogimage, name = 'Name', price = '€€', type = 'Type', age = 'Age', timeOfAdding = 'Time Of Adding'}) => {
     return (
         <View style={[styles.container]}>
-            <Image source={dogimage} style={[styles.image]}/>
+            <Image source={image} style={[styles.image]}/>
             <View style={{marginTop: 12}}>
                 <View style={{flexDirection: "row"}}>
                     <Text adjustsFontSizeToFit numberOfLines={1} 
-                    style={[styles.nametext]}>Strawberry</Text>
+                    style={[styles.nametext]}>{name}</Text>
                     <Text adjustsFontSizeToFit numberOfLines={1}
-                    style={[styles.pricetext]}>50€</Text>
+                    style={[styles.pricetext]}>{price}€</Text>
                 </View>
-                <Text style={[styles.infotext]}>Type</Text>
-                <Text style={[styles.infotext]}>Young</Text>
-                <Text style={{marginTop: 10, alignSelf: "flex-start"}}>31.3.2023</Text>
+                <Text style={[styles.infotext]}>{type}</Text>
+                <Text style={[styles.infotext]}>{age}</Text>
+                <Text style={{marginTop: 10, alignSelf: "flex-start"}}>{timeOfAdding}</Text>
             </View>
         </View>
     )
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         borderColor: COLORS.primary,
         flexDirection: "row",
         gap: 20,
+        marginVertical: 2,
     },
     image: {
         marginLeft: 20,
