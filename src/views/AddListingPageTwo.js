@@ -8,11 +8,15 @@ import {COLORS} from '../../assets/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import DescriptionBox from '../components/DescriptionBox';
 import TextHeading from './TextHeading';
+import TopBar from '../components/TopBar';
 
 const AddListingPageTwo = ({navigation}) => {
   return (
     <SafeAreaView
       style={{height: '100%', width: 'auto', flex: 1, position: 'relative'}}>
+      <View>
+        <TopBar style={{position: 'absolute'}} />
+      </View>
       <View
         style={{
           flex: 1,
