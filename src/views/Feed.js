@@ -82,7 +82,7 @@ const Feed = ({navigation}) => {
         let filteredData = listingData
         if(species != 'Species'){
             filteredData = filteredData.filter((item) => {
-                return item.species === species
+                return item.animal_species === species
             })
         }
         if(gender != 'Gender'){
@@ -119,14 +119,14 @@ const Feed = ({navigation}) => {
                 )}
             </ScrollView>
 
-            <View style={styles.buttonContainer}>
-                <Btn_floating_round onPress={() => setModalVisible(true)} icon={<Icon name='tune' size={24} color={COLORS.black}/>}/>
-            </View>
 
             <View style={{position: 'absolute', top: 0, left: 0, width: '100%'}}>
                 <TopBar/>
             </View>
 
+            <View style={styles.buttonContainer}>
+                <Btn_floating_round onPress={() => setModalVisible(true)} icon={<Icon name='tune' size={24} color={COLORS.black}/>}/>
+            </View>
             {/* Modal view for filtering options */}
             <Modal 
                 animationType="slide"
@@ -141,7 +141,7 @@ const Feed = ({navigation}) => {
                                 <DropDown placehoder={sorting? sorting : 'Sort'} choice={sortingTypes} setSelected={(val) => setSorting(val)}/>
                                 <DropDown placehoder={species != 'Species'? species : 'Species'} choice={speciesData} setSelected={(val) => setSpecies(val)}/>
                                 <DropDown placehoder={gender != 'Gender'? gender : 'Gender'} choice={genderData} setSelected={(val) => setGender(val)}/>
-                                <InputField text_title="Location" value={location} onChangeText={newText => setLocation(newText)} icon={<MaterialIcons animal_name='search' size={20} color={COLORS.black}/>}/>
+                                <InputField text_title="Location" value={location} onChangeText={newText => setLocation(newText)} icon={<MaterialIcons name='search' size={20} color={COLORS.black}/>}/>
                             </ScrollView>
                             <Btn_solid_big title='show' onPress={() => {filterAndSortData(), setModalVisible(!modalVisible)}}/>
                         </View>
@@ -155,7 +155,8 @@ export default Feed;
 
 const styles = StyleSheet.create({
     container: {
-        
+        backgroundColor: COLORS.black,
+        flex: 1
     },
     centeredView: { //Center modal window and dim background
         flex: 1,
@@ -169,6 +170,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingBottom: 10, 
         paddingTop: 74,
+        backgroundColor: COLORS.white,
     },
     modalScrollView:{
 
