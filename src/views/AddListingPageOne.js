@@ -30,11 +30,13 @@ const AddListingPageOne = ({navigation}) => {
             choice={['Golden Retriever', 'BullDog', 'Huskey']}
           />
         </View>
-        <View style={{marginBottom:24}}>
-          <InputField text_title="Name" />
-        </View>
-        <View style={{marginBottom:28}}>
-          <InputField text_title="Age" />
+        <View style={{gap: 24, alignItems: 'center'}}>
+          <View>
+            <InputField text_title="Name" />
+          </View>
+          <View>
+            <InputField text_title="Age" />
+          </View>
         </View>
         <View style={{alignSelf:'center'}}>
           <Btn_solid_regular title="Next" 

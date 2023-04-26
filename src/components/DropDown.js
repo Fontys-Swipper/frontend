@@ -2,8 +2,8 @@ import React from 'react';
 import {SelectList} from 'react-native-dropdown-select-list';
 import {COLORS} from '../../assets/colors';
 import {View} from 'react-native';
-const DropDown = ({choice = [], placehoder = '' ,searchPlaceholder='' , search=''}) => {
-  const [selected, setSelected] = React.useState('');
+const DropDown = ({choice = [{key, value}], placehoder = '' ,searchPlaceholder='' , search='', setSelected}) => {
+  // const [selected, setSelected] = React.useState('');
 
   return (
     <View>
@@ -17,6 +17,11 @@ const DropDown = ({choice = [], placehoder = '' ,searchPlaceholder='' , search='
           borderWidth: 0,
           marginRight: '16%',
           marginLeft:'16%'
+        }}
+        inputStyles={{
+          fontFamily: 'Roboto-Medium',
+          fontSize: 15,
+          color: COLORS.black
         }}
         dropdownItemStyles={{
           padding: 10,
@@ -33,14 +38,16 @@ const DropDown = ({choice = [], placehoder = '' ,searchPlaceholder='' , search='
           borderColor: COLORS.primary,
           width:258,
           height:43,
+          marginVertical: 10,
           alignSelf:'center',
           borderWidth: 0,
           borderBottomWidth: 1,
           borderRadius: 0,
+          paddingLeft:15,
         }}
-        setSelected={val => setSelected(val)}
+        setSelected={setSelected}
         data={choice}
-        save={choice}
+        save='value'
         maxHeight={200}
       />
     </View>

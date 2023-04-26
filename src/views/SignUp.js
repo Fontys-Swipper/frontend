@@ -68,7 +68,7 @@ const SignUp = ({navigation}) => {
                             
                         </View>
                         <View style={styles.buttonsContainer}>
-                            <Btn_solid_big title="Login"/>
+                            <Btn_solid_big onPress={() => navigation.navigate('NavigationBar')} title="Login"/>
                             <Btn_outline_big onPress={()=> setView(0)} title="Back"/>
                         </View>
                     </View>
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: COLORS.black + 90,
         justifyContent: "space-between",
+        alignItems: 'center'
     },
     buttonsContainer: {
         alignItems: "center",
