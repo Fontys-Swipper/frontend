@@ -45,7 +45,11 @@ const AddListingPageTwo = ({navigation}) => {
           />
         </View>
         <View style={{alignSelf: 'center'}}>
-          <Btn_solid_regular title="Next" />
+          <Btn_solid_regular
+            title="Next"
+            // eslint-disable-next-line no-undef
+            onPress={() => navigation.navigate('AddListing3')}
+          />
         </View>
       </View>
       {/* <NavigationBarContainer style={{position: 'absolute'}} /> */}
