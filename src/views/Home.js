@@ -5,7 +5,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Start from "./Start.js";
 import TopBar from "../components/TopBar.js";
 
-
 const HomePage = ({navigation}) => {
 
   const handlePressCircle1 = () => {
@@ -30,13 +29,9 @@ const HomePage = ({navigation}) => {
 
     return (
       <View style={{flex: 1}}>
-        <View>
-          <TopBar/>
-        </View>
         <ScrollView>
           <View style={styles.container}>
               <Image style={styles.first_container} source={require('../../assets/images/malinois-g4dd9f780d_1920.jpg')}/>
-              {/* <View style={styles.content}> */}
                 <View style={styles.second_container}>
                     <Text style={styles.text}>Find animals you like</Text>
                     <View style={styles.circle_container}>
@@ -59,9 +54,11 @@ const HomePage = ({navigation}) => {
                       </TouchableOpacity>
                     </View>
                 </View>
-              {/* </View> */}
           </View>
         </ScrollView>
+          <View style={{position: 'absolute', top: 0, left: 0, width: '100%'}}>
+            <TopBar/>
+          </View>
       </View>     
     );
 }
@@ -75,7 +72,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: COLORS.white,
       // height: 810,
-      paddingTop: 10,
+      paddingTop: 64,
       paddingBottom: 30
     },
     first_container: {

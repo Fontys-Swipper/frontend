@@ -19,6 +19,7 @@ function NavigationBarContainer() {
           tabBarShowLabel: false,
           tabBarActiveTintColor: COLORS.white,
           tabBarInactiveTintColor: COLORS.black,
+          tabBarHideOnKeyboard:  true,
           tabBarStyle: {
             height: 56,
             backgroundColor: COLORS.primary,

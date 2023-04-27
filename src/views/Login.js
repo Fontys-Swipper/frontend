@@ -27,7 +27,7 @@ const Login = ({navigation}) => {
                         </View>
                     </View>
                     <View style={styles.buttonsContainer}>
-                        <Btn_solid_big title="Login"/>
+                        <Btn_solid_big title="Login" onPress={() => navigation.navigate('NavigationBar')}/>
                         <Btn_outline_big onPress={() => navigation.navigate('Start')} title="Back"/>
                     </View>
                 </View>
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: COLORS.black + 90,
         justifyContent: "space-between",
+        alignItems: 'center'
     },
     buttonsContainer: {
         alignItems: "center",

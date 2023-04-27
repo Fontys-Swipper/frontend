@@ -99,11 +99,12 @@ const styles = StyleSheet.create({
     inputfields: {
         marginTop: 50, 
         gap: 20,
+        alignItems: 'center'
     },
     icon: {
         position: "absolute", 
         left: 330, 
-        top: 115,
+        top: 145,
     },
     button: {
         alignItems: "center", 

@@ -13,6 +13,14 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
+      maven { url "$rootDir/../node_modules/react-native/android" }
+
+      // ADD THIS
+      maven { url 'https://maven.google.com' }
+
+      // ADD THIS
+      maven { url "https://www.jitpack.io" }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.3.1")
