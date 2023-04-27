@@ -3,13 +3,13 @@ import { StyleSheet, Text, View, Image, PanResponder, Animated, Dimensions, Pres
 import { COLORS } from "../../assets/colors";
 import Btn_like from "./buttons/Btn_like";
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import LinearGradient from "react-native-linear-gradient";
 
 const screen_widht = Dimensions.get("window").width
 const screen_height = Dimensions.get("window").height
 
 const cards = [
     {
+        id: 0,
         name:"Daisy",
         type: "Border Terrier",
         age: "Young",
@@ -17,6 +17,7 @@ const cards = [
         image: require("../../assets/images/dog-gba5dc7061_1920.jpg"),
     },
     {
+    id: 1,
       name:"Luna",
       type: "Boxer",
       age: "Old",
@@ -24,6 +25,7 @@ const cards = [
       image: require("../../assets/images/akita.jpg"),
   },
   {
+    id: 2,
       name:"Cooper",
       type: "American Bulldog",
       age: "Old",
@@ -31,6 +33,7 @@ const cards = [
       image: require("../../assets/images/labrador-retriever-gb2d619e6b_1920.jpg"),
   },
   {
+    id: 3,
       name:"Milo",
       type: "Spaniel",
       age: "Young",
@@ -38,6 +41,7 @@ const cards = [
       image: require("../../assets/images/dog_image.jpg"),
   },
   {
+    id: 4,
       name:"Lucy",
       type: "Terrier",
       age: "Young",
@@ -45,6 +49,7 @@ const cards = [
       image: require("../../assets/images/malinois-g4dd9f780d_1920.jpg"),
   },
   {
+    id: 5,
       name:"Bella",
       type: "Alaskan Husky",
       age: "Old",
@@ -56,16 +61,18 @@ const cards = [
 
 export default class AnimalCards extends React.Component {
 
-    constructor(){
+    constructor(props){
         super()
         
         this.position = new Animated.ValueXY()
         
         this.state = {
             currentIndex: 0,
-            animals: []
+            currentItem: 0,
+            animals: [],
+            pos: this.position.x
         } 
-
+        props.postitionX(this.state.pos)
         this.showAnimalProfile = () => {
             console.log("Showing "+cards[this.state.currentIndex].name+"'s profile")
         }
@@ -160,7 +167,7 @@ export default class AnimalCards extends React.Component {
             },
             onPanResponderRelease:(event, gestureState) => {
                 if (gestureState.dx > 120) {
-                    this.addToFavorites(cards[this.state.currentIndex].name)
+                    this.addToFavorites(cards[this.state.currentItem].name)
                     Animated.spring(this.position, {
                         toValue: {x: screen_widht + 100, y: gestureState.dy},
                         useNativeDriver: true
@@ -172,7 +179,7 @@ export default class AnimalCards extends React.Component {
                 }
                 else if (gestureState.dx < -120) {
                     let items = this.state.animals
-                    let currentitem = cards[this.state.currentIndex]
+                    let currentitem = cards[this.state.currentItem]
                     let updatedAnimals = [...items, currentitem]
                     this.setState({animals: updatedAnimals})
                     Animated.spring(this.position, {
@@ -203,20 +210,22 @@ export default class AnimalCards extends React.Component {
 
     renderAnimal = () => {
         return this.state.animals.map((item, i) => {
+            console.log("Item "+i+", index "+this.state.currentIndex)
             if (i < this.state.currentIndex) {
                 return null
             }
-            else if (i == this.state.currentIndex) {         
+            else if (i === this.state.currentIndex) { 
+            this.state.currentItem = item.id
             return (
-                <Animated.View key={i}
+                <Animated.View key={item.id}
                 {...this.PanResponder.panHandlers}
                 style={[
                     this.rotateAndTranslate,
                     styles.container,
                 ]}>
                     <Animated.View 
-                    style={{position: "absolute", zIndex: 1000, top: 170, right: 70, opacity: this.likingOpacity}}>
-                        <Icon name="favorite" size={100} color={"#FF3333"}></Icon>
+                    style={{position: "absolute", zIndex: 10, top: 170, right: 70, opacity: this.likingOpacity}}>
+                        <Icon name="favorite" size={100} color={COLORS.background2}></Icon>
                     </Animated.View>
                     <View style={{flexDirection: "column"}}>
                         <Image source={item.image} style={[styles.image]}/>
@@ -252,9 +261,9 @@ export default class AnimalCards extends React.Component {
                 </Animated.View>
               )
             }
-            else if (i == this.state.currentIndex + 1){
+            else if (i === this.state.currentIndex + 1){
                 return(
-                    <Animated.View key={i}
+                    <Animated.View key={item.id}
                     style={[
                         {transform: [{translateX: this.nextCardPositionX},
                         {translateY: this.nextCardPositionY}]},
@@ -283,9 +292,9 @@ export default class AnimalCards extends React.Component {
                     </Animated.View>
                 )
             }
-            else if (i == this.state.currentIndex + 2){
+            else if (i === this.state.currentIndex + 2){
                 return(
-                    <Animated.View key={i}
+                    <Animated.View key={item.id}
                     style={[
                         {opacity: this.card2Opacity},
                         {transform: [{translateX: this.card2PositionX},
@@ -315,9 +324,9 @@ export default class AnimalCards extends React.Component {
                     </Animated.View>
                 )
             }
-            else if (i == this.state.currentIndex + 3){
+            else if (i === this.state.currentIndex + 3){
                 return(
-                    <Animated.View key={i}
+                    <Animated.View key={item.id}
                     style={[
                         {opacity: this.card3Opacity},
                         {transform: [{translateX: this.card3PositionX},
@@ -354,30 +363,6 @@ export default class AnimalCards extends React.Component {
     return (      
         <>
         {this.renderAnimal()}       
-        <Animated.View 
-        style={{width: screen_widht/4, height: "100%", left: -150, opacity: this.leftSwipeOpacity}}>
-            <LinearGradient 
-                colors={['rgba(219,219,219,1)' ,'rgba(255,255,255,0)']}
-                style={{
-                    width: "100%",
-                    height: "100%",                 
-                }}
-                start={{x: 0.2, y:0.5}}
-                end={{x: 1, y:0.5}}
-            />
-        </Animated.View>
-        <Animated.View 
-        style={{width: screen_widht/4, height: "100%", position: "absolute" ,right: 0, opacity: this.likingOpacity}}>
-            <LinearGradient 
-                colors={['rgba(255,255,255,0)', 'rgba(103,255,98,0.9)']}
-                style={{
-                    width: "100%",
-                    height: "100%",                 
-                }}
-                start={{x: 0, y:0.5}}
-                end={{x: 1, y:0.5}}
-            />
-        </Animated.View>
         </>   
     )
 }
