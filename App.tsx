@@ -28,13 +28,17 @@ const App = () => {
       }}
       >
         <Stack.Screen
-          name = "NavigationBar"
-          component={NavigationBarContainer}
+          name="Home"
+          component={Home}
           options={{
             title: 'Home',
             headerShown: false,
           }}
         />
+        <Stack.Screen name="AddListing1" component={AddListingPageOne} />
+        <Stack.Screen name="AddListing2" component={AddListingPageTwo} />
+        <Stack.Screen name="AddListing3" component={AddListingPageThree} />
+
         <Stack.Screen
           name="Start"
           component={Start}

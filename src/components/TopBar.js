@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
-import { COLORS } from "../../assets/colors";
-import logo from "../../assets/images/swipper-logo.png";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { useNavigation } from '@react-navigation/native';
-
+import React, {useState} from 'react';
+import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
+import {COLORS} from '../../assets/colors';
+import logo from '../../assets/images/swipper-logo.png';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useNavigation} from '@react-navigation/native';
 
 const TopBar = () => {
   const navigation = useNavigation();
@@ -15,7 +14,7 @@ const TopBar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavigation = (screenName) => {
+  const handleNavigation = screenName => {
     toggleMenu();
     navigation.navigate(screenName);
   };
@@ -38,9 +37,9 @@ const TopBar = () => {
           </TouchableOpacity>
         </View>
       )}
-        <TouchableOpacity onPress={toggleMenu}>
-            <MaterialCommunityIcons name="menu" size={32} color={COLORS.black} />
-        </TouchableOpacity>
+      <TouchableOpacity onPress={toggleMenu}>
+        <MaterialCommunityIcons name="menu" size={32} color={COLORS.black} />
+      </TouchableOpacity>
     </View>
   );
 };
