@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useState} from "react";
 import { View, Text, ToastAndroid, StyleSheet } from "react-native";
 import TopBar from "../components/TopBar";
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -56,31 +56,27 @@ const UserInformation = ({navigation}) => {
                     text_title="Username" 
                     defaultValue=""
                     onChangeText={text => setUsername(text) + SetChanges(true)}
-                    value={username}/>
-                    <View style={[styles.Icon1]}>
-                        <Icon name="edit" size={24}/>
-                    </View>
+                    value={username}
+                    icon={<Icon name="edit" size={24}/>}
+                    />
                     <InputField 
                     text_title="Fistname" 
                     onChangeText={text => setFirstname(text) + SetChanges(true)} 
-                    value={firstname}/>
-                    <View style={[styles.Icon2]}>
-                        <Icon name="edit" size={24}/>
-                    </View>
+                    value={firstname}
+                    icon={<Icon name="edit" size={24}/>}
+                    />
                     <InputField 
                     text_title="Lasname" 
                     onChangeText={text => setLastname(text) + SetChanges(true)}
-                    value={lastname}/>
-                    <View style={[styles.Icon3]}>
-                        <Icon name="edit" size={24}/>
-                    </View>
+                    value={lastname}
+                    icon={<Icon name="edit" size={24}/>}
+                    />
                     <InputField 
                     text_title="Address" 
                     onChangeText={text => setAddress(text) + SetChanges(true)} 
-                    value={address}/>
-                    <View style={[styles.Icon4]}>
-                        <Icon name="edit" size={24}/>
-                    </View>
+                    value={address}
+                    icon={<Icon name="edit" size={24}/>}
+                    />
                 </View>
                 {changes && (
                 <View style={[styles.button]}>
@@ -106,26 +102,7 @@ const styles = StyleSheet.create({
     inputfiels: {
         marginTop: 50, 
         gap: 20,
-    },
-    Icon1: {
-        position: "absolute", 
-        right: 70,
-        top: -5,
-    },
-    Icon2: {
-        position: "absolute", 
-        right: 70,
-        top: 75,
-    },
-    Icon3: {
-        position: "absolute", 
-        right: 70,
-        top: 160,
-    },
-    Icon4: {
-        position: "absolute", 
-        right: 70,
-        top: 245,
+        alignItems: "center",
     },
     button: {
         alignItems: "center", 
