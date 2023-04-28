@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import { COLORS } from '../../../assets/colors'
 
-const Btn_menu_underline = ({ onPress, title = 'Menu underline' }) => {
+const Btn_menu_underline = ({ onPress, title = 'Menu underline', icon = 'arrow-forward'}) => {
 
     onPressDefault= () => {
         console.log('Underline button pressed')
@@ -17,7 +17,7 @@ const Btn_menu_underline = ({ onPress, title = 'Menu underline' }) => {
         <Pressable style={styles.button} onPress={onPress? onPress: this.onPressDefault}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
                 <Text style={styles.text}>{title}</Text>
-                <Icon name="arrow-forward" size={24} color={COLORS.black}/>
+                <Icon name={icon} size={24} color={COLORS.black}/>
             </View>
         </Pressable>
     )
