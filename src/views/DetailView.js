@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 
 import {COLORS} from '../../assets/colors.js';
-import Btn_arrow_left from '../components/buttons/Btn_arrow_left';
 import Btn_chat from '../components/buttons/Btn_chat';
 import Btn_like from '../components/buttons/Btn_like';
+import Btn_back_arrow from '../components/buttons/Btn_back_arrow.js';
 
 // animalData = the passed JSON which includes all the necesary informations for display
 // route = object including a namestring of the view that navigated to this one,
@@ -28,7 +28,7 @@ const DetailView = ({navigation, animalData, route}) => {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.backButtonContainer}>
-          <Btn_arrow_left /*onPress={() => navigation.navigate(route.params)}*/
+          <Btn_back_arrow /*onPress={() => navigation.navigate(route.params)}*/
           />
         </View>
         <View style={styles.floatingIcons}>
