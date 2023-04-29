@@ -22,13 +22,13 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Start' 
-      screenOptions={{
-        headerShown: false
-      }}
-      >
+      <Stack.Navigator
+        initialRouteName="Start"
+        screenOptions={{
+          headerShown: false,
+        }}>
         <Stack.Screen
-          name = "NavigationBar"
+          name="NavigationBar"
           component={NavigationBarContainer}
           options={{
             title: 'Home',
@@ -40,6 +40,9 @@ const App = () => {
           component={Start}
           options={{title: 'Start'}}
         />
+        <Stack.Screen name="AddListing1" component={AddListingPageOne} />
+        <Stack.Screen name="AddListing2" component={AddListingPageTwo} />
+        <Stack.Screen name="AddListing3" component={AddListingPageThree} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Profile" component={Profile} />
