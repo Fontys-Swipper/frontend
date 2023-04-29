@@ -54,6 +54,7 @@ const DropDown = ({
         setSelected={setSelected}
         data={choice}
         maxHeight={130}
+        save="value"
       />
     </View>
   );

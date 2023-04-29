@@ -10,6 +10,7 @@ import TopBar from '../components/TopBar';
 import NavigationBarContainer from '../components/NavigationBarContainer';
 import DescriptionBox from '../components/DescriptionBox';
 import {COLORS} from '../../assets/colors';
+import Btn_solid_small from '../components/buttons/Btn_solid_small';
 const AddListingPageThree = ({navigation}) => {
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -29,18 +30,18 @@ const AddListingPageThree = ({navigation}) => {
 
         <View>
           <TextHeading text_title="Add Listing" />
-          <DescriptionBox />
           <SelectImage
             selectedImages={selectedImages}
             setSelectedImages={setSelectedImages}
           />
         </View>
-
         {/* eslint-disable-line react-native/no-inline-styles */}
-        <View style={{alignSelf: 'center'}}>
+        <View
+          style={{alignSelf: 'center', marginTop: 600, position: 'absolute'}}>
           <Btn_solid_regular title="Add" />
         </View>
       </View>
+      {/* <NavigationBarContainer style={{position: 'absolute'}} /> */}
     </SafeAreaView>
   );
 };
