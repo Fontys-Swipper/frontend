@@ -155,8 +155,8 @@ export default Feed;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: COLORS.black,
-        flex: 1
+        flex: 1,
+        backgroundColor: COLORS.white
     },
     centeredView: { //Center modal window and dim background
         flex: 1,
