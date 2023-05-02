@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/views/Home';
+import DetailView from './src/views/DetailView';
 import Start from './src/views/Start';
 import Login from './src/views/Login';
 import NavigationBarContainer from './src/components/NavigationBarContainer';
@@ -22,13 +23,13 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Start' 
-      screenOptions={{
-        headerShown: false
-      }}
-      >
+      <Stack.Navigator
+        initialRouteName="Start"
+        screenOptions={{
+          headerShown: false,
+        }}>
         <Stack.Screen
-          name = "NavigationBar"
+          name="NavigationBar"
           component={NavigationBarContainer}
           options={{
             title: 'Home',
@@ -40,9 +41,13 @@ const App = () => {
           component={Start}
           options={{title: 'Start'}}
         />
+        <Stack.Screen name="AddListing1" component={AddListingPageOne} />
+        <Stack.Screen name="AddListing2" component={AddListingPageTwo} />
+        <Stack.Screen name="AddListing3" component={AddListingPageThree} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Feed" component={Feed} />
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="UserInfo" component={UserInformation} />
         <Stack.Screen name="TermsOfService" component={TermsOfService} />

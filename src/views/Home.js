@@ -2,30 +2,15 @@ import React from "react";
 import {Text, View, StyleSheet, Image, TouchableOpacity, ScrollView} from "react-native"
 import { COLORS } from "../../assets/colors.js"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import Start from "./Start.js";
 import TopBar from "../components/TopBar.js";
+import { useNavigation } from '@react-navigation/native';
 
-const HomePage = ({navigation}) => {
+  const HomePage = () => {
+    const navigation = useNavigation();
 
-  const handlePressCircle1 = () => {
-    // navigate to page 1
-    navigation.navigate('Page1');
-  };
-
-  const handlePressCircle2 = () => {
-    // navigate to page 2
-    navigation.navigate('Page2');
-  };
-
-  const handlePressCircle3 = () => {
-    // navigate to page 3
-    navigation.navigate('Page3');
-  };
-
-  const handlePressCircle4 = () => {
-    // navigate to page 3
-    navigation.navigate('Page3');
-  };
+    const handleNavigation = (screenName) => {
+      navigation.navigate(screenName);
+    };
 
     return (
       <View style={{flex: 1}}>
@@ -35,13 +20,13 @@ const HomePage = ({navigation}) => {
                 <View style={styles.second_container}>
                     <Text style={styles.text}>Find animals you like</Text>
                     <View style={styles.circle_container}>
-                      <TouchableOpacity onPress={handlePressCircle1} style={styles.circle}>
+                      <TouchableOpacity onPress={() => handleNavigation('Feed')} style={styles.circle}>
                         <Image source={require('../../assets/images/dog-gba5dc7061_1920.jpg')} style={styles.image_circle}/>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={handlePressCircle2} style={styles.circle}>
+                      <TouchableOpacity onPress={() => handleNavigation('Feed')} style={styles.circle}>
                         <Image source={require('../../assets/images/cat-g2ff4963cc_1920.jpg')} style={styles.image_circle}/>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={handlePressCircle3} style={styles.circle}>
+                      <TouchableOpacity onPress={() => handleNavigation('Feed')} style={styles.circle}>
                         <Image source={require('../../assets/images/rabbit.jpg')} style={styles.image_circle}/>
                       </TouchableOpacity>
                     </View>
@@ -49,19 +34,19 @@ const HomePage = ({navigation}) => {
                 <View style={styles.third_container}>
                     <Text style={styles.text}>Add your own listing</Text>
                     <View style={styles.circle_container_2}>
-                      <TouchableOpacity onPress={handlePressCircle4} style={styles.circle_button}>
+                      <TouchableOpacity onPress={() => handleNavigation('AddListing1')} style={styles.circle_button}>
                           <MaterialCommunityIcons name="plus" size={42} color={COLORS.white}/>
                       </TouchableOpacity>
                     </View>
                 </View>
-          </View>
-        </ScrollView>
-          <View style={{position: 'absolute', top: 0, left: 0, width: '100%'}}>
-            <TopBar/>
-          </View>
-      </View>     
-    );
-}
+            </View>
+          </ScrollView>
+            <View style={{position: 'absolute', top: 0, left: 0, width: '100%'}}>
+              <TopBar />
+            </View>
+    </View>
+  );
+};
 
 export default HomePage;
 
