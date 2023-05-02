@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Image, Button, TouchableOpacity, StyleSheet} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Btn_solid_small from './buttons/Btn_solid_small';
 
 const SelectImage = ({selectedImages, setSelectedImages}) => {
   const handleSelectImages = () => {
@@ -40,9 +41,9 @@ const SelectImage = ({selectedImages, setSelectedImages}) => {
           </TouchableOpacity>
         </View>
       ))}
-      {/* eslint-disable-line react-native/no-inline-styles */}
-      <Button
-        title="Select Images"
+
+      <Btn_solid_small
+        title="Choose"
         onPress={handleSelectImages}
         style={{position: 'absolute'}}
       />
@@ -52,21 +53,23 @@ const SelectImage = ({selectedImages, setSelectedImages}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: 20,
+    display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
+    // alignContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   imageContainer: {
+    // justifyContent: 'space-between',
     position: 'relative',
-    marginBottom: 10,
+    maxHeight: 200,
+    padding: 2,
   },
   image: {
-    width: 100,
     height: 120,
+    width: 120,
+    padding: 20,
   },
   removeButton: {
     position: 'absolute',
@@ -74,8 +77,8 @@ const styles = StyleSheet.create({
     right: 5,
     backgroundColor: 'red',
     borderRadius: 15,
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     alignItems: 'center',
     justifyContent: 'center',
   },
