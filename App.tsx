@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/views/Home';
+import DetailView from './src/views/DetailView';
 import Start from './src/views/Start';
 import Login from './src/views/Login';
 import NavigationBarContainer from './src/components/NavigationBarContainer';
