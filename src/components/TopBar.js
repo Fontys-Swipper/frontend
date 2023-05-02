@@ -1,21 +1,9 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
-import { COLORS } from "../../assets/colors";
-import logo from "../../assets/images/swipper-logo.png";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-// Screens
-import Profile from '../views/Profile';
-import Settings from '../views/Settings';
-
-const Stack = createStackNavigator();
-
-<Stack.Navigator>
-    <Stack.Screen name="Profile" component={Profile} />
-    <Stack.Screen name="Settings" component={Settings} />
-</Stack.Navigator>
+import React, {useState} from 'react';
+import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
+import {COLORS} from '../../assets/colors';
+import logo from '../../assets/images/swipper-logo.png';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useNavigation} from '@react-navigation/native';
 
 const TopBar = () => {
   const navigation = useNavigation();
@@ -26,7 +14,7 @@ const TopBar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavigation = (screenName) => {
+  const handleNavigation = screenName => {
     toggleMenu();
     navigation.navigate(screenName);
   };
@@ -41,7 +29,7 @@ const TopBar = () => {
           <TouchableOpacity onPress={() => handleNavigation('Profile')}>
             <Text style={styles.menuItem}>Profile</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleNavigation('Add Listing')}>
+          <TouchableOpacity onPress={() => handleNavigation('AddListingPageOne')}>
             <Text style={styles.menuItem}>Add Listing</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleNavigation('Settings')}>
@@ -49,9 +37,9 @@ const TopBar = () => {
           </TouchableOpacity>
         </View>
       )}
-        <TouchableOpacity onPress={toggleMenu}>
-            <MaterialCommunityIcons name="menu" size={32} color={COLORS.black} />
-        </TouchableOpacity>
+      <TouchableOpacity onPress={toggleMenu}>
+        <MaterialCommunityIcons name="menu" size={32} color={COLORS.black} />
+      </TouchableOpacity>
     </View>
   );
 };
