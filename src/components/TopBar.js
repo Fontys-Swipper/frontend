@@ -29,7 +29,7 @@ const TopBar = () => {
           <TouchableOpacity onPress={() => handleNavigation('Profile')}>
             <Text style={styles.menuItem}>Profile</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleNavigation('Add Listing')}>
+          <TouchableOpacity onPress={() => handleNavigation('AddListingPageOne')}>
             <Text style={styles.menuItem}>Add Listing</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleNavigation('Settings')}>
