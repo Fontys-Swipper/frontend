@@ -1,1 +1,1 @@
-[{"Id":0,"AnimalName":"string","AnimalSpecies":"string","AnimalImageLink":"string"},{"Id":1,"AnimalName":"Test","AnimalSpecies":"123","AnimalImageLink":"Test214"}]
+[{"Id":0,"AnimalName":"string","AnimalSpecies":"string","AnimalImageLink":"string"},{"Id":1,"AnimalName":"Test","AnimalSpecies":"123","AnimalImageLink":"Test214"},{"Id":2,"AnimalName":"Test2","AnimalSpecies":"Dog","AnimalImageLink":"DogImage"}]
