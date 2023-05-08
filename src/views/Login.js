@@ -1,15 +1,44 @@
 import React, { useState } from "react"; 
 import {Text, View, StyleSheet, Button, ImageBackground} from "react-native"
 import {Dimensions} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { COLORS } from "../../assets/colors.js"
 import InputField from "../components/InputField.js";
 import LoginTopBar from "../components/LoginTopBar.js";
 import Btn_solid_regular from "../components/buttons/Btn_solid_regular.js";
+import { AuthenticateUser } from "../utils/UserApi.js";
 
 const Login = ({navigation}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    _storeUser = async (id) => {
+        try {
+            await AsyncStorage.setItem('@userId', id.toString())
+        } catch (error) {
+            console.log(error)
+        }
+      };
+
+    const authenticateUser = () => {
+        user = {
+            email: email,
+            password: password
+        }
+        AuthenticateUser(user).then(result => {
+            userId = result.data
+            if(result.data != 0)
+            {
+                _storeUser(userId)
+                navigation.navigate('NavigationBar')                
+            }else (
+                console.log('Wrong email or password')
+            )
+        }).catch(error => {
+            console.log(error)
+        });
+    }
 
     return (
         <View style={styles.container}>
@@ -25,7 +54,7 @@ const Login = ({navigation}) => {
                         </View>
                     </View>
                     <View style={styles.buttonsContainer}>
-                        <Btn_solid_regular title="Login" onPress={() => navigation.navigate('NavigationBar')}/>
+                        <Btn_solid_regular title="Login" onPress={() => authenticateUser()}/>
                         {/* <Btn_outline_big onPress={() => navigation.navigate('Start')} title="Back"/> */}
                     </View>
                 </View>
