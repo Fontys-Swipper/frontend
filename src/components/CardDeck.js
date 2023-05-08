@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, PanResponder, Animated, Dimensions, Pres
 import { COLORS } from "../../assets/colors";
 import Btn_like from "./buttons/Btn_like";
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { get_all_listings} from "../utils/listing";
+import {get_all_listings} from "../utils/listing";
 
 const screen_widht = Dimensions.get("window").width
 const screen_height = Dimensions.get("window").height
