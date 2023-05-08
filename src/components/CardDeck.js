@@ -26,7 +26,7 @@ export default class AnimalCards extends React.Component {
         props.postitionX(this.state.pos)
 
         this.showAnimalProfile = () => {
-            console.log("Showing "+cards[this.state.currentIndex].name+"'s profile")
+            console.log("Showing "+this.state.animals[this.state.currentIndex].name+"'s profile")
         }
 
         this.addToFavorites = (name) => {
@@ -195,7 +195,7 @@ export default class AnimalCards extends React.Component {
                         <Icon name="favorite" size={100} color={COLORS.background2}></Icon>
                     </Animated.View>
                     <View style={{flexDirection: "column"}}>
-                        <Image style={[styles.image]} source={{uri: item.animalImageLink}}/>
+                        {item.animalImageLink !== "" ? <Image style={[styles.image]} source={{uri: item.animalImageLink}}/> : null}
                         <View style={[styles.row]}>
                             <View style={[styles.textcontainer]}>
                                 <View style={{flexDirection: "row", gap: 20}}>
@@ -237,8 +237,8 @@ export default class AnimalCards extends React.Component {
                         styles.container,
                     ]}>
                         <View style={{flexDirection: "column"}}>
-                                <Image source={{uri: item.animalImageLink}} style={[styles.image]}/>
-                            <View style={[styles.row]}>
+                        {item.animalImageLink !== "" ? <Image style={[styles.image]} source={{uri: item.animalImageLink}}/> : null} 
+                           <View style={[styles.row]}>
                                 <View style={[styles.textcontainer]}>
                                     <View style={{flexDirection: "row", gap: 20}}>
                                         <Text adjustsFontSizeToFit numberOfLines={1} 
@@ -269,8 +269,8 @@ export default class AnimalCards extends React.Component {
                         styles.container,
                     ]}>
                         <View style={{flexDirection: "column"}}>
-                            <Image source={{uri: item.animalImageLink}} style={[styles.image]}/>
-                            <View style={[styles.row]}>
+                        {item.animalImageLink !== "" ? <Image style={[styles.image]} source={{uri: item.animalImageLink}}/> : null}                            
+                        <View style={[styles.row]}>
                                 <View style={[styles.textcontainer]}>
                                     <View style={{flexDirection: "row", gap: 20}}>
                                         <Text adjustsFontSizeToFit numberOfLines={1} 
@@ -301,7 +301,7 @@ export default class AnimalCards extends React.Component {
                         styles.container,
                     ]}>
                         <View style={{flexDirection: "column"}}>
-                            <Image source={{uri: item.animalImageLink}} style={[styles.image]}/>
+                        {item.animalImageLink !== "" ? <Image style={[styles.image]} source={{uri: item.animalImageLink}}/> : null}
                             <View style={[styles.row]}>
                                 <View style={[styles.textcontainer]}>
                                     <View style={{flexDirection: "row", gap: 20}}>
