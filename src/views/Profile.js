@@ -14,7 +14,6 @@ import {useNavigation} from '@react-navigation/native';
 
 import Btn_back_arrow from '../components/buttons/Btn_back_arrow.js';
 import Feedcard from '../components/Feedcard';
-
 import image1 from '../../assets/images/cat-g2ff4963cc_1920.jpg';
 import image2 from '../../assets/images/malinois-g4dd9f780d_1920.jpg';
 import image3 from '../../assets/images/dog_image.jpg';
