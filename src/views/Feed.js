@@ -250,7 +250,7 @@ const Feed = ({navigation}) => {
     let filteredData = listingData;
     if (species != 'Species') {
       filteredData = filteredData.filter(item => {
-        return item.species === species;
+        return item.animal_species === species;
       });
     }
     if (gender != 'Gender') {
@@ -364,50 +364,55 @@ const Feed = ({navigation}) => {
 export default Feed;
 
 const styles = StyleSheet.create({
-  container: {},
-  centeredView: {
-    //Center modal window and dim background
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    backgroundColor: COLORS.black + '99',
-  },
-  contentContainer: {
-    alignItems: 'center',
-    paddingBottom: 10,
-    paddingTop: 74,
-  },
-  modalScrollView: {},
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginVertical: 10,
-    alignSelf: 'flex-start',
-    marginLeft: 33,
-    position: 'absolute',
-    bottom: 0,
-    right: 15,
-  },
-  modalView: {
-    margin: 10,
-    paddingVertical: 10,
-    width: 300,
-    height: '80%',
-    backgroundColor: COLORS.background,
-    borderRadius: 4,
-    borderColor: COLORS.primary,
-    borderWidth: 2,
-    alignItems: 'center',
-    shadowColor: '#000',
-    gap: 10,
-    shadowOffset: {
-      width: 0,
-      height: 2,
+    container: {
+        flex: 1,
+        backgroundColor: COLORS.white
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-});
+    centeredView: { //Center modal window and dim background
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+        backgroundColor: COLORS.black + '99'
+    },
+    contentContainer: {
+        alignItems: 'center',
+        paddingBottom: 10, 
+        paddingTop: 74,
+        backgroundColor: COLORS.white,
+    },
+    modalScrollView:{
+
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginVertical: 10,
+        alignSelf: 'flex-start',
+        marginLeft: 33,
+        position: 'absolute',
+        bottom: 0,
+        right: 15,
+    },
+    modalView: {
+        margin: 10,
+        paddingVertical: 10,
+        width: 300,
+        height: '80%',
+        backgroundColor: COLORS.background,
+        borderRadius: 4,
+        borderColor: COLORS.primary,
+        borderWidth: 2,
+        alignItems: 'center',
+        shadowColor: '#000',
+        gap: 10,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+})

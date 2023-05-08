@@ -1,8 +1,5 @@
 import React from "react"; 
 import {Text, View, StyleSheet, ImageBackground, Button} from "react-native"
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 
 import { COLORS } from "../../assets/colors.js"
 import Btn_solid_big from "../components/buttons/Btn_solid_big.js";
@@ -39,7 +36,7 @@ const styles = StyleSheet.create({
     },
     innerContainer: {
         flex: 1,
-        backgroundColor: COLORS.black + 90,
+        backgroundColor: COLORS.black + 'a6',
         alignItems: "center",
         justifyContent: "space-between",
     },
