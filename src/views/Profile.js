@@ -10,6 +10,7 @@ import {COLORS} from '../../assets/colors.js';
 import TopBar from '../components/TopBar.js';
 import {useState} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useNavigation} from '@react-navigation/native';
 
 import Btn_back_arrow from '../components/buttons/Btn_back_arrow.js';
 import Feedcard from '../components/Feedcard';
@@ -55,9 +56,15 @@ dummyUser = {
   hasGarden: 'Yes',
 };
 
-const Profile = ({navigation}) => {
+const Profile = () => {
   const [listings, setListings] = useState(dummy);
   const [userInfo, setUserInfo] = useState(dummyUser);
+
+  const navigation = useNavigation();
+
+  const handleNavigation = screenName => {
+    navigation.navigate(screenName);
+  };
 
   return (
     <View>
@@ -85,7 +92,9 @@ const Profile = ({navigation}) => {
           </View>
         ))}
         <View style={styles.circle_container}>
-          <TouchableOpacity style={styles.circle_button}>
+          <TouchableOpacity
+            onPress={() => handleNavigation('AddListing1')}
+            style={styles.circle_button}>
             <MaterialCommunityIcons
               name="plus"
               size={42}
@@ -93,7 +102,6 @@ const Profile = ({navigation}) => {
             />
           </TouchableOpacity>
         </View>
-
         <View style={styles.separator} />
       </ScrollView>
     </View>
