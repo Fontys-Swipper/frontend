@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 function NavigationBarContainer() {
     return (
       <Tab.Navigator
-        initialRouteName="Feed"
+        initialRouteName="Home"
         screenOptions={{
           tabBarShowLabel: false,
           tabBarActiveTintColor: COLORS.white,
