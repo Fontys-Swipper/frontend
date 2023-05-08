@@ -3,61 +3,10 @@ import { StyleSheet, Text, View, Image, PanResponder, Animated, Dimensions, Pres
 import { COLORS } from "../../assets/colors";
 import Btn_like from "./buttons/Btn_like";
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import {get_all_listings} from "../utils/listing";
 
 const screen_widht = Dimensions.get("window").width
 const screen_height = Dimensions.get("window").height
-
-const cards = [
-    {
-        id: 5,
-        name:"Daisy",
-        type: "Border Terrier",
-        age: "Young",
-        price: "100€",
-        image: require("../../assets/images/dog-gba5dc7061_1920.jpg"),
-    },
-    {
-    id: 1,
-      name:"Luna",
-      type: "Boxer",
-      age: "Old",
-      price: "50€",
-      image: require("../../assets/images/akita.jpg"),
-  },
-  {
-    id: 21,
-      name:"Cooper",
-      type: "American Bulldog",
-      age: "Old",
-      price: "500€",
-      image: require("../../assets/images/labrador-retriever-gb2d619e6b_1920.jpg"),
-  },
-  {
-    id: 33,
-      name:"Milo",
-      type: "Spaniel",
-      age: "Young",
-      price: "150€",
-      image: require("../../assets/images/dog_image.jpg"),
-  },
-  {
-    id: 4,
-      name:"Lucy",
-      type: "Terrier",
-      age: "Young",
-      price: "200€",
-      image: require("../../assets/images/malinois-g4dd9f780d_1920.jpg"),
-  },
-  {
-    id: 5333,
-      name:"Bella",
-      type: "Alaskan Husky",
-      age: "Old",
-      price: "250€",
-      image: require("../../assets/images/jack-russell-g49275d8de_1920.jpg"),
-  },
-  ]
-
 
 export default class AnimalCards extends React.Component {
 
@@ -70,13 +19,14 @@ export default class AnimalCards extends React.Component {
             currentIndex: 0,
             currentItem: 0,
             animals: [],
-            pos: this.position.x
+            pos: this.position.x,
+            isLoading: true,
         } 
         
         props.postitionX(this.state.pos)
 
         this.showAnimalProfile = () => {
-            console.log("Showing "+cards[this.state.currentIndex].name+"'s profile")
+            console.log("Showing "+this.state.animals[this.state.currentIndex].name+"'s profile")
         }
 
         this.addToFavorites = (name) => {
@@ -163,10 +113,10 @@ export default class AnimalCards extends React.Component {
             onPanResponderRelease:(event, gestureState) => {
                 if (gestureState.dx > 120) {   
 
-                    for (let index = 0; index < cards.length; index++) {
-                        const card = cards[index];
+                    for (let index = 0; index < this.state.animals.length; index++) {
+                        const card = this.state.animals[index];
                             if (card.id === this.state.currentItem) {
-                                this.addToFavorites(card.name)
+                                this.addToFavorites(card.animalName)
                             }
                     }
                     
@@ -182,8 +132,8 @@ export default class AnimalCards extends React.Component {
                 else if (gestureState.dx < -120) {  
                     let items = this.state.animals                  
                     
-                    for (let index = 0; index < cards.length; index++) {
-                        const card = cards[index];
+                    for (let index = 0; index < this.state.animals.length; index++) {
+                        const card = this.state.animals[index];
                         if (card.id === this.state.currentItem) {
                             let updatedAnimals = [...items, card]
                             this.setState({animals: updatedAnimals})
@@ -210,13 +160,23 @@ export default class AnimalCards extends React.Component {
         })
     }
 
+    getAnimals() {
+        get_all_listings().then(result => {
+            this.setState({animals: result.data})
+            this.setState({isLoading: false})
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
     componentDidMount() {
-        this.setState({animals: cards})
+        this.getAnimals()
     }
 
 
 
     renderAnimal = () => {
+        if (this.state.isLoading === false) {
         return this.state.animals.map((item, i) => {
             if (i < this.state.currentIndex) {
                 return null
@@ -235,24 +195,24 @@ export default class AnimalCards extends React.Component {
                         <Icon name="favorite" size={100} color={COLORS.background2}></Icon>
                     </Animated.View>
                     <View style={{flexDirection: "column"}}>
-                        <Image source={item.image} style={[styles.image]}/>
+                        {item.animalImageLink !== "" ? <Image style={[styles.image]} source={{uri: item.animalImageLink}}/> : null}
                         <View style={[styles.row]}>
                             <View style={[styles.textcontainer]}>
                                 <View style={{flexDirection: "row", gap: 20}}>
                                     <Pressable onPress={this.showAnimalProfile}>
                                     <Text adjustsFontSizeToFit numberOfLines={1} 
-                                        style={[styles.nametext]}>{item.name}
+                                        style={[styles.nametext]}>{item.animalName}
                                     </Text>
                                     </Pressable>
                                     <Text adjustsFontSizeToFit numberOfLines={1} 
                                     style={[styles.price]}>{item.price}</Text>
                                 </View>
-                                <Text style={[styles.infotext]}>{item.type}</Text>
+                                <Text style={[styles.infotext]}>{item.animalSpecies}</Text>
                                 <Text style={[styles.infotext]}>{item.age}</Text>
                             </View>
                             <View style={[styles.buttoncontainer]}>
                                 <Btn_like onPress={() => {   
-                                    this.addToFavorites(item.name) 
+                                    this.addToFavorites(item.animalName) 
                                     Animated.spring(this.position, {
                                         toValue: {x: screen_widht + 100, y: 0},
                                         useNativeDriver: true
@@ -277,17 +237,17 @@ export default class AnimalCards extends React.Component {
                         styles.container,
                     ]}>
                         <View style={{flexDirection: "column"}}>
-                                <Image source={item.image} style={[styles.image]}/>
-                            <View style={[styles.row]}>
+                        {item.animalImageLink !== "" ? <Image style={[styles.image]} source={{uri: item.animalImageLink}}/> : null} 
+                           <View style={[styles.row]}>
                                 <View style={[styles.textcontainer]}>
                                     <View style={{flexDirection: "row", gap: 20}}>
                                         <Text adjustsFontSizeToFit numberOfLines={1} 
-                                            style={[styles.nametext]}>{item.name}
+                                            style={[styles.nametext]}>{item.animalName}
                                         </Text>
                                         <Text adjustsFontSizeToFit numberOfLines={1} 
                                         style={[styles.price]}>{item.price}</Text>
                                     </View>
-                                    <Text style={[styles.infotext]}>{item.type}</Text>
+                                    <Text style={[styles.infotext]}>{item.animalSpecies}</Text>
                                     <Text style={[styles.infotext]}>{item.age}</Text>
                                 </View>
                                 <View style={[styles.buttoncontainer]}>
@@ -309,17 +269,17 @@ export default class AnimalCards extends React.Component {
                         styles.container,
                     ]}>
                         <View style={{flexDirection: "column"}}>
-                            <Image source={item.image} style={[styles.image]}/>
-                            <View style={[styles.row]}>
+                        {item.animalImageLink !== "" ? <Image style={[styles.image]} source={{uri: item.animalImageLink}}/> : null}                            
+                        <View style={[styles.row]}>
                                 <View style={[styles.textcontainer]}>
                                     <View style={{flexDirection: "row", gap: 20}}>
                                         <Text adjustsFontSizeToFit numberOfLines={1} 
-                                            style={[styles.nametext]}>{item.name}
+                                            style={[styles.nametext]}>{item.animalName}
                                         </Text>
                                         <Text adjustsFontSizeToFit numberOfLines={1} 
                                         style={[styles.price]}>{item.price}</Text>
                                     </View>
-                                    <Text style={[styles.infotext]}>{item.type}</Text>
+                                    <Text style={[styles.infotext]}>{item.animalSpecies}</Text>
                                     <Text style={[styles.infotext]}>{item.age}</Text>
                                 </View>
                                 <View style={[styles.buttoncontainer]}>
@@ -341,17 +301,17 @@ export default class AnimalCards extends React.Component {
                         styles.container,
                     ]}>
                         <View style={{flexDirection: "column"}}>
-                            <Image source={item.image} style={[styles.image]}/>
+                        {item.animalImageLink !== "" ? <Image style={[styles.image]} source={{uri: item.animalImageLink}}/> : null}
                             <View style={[styles.row]}>
                                 <View style={[styles.textcontainer]}>
                                     <View style={{flexDirection: "row", gap: 20}}>
                                         <Text adjustsFontSizeToFit numberOfLines={1} 
-                                            style={[styles.nametext]}>{item.name}
+                                            style={[styles.nametext]}>{item.animalName}
                                         </Text>
                                         <Text adjustsFontSizeToFit numberOfLines={1} 
                                         style={[styles.price]}>{item.price}</Text>
                                     </View>
-                                    <Text style={[styles.infotext]}>{item.type}</Text>
+                                    <Text style={[styles.infotext]}>{item.animalSpecies}</Text>
                                     <Text style={[styles.infotext]}>{item.age}</Text>
                                 </View>
                                 <View style={[styles.buttoncontainer]}>
@@ -365,11 +325,13 @@ export default class AnimalCards extends React.Component {
             }
         }).reverse()
     }
+    }
 
     render(){
+        const renderanimal = this.renderAnimal()
     return (      
         <>
-        {this.renderAnimal()}       
+        {this.state.isLoading ? (<Text>Loading...</Text>):(renderanimal)}      
         </>   
     )
 }
@@ -390,6 +352,8 @@ const styles = StyleSheet.create({
     image: {
         alignSelf: "center",
         marginTop: 5,
+        width: 248,
+        height: 400,
         maxHeight: 400,
         maxWidth: 248
     },
