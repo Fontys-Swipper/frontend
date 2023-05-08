@@ -205,10 +205,10 @@ export default class AnimalCards extends React.Component {
                                     </Text>
                                     </Pressable>
                                     <Text adjustsFontSizeToFit numberOfLines={1} 
-                                    style={[styles.price]}>{item.price}</Text>
+                                    style={[styles.price]}>{item.price+"€"}</Text>
                                 </View>
                                 <Text style={[styles.infotext]}>{item.animalSpecies}</Text>
-                                <Text style={[styles.infotext]}>{item.age}</Text>
+                                <Text style={[styles.infotext]}>{item.age+" Years old"}</Text>
                             </View>
                             <View style={[styles.buttoncontainer]}>
                                 <Btn_like onPress={() => {   
@@ -245,10 +245,10 @@ export default class AnimalCards extends React.Component {
                                             style={[styles.nametext]}>{item.animalName}
                                         </Text>
                                         <Text adjustsFontSizeToFit numberOfLines={1} 
-                                        style={[styles.price]}>{item.price}</Text>
+                                        style={[styles.price]}>{item.price+"€"}</Text>
                                     </View>
                                     <Text style={[styles.infotext]}>{item.animalSpecies}</Text>
-                                    <Text style={[styles.infotext]}>{item.age}</Text>
+                                    <Text style={[styles.infotext]}>{item.age+" Years old"}</Text>
                                 </View>
                                 <View style={[styles.buttoncontainer]}>
                                     <Btn_like onPress={() => {                                
@@ -277,10 +277,10 @@ export default class AnimalCards extends React.Component {
                                             style={[styles.nametext]}>{item.animalName}
                                         </Text>
                                         <Text adjustsFontSizeToFit numberOfLines={1} 
-                                        style={[styles.price]}>{item.price}</Text>
+                                        style={[styles.price]}>{item.price+"€"}</Text>
                                     </View>
                                     <Text style={[styles.infotext]}>{item.animalSpecies}</Text>
-                                    <Text style={[styles.infotext]}>{item.age}</Text>
+                                    <Text style={[styles.infotext]}>{item.age+" Years old"}</Text>
                                 </View>
                                 <View style={[styles.buttoncontainer]}>
                                     <Btn_like onPress={() => {                                
