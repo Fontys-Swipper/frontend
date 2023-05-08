@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -20,6 +20,7 @@ import DropDown from '../components/DropDown';
 import Btn_solid_big from '../components/buttons/Btn_solid_big';
 import InputField from '../components/InputField.js';
 import Btn_floating_round from '../components/buttons/Btn_floating_round';
+import { get_all_listings } from '../utils/listing';
 
 //Dummy data for species dropdown
 const speciesData = [
@@ -242,15 +243,23 @@ const Feed = ({navigation}) => {
   const [gender, setGender] = useState('Gender');
   const [location, setLocation] = useState('');
   const [sorting, setSorting] = useState('');
-  const [data, setData] = useState(listingData);
+  const [data, setData] = useState([]);
   const tabBarHeight = useBottomTabBarHeight();
+
+  useEffect(() => {
+    get_all_listings().then(result =>{
+      setData(result.data)
+    }).catch(error => {
+      console.log(error)
+    })
+  },[])
 
   //Filtering and sorting the feed according to users selections
   const filterAndSortData = () => {
-    let filteredData = listingData;
+    let filteredData = data;
     if (species != 'Species') {
       filteredData = filteredData.filter(item => {
-        return item.animal_species === species;
+        return item.animalSpecies === species;
       });
     }
     if (gender != 'Gender') {
@@ -262,12 +271,12 @@ const Feed = ({navigation}) => {
       switch (sorting) {
         case 'Newest':
           filteredData.sort((a, b) =>
-            a.timeOfAdding < b.timeOfAdding ? 1 : -1,
+            a.listingDate < b.listingDate ? 1 : -1,
           );
           break;
         case 'Oldest':
           filteredData.sort((a, b) =>
-            a.timeOfAdding > b.timeOfAdding ? 1 : -1,
+            a.listingDate > b.listingDate ? 1 : -1,
           );
           break;
         case 'Price: Low to high':
@@ -287,13 +296,13 @@ const Feed = ({navigation}) => {
         {/* Map data to feedcards */}
         {data.map(item => (
           <Feedcard
-            key={item.listing_id}
-            image={item.animal_image_link}
-            name={item.animal_name}
+            key={item.id}
+            image={item.animalImageLink}
+            name={item.animalName}
             price={item.price}
-            type={item.type}
-            age={item.age}
-            timeOfAdding={item.timeOfAdding}
+            type={item.animalSpecies}
+            age={item.age+" Years old"}
+            timeOfAdding={item.listingDate.substring(0,10)}
           />
         ))}
       </ScrollView>

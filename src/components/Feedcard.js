@@ -16,7 +16,7 @@ const Feedcard = ({image = image, name = 'Name', price = '€€', type = 'Type'
                 </View>
                 <Text style={[styles.infotext]}>{type}</Text>
                 <Text style={[styles.infotext]}>{age}</Text>
-                <Text style={{marginTop: 10, alignSelf: "flex-start"}}>{timeOfAdding}</Text>
+                <Text style={{marginTop: 5, alignSelf: "flex-start"}}>{timeOfAdding}</Text>
             </View>
         </View>
     )
