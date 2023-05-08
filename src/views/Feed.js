@@ -47,7 +47,7 @@ const sortingTypes = [
 ];
 
 //Imges for dummy data
-image1 = require('../../assets/images/akita.jpg');
+image1 = "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*";
 image2 = require('../../assets/images/dog_image.jpg');
 image3 = require('../../assets/images/dog-gba5dc7061_1920.jpg');
 image4 = require('../../assets/images/jack-russell-g49275d8de_1920.jpg');

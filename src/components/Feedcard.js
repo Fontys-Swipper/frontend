@@ -3,10 +3,10 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import { COLORS } from "../../assets/colors";
 import dogimage from "../../assets/images/dog_image.jpg"
 
-const Feedcard = ({image = dogimage, name = 'Name', price = '€€', type = 'Type', age = 'Age', timeOfAdding = 'Time Of Adding'}) => {
+const Feedcard = ({image = image, name = 'Name', price = '€€', type = 'Type', age = 'Age', timeOfAdding = 'Time Of Adding'}) => {
     return (
         <View style={[styles.container]}>
-            <Image source={image} style={[styles.image]}/>
+            <Image source={{uri: image}} style={[styles.image]}/>
             <View style={{marginTop: 12}}>
                 <View style={{flexDirection: "row"}}>
                     <Text adjustsFontSizeToFit numberOfLines={1} 
@@ -37,9 +37,11 @@ const styles = StyleSheet.create({
     image: {
         marginLeft: 20,
         alignSelf: "center",
-        maxHeight: 80,
-        maxWidth: 80,  
+        // maxHeight: 80,
+        // maxWidth: 80,  
         borderRadius: 50,
+        height: 80,
+        width: 80,  
     },
     nametext: {
         fontFamily: "RobotoSlab-SemiBold",
