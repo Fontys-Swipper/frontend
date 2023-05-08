@@ -22,12 +22,12 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Start' 
-      screenOptions={{
-        headerShown: false
-      }}
-      >
-        <Stack.Screen
+      <Stack.Navigator
+        initialRouteName="Start"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        {/* <Stack.Screen
           name = "NavigationBar"
           component={NavigationBarContainer}
           options={{
@@ -47,7 +47,8 @@ const App = () => {
         <Stack.Screen name="UserInfo" component={UserInformation} />
         <Stack.Screen name="TermsOfService" component={TermsOfService} />
         <Stack.Screen name="ChangeMail" component={ChangeMail} />
-        <Stack.Screen name="ChangePassword" component={ChangePassword} />
+        <Stack.Screen name="ChangePassword" component={ChangePassword} /> */}
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

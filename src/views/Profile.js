@@ -1,9 +1,18 @@
 import React from 'react';
-import {Text, View, ScrollView, ToastAndroid, Button} from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import {COLORS} from '../../assets/colors.js';
 import TopBar from '../components/TopBar.js';
+import {useState} from 'react';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Btn_back_arrow from '../components/buttons/Btn_back_arrow.js';
+import Feedcard from '../components/Feedcard';
 
 import image1 from '../../assets/images/cat-g2ff4963cc_1920.jpg';
 import image2 from '../../assets/images/malinois-g4dd9f780d_1920.jpg';
@@ -36,35 +45,102 @@ const dummy = [
   },
 ];
 
-const Profile = ({navigation}) => {
-  const [listings, setListings] = useState([]);
+dummyUser = {
+  name: 'Max Mustermann',
+  city: 'Oulu',
+  livingSpace: 'Super big',
+  description:
+    'I am the default user template for this App. I love animals and everything animal related. Right now I live in a huge apartment with a garden and have two bunnies. I am always ready to tak in animals in need and help wherever I can.',
+  hasPet: 'Yes',
+  hasGarden: 'Yes',
+};
 
-  setListings(dummy);
+const Profile = ({navigation}) => {
+  const [listings, setListings] = useState(dummy);
+  const [userInfo, setUserInfo] = useState(dummyUser);
 
   return (
     <View>
       <ScrollView>
         <TopBar />
         <Btn_back_arrow />
-        <Text>Max Mustermann</Text>
-        <Text>City</Text>
-        <Text>Living Space</Text>
-        <Text>Description</Text>
-        <Text>Has Pet (yes or no)</Text>
-        <Text>Has Garden (yes or no)</Text>
-        <Text>Own listings</Text>
+        <Text style={styles.userInfoTitle}>{userInfo.name}</Text>
+        <Text style={styles.userInfo}>{userInfo.description}</Text>
+        <Text style={styles.userInfo}>City: {userInfo.city}</Text>
+        <Text style={styles.userInfo}>
+          Living space: {userInfo.livingSpace}
+        </Text>
+        <Text style={styles.userInfo}>Has a pet: {userInfo.hasPet}</Text>
+        <Text style={styles.userInfo}>Has a garden: {userInfo.hasGarden}</Text>
+        <Text style={styles.userInfoTitle}>Own listings:</Text>
         {listings.map(item => (
-          <Feedcard
-            key={item.listing_id}
-            image={item.animal_image_link}
-            name={item.animal_name}
-            price={item.price}
-            timeOfAdding={item.timeOfAdding}
-          />
+          <View style={styles.userListings}>
+            <Feedcard
+              key={item.listing_id}
+              image={item.animal_image_link}
+              name={item.animal_name}
+              price={item.price}
+              timeOfAdding={item.timeOfAdding}
+            />
+          </View>
         ))}
+        <View style={styles.circle_container}>
+          <TouchableOpacity style={styles.circle_button}>
+            <MaterialCommunityIcons
+              name="plus"
+              size={42}
+              color={COLORS.white}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.separator} />
       </ScrollView>
     </View>
   );
 };
 
 export default Profile;
+
+const styles = StyleSheet.create({
+  userInfoTitle: {
+    fontFamily: 'RobotoSlab-SemiBold',
+    fontSize: 26,
+    fontWeight: 600,
+    marginTop: 20,
+    marginLeft: 30,
+    marginBottom: 10,
+  },
+  userInfo: {
+    fontFamily: 'Roboto-Regular',
+    fontWeight: 300,
+    fontSize: 15,
+    marginTop: 15,
+    marginLeft: 30,
+  },
+  userListings: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 10,
+    marginEnd: 20,
+  },
+  circle_container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40,
+  },
+  circle_button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.primary,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+  },
+
+  separator: {
+    marginTop: 40,
+  },
+});
