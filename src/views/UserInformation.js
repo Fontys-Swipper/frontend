@@ -1,29 +1,26 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text, ToastAndroid, StyleSheet } from "react-native";
 import TopBar from "../components/TopBar";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import InputField from "../components/InputField";
 import Btn_outline_big from "../components/buttons/Btn_outline_big";
 import Btn_back_arrow from "../components/buttons/Btn_back_arrow";
+import { UpdateUser } from "../utils/UserApi";
 
-// User mockdata
-const UserInfo = [
-    {
-        uname: "user123",
-        fname: "Etunimi",
-        lname: "Sukunimi",
-        address: "Address 12"
-    }
-]
-
-const UserInformation = ({navigation}) => {
-    const [username, setUsername] = useState(UserInfo[0].uname)
-    const [firstname, setFirstname] = useState(UserInfo[0].fname)
-    const [lastname, setLastname] = useState(UserInfo[0].lname)
-    const [address, setAddress] = useState(UserInfo[0].address)
+const UserInformation = ({navigation, route}) => {
+    const [username, setUsername] = useState('')
+    const [firstname, setFirstname] = useState('')
+    const [lastname, setLastname] = useState('')
+    const [address, setAddress] = useState('')
     const [changes, SetChanges] = useState(false)
+    const {user} = route.params
 
-
+    useEffect(() => {
+        setUsername(user.username)
+        setFirstname(user.firstname)
+        setLastname(user.lastname)
+        setAddress(user.address)
+    },[])
 
     const handleSave = () => {
         if (username === "" || firstname === "" || lastname === "" || address === "") {
@@ -32,11 +29,26 @@ const UserInformation = ({navigation}) => {
             }
             return
         }
-        // API call
-        UserInfo[0].uname = username
-        UserInfo[0].fname = firstname
-        UserInfo[0].lname = lastname
-        UserInfo[0].address = address
+        UpdateUser(user.id, {
+            id: user.id,
+            username: username,
+            firstname: firstname,
+            lastname: lastname,
+            address: address,
+            password: user.password,
+            email: user.email,
+            livingSpace: user.livingSpace,
+            description: user.description,
+            companyName: user.companyName,
+            hasPet: user.hasPet,
+            hasGarden: user.hasGarden,
+            likedAnimals: user.likedAnimals,
+            ownAnimals: user.ownAnimals,
+        }).then(result => {
+            console.log(result)
+        }).catch(error => {
+            console.log(error)
+        })
         SetChanges(false)
         if(Platform.OS === 'android'){
             ToastAndroid.show('Saved user information', ToastAndroid.SHORT)

@@ -7,19 +7,11 @@ import { COLORS } from "../../assets/colors.js"
 import InputField from "../components/InputField.js";
 import LoginTopBar from "../components/LoginTopBar.js";
 import Btn_solid_regular from "../components/buttons/Btn_solid_regular.js";
-import { AuthenticateUser } from "../utils/UserApi.js";
+import { AuthenticateUser, StoreUserId } from "../utils/UserApi.js";
 
 const Login = ({navigation}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-    _storeUser = async (id) => {
-        try {
-            await AsyncStorage.setItem('@userId', id.toString())
-        } catch (error) {
-            console.log(error)
-        }
-      };
 
     const authenticateUser = () => {
         user = {
@@ -30,7 +22,9 @@ const Login = ({navigation}) => {
             userId = result.data
             if(result.data != 0)
             {
-                _storeUser(userId)
+                StoreUserId(userId).catch(error => {
+                    console.log(error)
+                })
                 navigation.navigate('NavigationBar')                
             }else (
                 console.log('Wrong email or password')
