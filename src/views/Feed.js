@@ -243,12 +243,14 @@ const Feed = ({navigation}) => {
   const [gender, setGender] = useState('Gender');
   const [location, setLocation] = useState('');
   const [sorting, setSorting] = useState('');
+  const [allData, setAllData] = useState([]);
   const [data, setData] = useState([]);
   const tabBarHeight = useBottomTabBarHeight();
 
   useEffect(() => {
     get_all_listings().then(result =>{
       setData(result.data)
+      setAllData(result.data)
     }).catch(error => {
       console.log(error)
     })
@@ -256,7 +258,7 @@ const Feed = ({navigation}) => {
 
   //Filtering and sorting the feed according to users selections
   const filterAndSortData = () => {
-    let filteredData = data;
+    let filteredData = allData;
     if (species != 'Species') {
       filteredData = filteredData.filter(item => {
         return item.animalSpecies === species;

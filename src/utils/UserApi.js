@@ -31,6 +31,10 @@ export function GetUser(userId) {
     return axios.get(baseURL + '/' + userId)
 }
 
+export function UpdateUser(userId, user) {
+    return axios.put(baseURL+"/"+userId, user)
+}
+
 export function AuthenticateUser(user) {
     return axios.post('https://swipperresource.azurewebsites.net/api/authenticate', null,{params: { email: user.email, password: user.password}})
 }
