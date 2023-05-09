@@ -17,7 +17,7 @@ import SelectImage from '../components/SelectImage';
 const AddListingPageOne = ({navigation}) => {
   // eslint-disable-next-line no-undef
   const [view, setView] = useState(1);
-  const [species, setSpecies] = useState('');
+  const [animalSpecies, setAnimalSpecies] = useState('');
   const [animalBreed, setAnimalBreed] = useState('');
   const [animalName, setAnimalname] = useState('');
   const [age, setAge] = useState();
@@ -32,7 +32,7 @@ const AddListingPageOne = ({navigation}) => {
   const handlePostRequest = () => {
     const requestBody = {
       view,
-      species,
+      animalSpecies,
       animalBreed,
       animalName,
       age,
@@ -83,9 +83,9 @@ const AddListingPageOne = ({navigation}) => {
                 placehoder="Type"
                 choice={['Dog']}
                 setSelected={val => {
-                  setSpecies(val);
+                  setAnimalSpecies(val);
                 }}
-                value={species}
+                value={animalSpecies}
               />
             </View>
             <View style={{marginBottom: 24, alignSelf: 'center'}}>
@@ -156,7 +156,7 @@ const AddListingPageOne = ({navigation}) => {
             <View style={{marginBottom: 31}}>
               <DropDown
                 placehoder="Gender"
-                choice={['Male', 'Female', 'Unknown']}
+                choice={['Male', 'Female']}
                 setSelected={val => setIsmale(val)}
                 value={isMale}
               />

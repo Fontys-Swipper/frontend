@@ -8,6 +8,7 @@ const DropDown = ({
   searchPlaceholder = '',
   search = '',
   setSelected,
+  textColor = COLORS.black,
 }) => {
   //const [selected, setSelected] = React.useState('');
 
@@ -27,7 +28,7 @@ const DropDown = ({
         inputStyles={{
           fontFamily: 'Roboto-Medium',
           fontSize: 15,
-          color: COLORS.black,
+          color: textColor,
         }}
         dropdownItemStyles={{
           padding: 10,
