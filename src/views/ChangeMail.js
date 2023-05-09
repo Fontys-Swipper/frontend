@@ -16,10 +16,7 @@ const ChangeMail = ({navigation, route}) => {
     const {user} = route.params
 
 
-    useEffect(() => { 
-        // if (newMail === mailAgain) {
-        //     setEmailIsMatch(true)
-        // }    
+    useEffect(() => {   
         setCurrentEmail(user.email)
     },[])
 
@@ -90,15 +87,10 @@ const ChangeMail = ({navigation, route}) => {
                 text_title="Repeat"
                 onChangeText={text => setMailAgain(text)}
                 value={mailAgain}
+                icon={!emailIsMatch && (
+                    <Icon name="error-outline" size={24} color={COLORS.primary}></Icon>
+                    )}
                 />
-                    
-                <View style={[styles.icon]}>
-                {!emailIsMatch && (
-                <Icon name="error-outline" size={24} color={COLORS.primary}></Icon>
-                )}
-                </View>
-                    
-                
                 </View>
                 <View style={[styles.button]}>
                     <Btn_solid_regular onPress={handleMailChange} title="Change"/>

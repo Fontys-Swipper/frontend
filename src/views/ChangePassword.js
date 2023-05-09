@@ -101,12 +101,10 @@ const ChangePassword = ({navigation, route}) => {
                     text_title="Repeat"
                     onChangeText={text => setPasswordAgain(text)}
                     value={passwordAgain}
-                    />
-                    <View style={[styles.icon]}>
-                        {!passwordIsMatch &&(
+                    icon={!passwordIsMatch &&(
                         <Icon name="error-outline" size={24} color={COLORS.primary}/>
                         )}
-                    </View>
+                    />
                 </View>
                 <View style={[styles.button]}>
                     <Btn_solid_regular onPress={handePasswordChange} title="Change"/>
