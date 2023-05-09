@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Text, Image, Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {COLORS} from '../../assets/colors';
 import logo from '../../assets/images/swipper-logo.png';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -19,6 +21,26 @@ const TopBar = () => {
     navigation.navigate(screenName);
   };
 
+  const logOutAlert = () =>
+    Alert.alert('Logging out', 'Click OK to log out', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => handleLogOut()},
+    ]);
+
+  const handleLogOut = async () => {
+    try {
+      await AsyncStorage.removeItem('@userId')
+      navigation.navigate('Start')
+    } catch(e) {
+      console.log(e)
+      // remove error
+    }
+  }
+
   return (
     <View style={styles.topBar}>
       <View style={styles.logoContainer}>
@@ -34,6 +56,9 @@ const TopBar = () => {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleNavigation('Settings')}>
             <Text style={styles.menuItem}>Settings</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => logOutAlert()}>
+            <Text style={styles.menuItem}>Log Out</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -68,7 +93,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     width: 128,
-    height: 121,
+    height: 140,
     top: 54,
     padding: 10,
     borderBottomLeftRadius: 4,

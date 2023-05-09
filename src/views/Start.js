@@ -17,6 +17,8 @@ const Start = ({ navigation }) => {
                     <View style={styles.buttonsContainer}>
                         <Btn_solid_big onPress={() => navigation.navigate('Login')} title="Login"/>
                         <Btn_outline_big onPress={() => navigation.navigate('SignUp')}  title="Sign up"/>
+                        <Btn_outline_big onPress={() => navigation.navigate('NavigationBar')}  title="Skip to Home"/>
+
                     </View>
                 </View>
             </ImageBackground>     
