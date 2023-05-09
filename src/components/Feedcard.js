@@ -1,7 +1,7 @@
-import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
-import { COLORS } from "../../assets/colors";
-import dogimage from "../../assets/images/dog_image.jpg"
+import React from 'react';
+import {View, Image, Text, StyleSheet} from 'react-native';
+import {COLORS} from '../../assets/colors';
+import dogimage from '../../assets/images/dog_image.jpg';
 
 const Feedcard = ({image = image, name = 'Name', price = '€€', type = 'Type', age = 'Age', timeOfAdding = 'Time Of Adding'}) => {
     return (
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: COLORS.background,
         height: 113,
-        width: 308,
+        width: '90%',
         borderRadius: 5,
         borderWidth: 2,
         borderColor: COLORS.primary,

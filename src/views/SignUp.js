@@ -1,22 +1,29 @@
-import React, { useState }  from "react"; 
-import {Text, View, StyleSheet, ScrollView, ImageBackground, Keyboard} from "react-native"
+import React, {useState} from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  ImageBackground,
+  Keyboard,
+} from 'react-native';
 import {Dimensions} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { COLORS } from "../../assets/colors.js"
-import InputField from "../components/InputField.js";
-import LoginTopBar from "../components/LoginTopBar.js";
-import Btn_solid_regular from "../components/buttons/Btn_solid_regular.js";
-import SwitchInput from "../components/SwitchInput.js";
-import {AddUser} from "../utils/UserApi.js";
-import DropDown from "../components/DropDown.js";
+import {COLORS} from '../../assets/colors.js';
+import InputField from '../components/InputField.js';
+import LoginTopBar from '../components/LoginTopBar.js';
+import Btn_solid_regular from '../components/buttons/Btn_solid_regular.js';
+import SwitchInput from '../components/SwitchInput.js';
+import {AddUser} from '../utils/UserApi.js';
+import DropDown from '../components/DropDown.js';
 
 const living_spaceTypes = [
-    {key: '1', value: 'Under 30m2'},
-    {key: '2', value: '30m2 - 50m2'},
-    {key: '3', value: '50m2 - 100m2'},
-    {key: '4', value: 'Over 100m2'},
-  ];
-
+  {key: '1', value: 'Under 30m2'},
+  {key: '2', value: '30m2 - 50m2'},
+  {key: '3', value: '50m2 - 100m2'},
+  {key: '4', value: 'Over 100m2'},
+];
 
 const SignUp = ({navigation}) => {
     const [view, setView] = useState(1)
@@ -31,6 +38,7 @@ const SignUp = ({navigation}) => {
     const [hasPet, setHasPet] = useState(false)
     const [hasGarden, setHasGarden] = useState(false)
     const [companyName, setCompanyName] = useState('')
+    const [warning, setWarning] = useState('')
 
     const CreateUser = () => {
         newUser = {
@@ -49,25 +57,33 @@ const SignUp = ({navigation}) => {
             "ownAnimals": ""
         }
 
-        AddUser(newUser).then(result => {
-            navigation.navigate('NavigationBar')
-        }).catch(error => {
+        //Create new user
+        try {
+            validateData()
+            setWarning('')
+            AddUser(newUser).then(result => {
+                navigation.navigate('NavigationBar')
+            }).catch(error => {
+                console.log(error)
+            })
+            console.log('User created')
+        } catch (error) {
+            setWarning(error.message)
             console.log(error)
-        })
+        }
 
     }
     
     if(view == 1){ // First view of sign up
         return(
             <View style={styles.container}>
-                <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={require('../../assets/images/malinois-g4dd9f780d_1920.jpg')}/>    
-                {/* <View style={styles.innerContainer}> */}
+                <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={{uri:'https://cdn.pixabay.com/photo/2018/04/18/21/36/malinois-3331687_1280.jpg'}}/>    
+
                     <LoginTopBar text="Create your own account" onPress={() => navigation.navigate('Start')}/>
                     <ScrollView style={styles.inputContainer} contentContainerStyle={styles.scrollContainer}>  
                         <InputField text_title="Username" text_color={COLORS.white} onChangeText={newText => setUsername(newText)} value={username} />
                         <InputField text_title="Email" text_color={COLORS.white} onChangeText={newText => setEmail(newText)} value={email} />
                         <InputField text_title="Password" text_color={COLORS.white} onChangeText={newText => setPassword(newText)} value={password} />
-                        <InputField text_title="Password again" text_color={COLORS.white}/>
 
                         <View style={styles.buttonsContainer}>
                             <Btn_solid_regular onPress={() => setView(2)} title="Next"/>
