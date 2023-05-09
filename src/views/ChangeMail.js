@@ -6,17 +6,19 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import InputField from "../components/InputField.js";
 import Btn_solid_regular from "../components/buttons/Btn_solid_regular.js";
 import Btn_back_arrow from "../components/buttons/Btn_back_arrow.js";
+import { UpdateUser } from "../utils/UserApi.js";
 
-const ChangeMail = ({navigation}) => {
+const ChangeMail = ({navigation, route}) => {
+    const [currentEmail, setCurrentEmail] = useState('')
     const [newMail, setNewMail] = useState('')
     const [mailAgain, setMailAgain] = useState('')
     const [emailIsMatch, setEmailIsMatch] = useState(true)
+    const {user} = route.params
 
-    useEffect(() => {
-        if (newMail === mailAgain) {
-            setEmailIsMatch(true)
-        }        
-    })
+
+    useEffect(() => {   
+        setCurrentEmail(user.email)
+    },[])
 
     const handleMailChange = () => {
         if (newMail === "" || mailAgain === "") {
@@ -33,11 +35,33 @@ const ChangeMail = ({navigation}) => {
             return
         }
         // API call
+        UpdateUser(user.id, {
+            id: user.id,
+            username: user.username,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            address: user.address,
+            password: user.password,
+            email: newMail,
+            livingSpace: user.livingSpace,
+            description: user.description,
+            companyName: user.companyName,
+            hasPet: user.hasPet,
+            hasGarden: user.hasGarden,
+            likedAnimals: user.likedAnimals,
+            ownAnimals: user.ownAnimals,
+        }).then(result => {
+            console.log(result)
+            setCurrentEmail(newMail)
+        }).catch(error => {
+            console.log(error)
+        })
         if(Platform.OS === 'android'){
             ToastAndroid.show('Email Changed', ToastAndroid.SHORT)
         }
         setNewMail("")
         setMailAgain("")
+        setEmailIsMatch(true)
     }   
 
 
@@ -50,7 +74,7 @@ const ChangeMail = ({navigation}) => {
                 <Btn_back_arrow onPress={() => navigation.navigate('Settings')}/>              
                 <Text style={[styles.heading]}>Change Email</Text>              
                 <Text style={[styles.currentEmail]}>
-                    Current Email: email@gmail.com
+                    Current Email: {currentEmail}
                 </Text>
                 <View style={[styles.inputfields]}>
                 <InputField 
@@ -63,15 +87,10 @@ const ChangeMail = ({navigation}) => {
                 text_title="Repeat"
                 onChangeText={text => setMailAgain(text)}
                 value={mailAgain}
+                icon={!emailIsMatch && (
+                    <Icon name="error-outline" size={24} color={COLORS.primary}></Icon>
+                    )}
                 />
-                    
-                <View style={[styles.icon]}>
-                {!emailIsMatch && (
-                <Icon name="error-outline" size={24} color={COLORS.primary}></Icon>
-                )}
-                </View>
-                    
-                
                 </View>
                 <View style={[styles.button]}>
                     <Btn_solid_regular onPress={handleMailChange} title="Change"/>

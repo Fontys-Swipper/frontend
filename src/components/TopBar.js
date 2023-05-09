@@ -6,6 +6,7 @@ import {COLORS} from '../../assets/colors';
 import logo from '../../assets/images/swipper-logo.png';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
+import { RemoveUserId } from '../utils/UserApi';
 
 const TopBar = () => {
   const navigation = useNavigation();
@@ -32,20 +33,16 @@ const TopBar = () => {
     ]);
 
   const handleLogOut = async () => {
-    try {
-      await AsyncStorage.removeItem('@userId')
+    RemoveUserId().then(() => {
       navigation.navigate('Start')
-    } catch(e) {
-      console.log(e)
-      // remove error
-    }
+    }).catch(error => {
+      console.log(error)
+    })
   }
 
   return (
     <View style={styles.topBar}>
-      <View style={styles.logoContainer}>
-        <Image source={logo} style={styles.logo} />
-      </View>
+      <Text style={styles.logo}>Swipper</Text>
       {isMenuOpen && (
         <View style={styles.menu}>
           <TouchableOpacity onPress={() => handleNavigation('Profile')}>
@@ -79,15 +76,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     elevation: 7,
   },
-  logoContainer: {
-    flex: 1,
-    alignItems: 'flex-start',
-  },
-  logo: {
-    width: 120,
-    height: 50,
-    resizeMode: 'contain',
-  },
   menu: {
     backgroundColor: COLORS.white,
     position: 'absolute',
@@ -103,6 +91,16 @@ const styles = StyleSheet.create({
   menuItem: {
     fontSize: 15,
     paddingVertical: 5,
+  },
+  logo: {
+    flex: 1,
+    alignItems: 'center',
+    // backgroundColor: COLORS.white,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    fontFamily: 'Gluten-SemiBold', 
+    fontSize: 30, 
+    color: '#000000',
   },
 });
 

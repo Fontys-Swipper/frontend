@@ -50,7 +50,7 @@ const InputField = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: 258,
+    width: "80%",
     borderBottomWidth: 1,
     borderBottomColor: COLORS.primary,
     margin: 5,
