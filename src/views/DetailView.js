@@ -24,11 +24,13 @@ const DetailView = ({navigation, animalData, route}) => {
     images: ['jack-russell-g49275d8de_1920.jpg', 'another-image.jpg'],
   };
 
+  console.log(route.params.route);
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.backButtonContainer}>
-          <Btn_back_arrow /*onPress={() => navigation.navigate(route.params)}*/
+          <Btn_back_arrow
+            onPress={() => navigation.navigate(route.params.route)}
           />
         </View>
         <View style={styles.floatingIcons}>
@@ -39,12 +41,36 @@ const DetailView = ({navigation, animalData, route}) => {
         </View>
         <ImageBackground
           style={styles.image}
-          source={require('../../assets/images/jack-russell-g49275d8de_1920.jpg')}
+          source={{uri: route.params.animalData.animalImageLink}}
         />
         <View style={styles.infoCard}>
           <View style={styles.textContainer}>
-            <Text style={styles.name}>{dummyData.name}</Text>
-            <Text style={styles.description}>{dummyData.description}</Text>
+            <Text style={styles.name}>
+              {route.params.animalData.animalName}
+            </Text>
+            <Text style={styles.description}>
+              Type: {route.params.animalData.animalSpecies}
+            </Text>
+            <Text style={styles.description}>
+              Breed: {route.params.animalData.animalBreed}
+            </Text>
+            <Text style={styles.description}>
+              Age: {route.params.animalData.age}
+            </Text>
+            <Text style={styles.description}>
+              Size: {route.params.animalData.animalSize}
+            </Text>
+            {route.params.animalData.isMale ? (
+              <Text style={styles.description}>Gender: Male</Text>
+            ) : (
+              <Text style={styles.description}>Gender: Female</Text>
+            )}
+            <Text style={styles.description}>
+              Price: {route.params.animalData.price}€
+            </Text>
+            <Text style={styles.description}>
+              {route.params.animalData.description}
+            </Text>
           </View>
         </View>
       </ScrollView>
@@ -105,6 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'Roboto-Regular',
     fontWeight: 300,
+    marginBottom: 5,
   },
 });
 

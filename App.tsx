@@ -52,7 +52,8 @@ const App = () => {
         <Stack.Screen name="UserInfo" component={UserInformation} />
         <Stack.Screen name="TermsOfService" component={TermsOfService} />
         <Stack.Screen name="ChangeMail" component={ChangeMail} />
-        <Stack.Screen name="ChangePassword" component={ChangePassword} /> 
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
+        <Stack.Screen name="DetailView" component={DetailView} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );

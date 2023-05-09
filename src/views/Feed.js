@@ -14,13 +14,12 @@ import Feedcard from '../components/Feedcard';
 import {COLORS} from '../../assets/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 import DropDown from '../components/DropDown';
 import Btn_solid_big from '../components/buttons/Btn_solid_big';
 import InputField from '../components/InputField.js';
 import Btn_floating_round from '../components/buttons/Btn_floating_round';
-import { get_all_listings } from '../utils/listing';
+import {get_all_listings} from '../utils/listing';
 
 //Dummy data for species dropdown
 const speciesData = [
@@ -48,7 +47,8 @@ const sortingTypes = [
 ];
 
 //Imges for dummy data
-image1 = "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*";
+image1 =
+  'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*';
 image2 = require('../../assets/images/dog_image.jpg');
 image3 = require('../../assets/images/dog-gba5dc7061_1920.jpg');
 image4 = require('../../assets/images/jack-russell-g49275d8de_1920.jpg');
@@ -244,15 +244,16 @@ const Feed = ({navigation}) => {
   const [location, setLocation] = useState('');
   const [sorting, setSorting] = useState('');
   const [data, setData] = useState([]);
-  const tabBarHeight = useBottomTabBarHeight();
 
   useEffect(() => {
-    get_all_listings().then(result =>{
-      setData(result.data)
-    }).catch(error => {
-      console.log(error)
-    })
-  },[])
+    get_all_listings()
+      .then(result => {
+        setData(result.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   //Filtering and sorting the feed according to users selections
   const filterAndSortData = () => {
@@ -270,14 +271,10 @@ const Feed = ({navigation}) => {
     if (sorting) {
       switch (sorting) {
         case 'Newest':
-          filteredData.sort((a, b) =>
-            a.listingDate < b.listingDate ? 1 : -1,
-          );
+          filteredData.sort((a, b) => (a.listingDate < b.listingDate ? 1 : -1));
           break;
         case 'Oldest':
-          filteredData.sort((a, b) =>
-            a.listingDate > b.listingDate ? 1 : -1,
-          );
+          filteredData.sort((a, b) => (a.listingDate > b.listingDate ? 1 : -1));
           break;
         case 'Price: Low to high':
           filteredData.sort((a, b) => (a.price > b.price ? 1 : -1));
@@ -296,13 +293,15 @@ const Feed = ({navigation}) => {
         {/* Map data to feedcards */}
         {data.map(item => (
           <Feedcard
+            route={'Feed'}
+            animalObject={item}
             key={item.id}
             image={item.animalImageLink}
             name={item.animalName}
             price={item.price}
             type={item.animalSpecies}
-            age={item.age+" Years old"}
-            timeOfAdding={item.listingDate.substring(0,10)}
+            age={item.age + ' Years old'}
+            timeOfAdding={item.listingDate.substring(0, 10)}
           />
         ))}
       </ScrollView>
@@ -373,55 +372,54 @@ const Feed = ({navigation}) => {
 export default Feed;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: COLORS.white
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+  },
+  centeredView: {
+    //Center modal window and dim background
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    backgroundColor: COLORS.black + '99',
+  },
+  contentContainer: {
+    alignItems: 'center',
+    paddingBottom: 10,
+    paddingTop: 74,
+    backgroundColor: COLORS.white,
+  },
+  modalScrollView: {},
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginVertical: 10,
+    alignSelf: 'flex-start',
+    marginLeft: 33,
+    position: 'absolute',
+    bottom: 0,
+    right: 15,
+  },
+  modalView: {
+    margin: 10,
+    paddingVertical: 10,
+    width: 300,
+    height: '80%',
+    backgroundColor: COLORS.background,
+    borderRadius: 4,
+    borderColor: COLORS.primary,
+    borderWidth: 2,
+    alignItems: 'center',
+    shadowColor: '#000',
+    gap: 10,
+    shadowOffset: {
+      width: 0,
+      height: 2,
     },
-    centeredView: { //Center modal window and dim background
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        backgroundColor: COLORS.black + '99'
-    },
-    contentContainer: {
-        alignItems: 'center',
-        paddingBottom: 10, 
-        paddingTop: 74,
-        backgroundColor: COLORS.white,
-    },
-    modalScrollView:{
-
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        marginVertical: 10,
-        alignSelf: 'flex-start',
-        marginLeft: 33,
-        position: 'absolute',
-        bottom: 0,
-        right: 15,
-    },
-    modalView: {
-        margin: 10,
-        paddingVertical: 10,
-        width: 300,
-        height: '80%',
-        backgroundColor: COLORS.background,
-        borderRadius: 4,
-        borderColor: COLORS.primary,
-        borderWidth: 2,
-        alignItems: 'center',
-        shadowColor: '#000',
-        gap: 10,
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-    },
-})
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+});

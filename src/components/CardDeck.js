@@ -15,17 +15,19 @@ import Btn_like from './buttons/Btn_like';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {get_all_listings, like_animal} from '../utils/listing';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import {useNavigation} from '@react-navigation/native';
 
 const screen_widht = Dimensions.get('window').width;
 const screen_height = Dimensions.get('window').height;
-// const navigation = useNavigation();
 
 export default class AnimalCards extends React.Component {
   constructor(props) {
     super(props);
 
     this.position = new Animated.ValueXY();
+
+    this.handleNavigation = (screenName, data, a) => {
+      this.props.navigation.navigate(screenName, data, a);
+    };
 
     this.state = {
       currentIndex: 0,
@@ -38,17 +40,14 @@ export default class AnimalCards extends React.Component {
     props.postitionX(this.state.pos);
 
     this.showAnimalProfile = () => {
-      //   let animal;
-      //   for (let index = 0; index < this.state.animals.length; index++) {
-      //     const currentAnimal = this.state.animals[index];
-      //     if (currentAnimal.id === this.state.currentItem) {
-      //       animal = currentAnimal;
-      //     }
-      //   }
-      //   navigation.navigate('DetailView', {
-      //     animaldata: animal,
-      //     route: 'Match',
-      //   });
+      let animal;
+      for (let index = 0; index < this.state.animals.length; index++) {
+        const currentAnimal = this.state.animals[index];
+        if (currentAnimal.id === this.state.currentItem) {
+          animal = currentAnimal;
+        }
+      }
+      this.handleNavigation('DetailView', {animalData: animal, route:'Match'});
     };
 
     this.addToFavorites = async () => {
