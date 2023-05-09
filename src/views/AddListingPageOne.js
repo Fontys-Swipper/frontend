@@ -55,12 +55,14 @@ const AddListingPageOne = ({navigation}) => {
       animalImageLink: animalImageLink,
       address: address,
       description: description,
-      price: 0,
+      price: price,
     };
     function validateData() {
       for (const x in newlisting) {
+        // console.log(newlisting[x])
         if (!newlisting[x]) {
           throw new Error('Please fill all the fields');
+          // console.log(x)
         }
       }
     }
