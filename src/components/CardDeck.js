@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, Image, PanResponder, Animated, Dimensions, Pres
 import { COLORS } from "../../assets/colors";
 import Btn_like from "./buttons/Btn_like";
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import {get_all_listings} from "../utils/listing";
+import {get_listings_forUser} from "../utils/listing";
+import {GetUserId} from "../utils/UserApi"
 
 const screen_widht = Dimensions.get("window").width
 const screen_height = Dimensions.get("window").height
@@ -24,6 +25,7 @@ export default class AnimalCards extends React.Component {
         } 
         
         props.postitionX(this.state.pos)
+
 
         this.showAnimalProfile = () => {
             console.log("Showing "+this.state.animals[this.state.currentIndex].name+"'s profile")
@@ -161,12 +163,17 @@ export default class AnimalCards extends React.Component {
     }
 
     getAnimals() {
-        get_all_listings().then(result => {
-            this.setState({animals: result.data})
-            this.setState({isLoading: false})
+        GetUserId().then(result => {
+            get_listings_forUser(result).then(result => {
+                this.setState({animals: result.data})
+                this.setState({isLoading: false})
+            }).catch(error => {
+                console.log(error)
+            })            
         }).catch(error => {
             console.log(error)
         })
+
     }
 
     componentDidMount() {
