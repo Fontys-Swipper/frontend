@@ -6,6 +6,7 @@ import {COLORS} from '../../assets/colors';
 import logo from '../../assets/images/swipper-logo.png';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
+import { RemoveUserId } from '../utils/UserApi';
 
 const TopBar = () => {
   const navigation = useNavigation();
@@ -32,13 +33,11 @@ const TopBar = () => {
     ]);
 
   const handleLogOut = async () => {
-    try {
-      await AsyncStorage.removeItem('@userId')
+    RemoveUserId().then(() => {
       navigation.navigate('Start')
-    } catch(e) {
-      console.log(e)
-      // remove error
-    }
+    }).catch(error => {
+      console.log(error)
+    })
   }
 
   return (
