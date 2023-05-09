@@ -13,6 +13,19 @@ import Btn_back_arrow from '../components/buttons/Btn_back_arrow';
 import {ScrollView, Alert} from 'react-native-gesture-handler';
 import DescriptionBox from '../components/DescriptionBox';
 import SelectImage from '../components/SelectImage';
+import {add_listing} from '../utils/listing';
+
+const animal_gender = [
+  {key: '1', value: 'Male'},
+  {key: '2', value: 'Female'},
+];
+
+const animal_Size = [
+  {key: '1', value: 'Tiny'},
+  {key: '2', value: 'small'},
+  {key: '3', value: 'Medium'},
+  {key: '4', value: 'Big'},
+];
 
 const AddListingPageOne = ({navigation}) => {
   // eslint-disable-next-line no-undef
@@ -28,35 +41,46 @@ const AddListingPageOne = ({navigation}) => {
   const [address, setAddress] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState();
+  const [warnning, setWarning] = useState('');
 
   const handlePostRequest = () => {
-    const requestBody = {
-      view,
-      animalSpecies,
-      animalBreed,
-      animalName,
-      age,
-      isMale,
-      animalSize,
-      selectedImages,
-      animalImageLink,
-      address,
-      description,
-      price,
+    // eslint-disable-next-line no-undef
+    const newlisting = {
+      animalSpecies: animalSpecies,
+      animalBreed: animalBreed,
+      animalName: animalName,
+      age: age,
+      isMale: true,
+      animalSize: animalSize,
+      animalImageLink: animalImageLink,
+      address: address,
+      description: description,
+      price: 0,
     };
-
-    fetch('https://swipperresource.azurewebsites.net/api/Listing', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestBody),
-    })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
+    function validateData() {
+      for (const x in newlisting) {
+        if (!newlisting[x]) {
+          throw new Error('Please fill all the fields');
+        }
+      }
+    }
+    //add listing
+    try {
+      validateData();
+      setWarning('');
+      add_listing(newlisting)
+        .then(result => {
+          navigation.navigate('NavigationBar');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      console.log('Succefully Added');
+    } catch (error) {
+      setWarning(error.message);
+      console.log(error);
+    }
   };
-
   if (view == 1) {
     return (
       <SafeAreaView
@@ -78,13 +102,10 @@ const AddListingPageOne = ({navigation}) => {
             <View>
               <TextHeading text_title="Add Listing" />
             </View>
-            <View style={{marginBottom: 33}}>
-              <DropDown
-                placehoder="Type"
-                choice={['Dog']}
-                setSelected={val => {
-                  setAnimalSpecies(val);
-                }}
+            <View style={{marginBottom: 24, alignSelf: 'center'}}>
+              <InputField
+                text_title="Type"
+                onChangeText={newText => setAnimalSpecies(newText)}
                 value={animalSpecies}
               />
             </View>
@@ -107,6 +128,7 @@ const AddListingPageOne = ({navigation}) => {
                 text_title="Age"
                 onChangeText={newText => setAge(newText)}
                 value={age}
+                keyboardtype="numeric"
               />
             </View>
             <View style={{alignSelf: 'center'}}>
@@ -146,29 +168,47 @@ const AddListingPageOne = ({navigation}) => {
             </View>
 
             <View style={{marginBottom: 31}}>
-              <DropDown
-                placehoder="Size"
-                choice={['Tiny', 'Small', 'Medium', 'Large']}
+              {/* <DropDown
+                placehoder={animal_Size ? animal_Size : 'Size'}
+                // choice={animal_Size}
                 setSelected={val => setAnimalsize(val)}
-                value={animalSize}
+                // value={animalSize} */}
+              {/* /> */}
+              <DropDown
+                placehoder={animalSize ? animalSize : 'Animal size'}
+                choice={animal_Size}
+                setSelected={val => setAnimalsize(val)}
               />
             </View>
             <View style={{marginBottom: 31}}>
               <DropDown
-                placehoder="Gender"
-                choice={['Male', 'Female']}
-                setSelected={val => setIsmale(val)}
-                value={isMale}
+                placehoder={isMale ? 'Male' : 'Female'}
+                choice={animal_gender}
+                setSelected={val => {
+                  if (val == 'Male') {
+                    setIsmale(true);
+                  } else {
+                    setIsmale(false);
+                  }
+                }}
               />
             </View>
-            <View style={{marginBottom: 28}}>
-              <DescriptionBox
-                palceholder="Give some information about animal...."
-                text_title="Description"
-                onChangeText={newText => setDescription(newText)}
-                value={description}
+            <View style={{marginBottom: 28, alignSelf: 'center'}}>
+              <InputField
+                text_title="Price"
+                onChangeText={newtext => setPrice(newtext)}
+                value={price}
+                keyboardtype="numeric"
               />
             </View>
+            <View style={{marginBottom: 28, alignSelf: 'center'}}>
+              <InputField
+                text_title="Image Link"
+                value={animalImageLink}
+                onChangeText={newtext => setAnimalImageLink(newtext)}
+              />
+            </View>
+
             <View style={{alignSelf: 'center'}}>
               <Btn_solid_regular
                 title="Next"
@@ -198,30 +238,25 @@ const AddListingPageOne = ({navigation}) => {
 
           <View>
             <TextHeading text_title="Add Listing" />
-            <View>
+            <View style={{marginBottom: 28, alignSelf: 'center'}}>
               <InputField
                 text_title="Address"
                 onChangeText={newText => setAddress(newText)}
                 value={address}
               />
             </View>
-            <SelectImage
+            {/* <SelectImage
               selectedImages={selectedImages}
               setSelectedImages={setSelectedImages}
-            />
+            /> */}
           </View>
-          <View>
-            <InputField
-              text_title="Price"
-              onChangeText={newtext => setPrice(newtext)}
-              value={price}
-            />
-          </View>
-          <View>
-            <InputField
-              text_title="Input the url"
-              value={animalImageLink}
-              onChangeText={newtext => setAnimalImageLink(newtext)}
+
+          <View style={{marginBottom: 28}}>
+            <DescriptionBox
+              palceholder="Give some information about animal...."
+              text_title="Description"
+              onChangeText={newText => setDescription(newText)}
+              value={description}
             />
           </View>
           <View
