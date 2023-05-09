@@ -1,6 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const baseURL = 'https://swipperresource.azurewebsites.net/api/user'
 // const baseURL = 'http://10.0.2.2:5050/api/user'
@@ -33,4 +34,17 @@ export function GetUser(userId) {
 
 export function AuthenticateUser(user) {
     return axios.post('https://swipperresource.azurewebsites.net/api/authenticate', null,{params: { email: user.email, password: user.password}})
+}
+
+//For storing user id to localStorage
+export async function StoreUserId(id) {
+    return await AsyncStorage.setItem('@userId', id.toString())
+}
+
+export async function GetUserId() {
+    return await AsyncStorage.getItem('@userId')
+}
+
+export async function RemoveUserId() {
+    return await AsyncStorage.removeItem('@userId')
 }
