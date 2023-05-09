@@ -1,6 +1,7 @@
 import React, { useState }  from "react"; 
 import {Text, View, StyleSheet, ScrollView, ImageBackground, Keyboard} from "react-native"
 import {Dimensions} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { COLORS } from "../../assets/colors.js"
 import InputField from "../components/InputField.js";
@@ -31,29 +32,49 @@ const SignUp = ({navigation}) => {
     const [hasPet, setHasPet] = useState(false)
     const [hasGarden, setHasGarden] = useState(false)
     const [companyName, setCompanyName] = useState('')
+    const [warning, setWarning] = useState('')
 
     const CreateUser = () => {
         newUser = {
-            "username": username,
-            "firstname": firstName,
-            "lastname": lastName,
-            "password": password,
-            "email": email,
-            "address": address,
-            "livingSpace": living_space,
-            "description": description,
-            "companyName": companyName,
-            "hasPet": true,
-            "hasGarden": true,
-            "likedAnimals": "",
-            "ownAnimals": ""
+            username: username,
+            firstname: firstName,
+            lastname: lastName,
+            password: password,
+            email: email,
+            address: address,
+            livingSpace: living_space,
+            description: description,
+            companyName: companyName,
+            hasPet: hasPet,
+            hasGarden: hasGarden,
+            likedAnimals: '',
+            ownAnimals: ''
         }
 
-        AddUser(newUser).then(result => {
-            navigation.navigate('NavigationBar')
-        }).catch(error => {
+        //Check if all fields are filled, if not throw error
+        function validateData(){
+            for (const x in newUser) {
+                if(!newUser[x] && x != 'hasPet' && x != 'hasGarden' && x != 'companyName' && x != 'likedAnimals' && x != 'ownAnimals'){
+                    console.log('Fill all the information: '+ x)
+                    throw new Error('Please fill the all fields')
+                }
+            }
+        }
+
+        //Create new user
+        try {
+            validateData()
+            setWarning('')
+            AddUser(newUser).then(result => {
+                navigation.navigate('NavigationBar')
+            }).catch(error => {
+                console.log(error)
+            })
+            console.log('User created')
+        } catch (error) {
+            setWarning(error.message)
             console.log(error)
-        })
+        }
 
     }
     
@@ -61,28 +82,24 @@ const SignUp = ({navigation}) => {
         return(
             <View style={styles.container}>
                 <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={{uri:'https://cdn.pixabay.com/photo/2018/04/18/21/36/malinois-3331687_1280.jpg'}}/>    
-                {/* <View style={styles.innerContainer}> */}
+
                     <LoginTopBar text="Create your own account" onPress={() => navigation.navigate('Start')}/>
                     <ScrollView style={styles.inputContainer} contentContainerStyle={styles.scrollContainer}>  
                         <InputField text_title="Username" text_color={COLORS.white} onChangeText={newText => setUsername(newText)} value={username} />
                         <InputField text_title="Email" text_color={COLORS.white} onChangeText={newText => setEmail(newText)} value={email} />
                         <InputField text_title="Password" text_color={COLORS.white} onChangeText={newText => setPassword(newText)} value={password} />
-                        <InputField text_title="Password again" text_color={COLORS.white}/>
 
                         <View style={styles.buttonsContainer}>
                             <Btn_solid_regular onPress={() => setView(2)} title="Next"/>
-                            {/* <Btn_outline_big onPress={() => navigation.navigate('Start')} title="Back"/> */}
                         </View>
                     </ScrollView>
-                {/* </View> */}
             </View> 
         )
     }else if (view == 2){ //Second view of sign up
         return (
             <View style={styles.container}>
                 <ImageBackground style={[styles.backgroundImage, {marginTop: 70,}]} resizeMode="cover" source={{uri: 'https://cdn.pixabay.com/photo/2020/09/17/13/59/cat-5579221_1280.jpg'}}/>
-                {/* <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={require('../../assets/images/malinois-g4dd9f780d_1920.jpg')}/>     */}
-                {/* <View style={styles.innerContainer}> */}
+
                 <LoginTopBar text="Create your own account" onPress={() => setView(1)}/>
                 <ScrollView style={styles.inputContainer} contentContainerStyle={styles.scrollContainer}>  
                     <InputField text_title="First name" text_color={COLORS.white} onChangeText={newText => setFirstName(newText)} value={firstName} />
@@ -92,31 +109,25 @@ const SignUp = ({navigation}) => {
 
                     <View style={styles.buttonsContainer}>
                         <Btn_solid_regular onPress={() => setView(3)} title="Next"/>
-                        {/* <Btn_outline_big onPress={() => navigation.navigate('Start')} title="Back"/> */}
                     </View>
                 </ScrollView>
-                {/* </View> */}
             </View> 
         )
     }else {
         return(
             <View style={styles.container}>
                 <ImageBackground style={[styles.backgroundImage, {marginTop: 70}]} resizeMode="cover" source={require('../../assets/images/cat-g2ff4963cc_1920.jpg')}/>
-                {/* <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={require('../../assets/images/malinois-g4dd9f780d_1920.jpg')}/>     */}
-                {/* <View style={styles.innerContainer}> */}
-                <LoginTopBar text="Create your own account" onPress={() => setView(2)}/>
+                <LoginTopBar text="Create your own account" onPress={() => {setView(2), setWarning('')}}/>
                 <ScrollView style={[styles.inputContainer,]} contentContainerStyle={styles.scrollContainer}>  
+                    <DropDown placehoder={living_space ? living_space : 'Living space'} textColor={COLORS.white} choice={living_spaceTypes} setSelected={val => setLiving_space(val)}/>
                     <SwitchInput text_title='Do you have a pet?' text_color={COLORS.white} isEnabled={hasPet} toggleSwitch={() => setHasPet(!hasPet)}/>
                     <SwitchInput text_title='Do you have a garden?' text_color={COLORS.white} isEnabled={hasGarden} toggleSwitch={() => setHasGarden(!hasGarden)}/>
-                    <DropDown placehoder={living_space ? living_space : 'Living space'} textColor={COLORS.white} choice={living_spaceTypes} setSelected={val => setLiving_space(val)}/>
                     <InputField text_title="Description" text_color={COLORS.white} onChangeText={newText => setDescription(newText)} value={description} multiline={true}/>
-                    {/* <DropDown/> */}
+                    <Text style={styles.warningText} >{warning}</Text>
                     <View style={styles.buttonsContainer}>
                         <Btn_solid_regular onPress={() => CreateUser()} title="Sign up"/>
-                        {/* <Btn_outline_big onPress={() => navigation.navigate('Start')} title="Back"/> */}
                     </View>
                 </ScrollView>
-                {/* </View> */}
             </View> 
         )
     }
@@ -163,6 +174,11 @@ const styles = StyleSheet.create({
         fontSize: 34,
         color: COLORS.background,
         marginTop: 50,
+    },
+    warningText: {
+        color:'red',
+        fontFamily: 'Roboto-Medium',
+        fontSize: 17
     }
 
 })

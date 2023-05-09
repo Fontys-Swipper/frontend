@@ -6,22 +6,24 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import InputField from "../components/InputField.js";
 import Btn_solid_regular from "../components/buttons/Btn_solid_regular.js";
 import Btn_back_arrow from "../components/buttons/Btn_back_arrow.js";
+import { UpdateUser } from "../utils/UserApi.js";
 
-const userPassword = "123"
 
-const ChangePassword = ({navigation}) => {
+const ChangePassword = ({navigation, route}) => {
+    const [userPassword, setUserPassword] = useState('')
     const [password, setPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [passwordAgain, setPasswordAgain] = useState('')
     const [passwordIsMatch, setPasswordIsMatch] = useState(true)
+    const {user} = route.params
 
 
     useEffect(() => {
         if (newPassword === passwordAgain) {
             setPasswordIsMatch(true)
         }
-        
-    })
+        setUserPassword(user.password)
+    },[])
 
     const handePasswordChange = () => {
         if (passwordAgain === "" || newPassword === "") {
@@ -38,12 +40,33 @@ const ChangePassword = ({navigation}) => {
             return
         }
         if (newPassword === passwordAgain) {
+            UpdateUser(user.id, {
+                id: user.id,
+                username: user.username,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                address: user.address,
+                password: newPassword,
+                email: user.email,
+                livingSpace: user.livingSpace,
+                description: user.description,
+                companyName: user.companyName,
+                hasPet: user.hasPet,
+                hasGarden: user.hasGarden,
+                likedAnimals: user.likedAnimals,
+                ownAnimals: user.ownAnimals,
+            }).then(result => {
+                console.log(result)
+            }).catch(error => {
+                console.log(error)
+            })
             if(Platform.OS === 'android'){
                 ToastAndroid.show('Password Changed', ToastAndroid.SHORT)
             }
             setPassword("")
             setNewPassword("")
             setPasswordAgain("")
+            setPasswordIsMatch(true)
         }
         else{
             if(Platform.OS === 'android'){
@@ -78,12 +101,10 @@ const ChangePassword = ({navigation}) => {
                     text_title="Repeat"
                     onChangeText={text => setPasswordAgain(text)}
                     value={passwordAgain}
-                    />
-                    <View style={[styles.icon]}>
-                        {!passwordIsMatch &&(
+                    icon={!passwordIsMatch &&(
                         <Icon name="error-outline" size={24} color={COLORS.primary}/>
                         )}
-                    </View>
+                    />
                 </View>
                 <View style={[styles.button]}>
                     <Btn_solid_regular onPress={handePasswordChange} title="Change"/>
