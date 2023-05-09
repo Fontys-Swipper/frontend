@@ -11,7 +11,7 @@ const Start = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={require('../../assets/images/akita.jpg')}>
+            <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={{uri: 'https://cdn.pixabay.com/photo/2021/01/30/15/14/akita-5964180_1280.jpg'}}>
                 <View style={styles.innerContainer}>
                     <Text style={styles.text}>Swipper</Text>
                     <View style={styles.buttonsContainer}>
