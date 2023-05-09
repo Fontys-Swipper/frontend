@@ -344,18 +344,18 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 3,
         borderColor: COLORS.primary,
-        height: 489,
-        width: 262,
+        height: "63%",
+        width: "66.5%",
         position: "absolute",
         marginTop: screen_height/5.5,
     },
     image: {
         alignSelf: "center",
         marginTop: 5,
-        width: 248,
-        height: 400,
-        maxHeight: 400,
-        maxWidth: 248
+        width: "98%",
+        height: "85%",
+        // maxHeight: 400,
+        // maxWidth: 248
     },
     row: {
         flexDirection: "row",
