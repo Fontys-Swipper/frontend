@@ -80,7 +80,7 @@ const Profile = () => {
         <Text style={styles.userInfo}>Has a garden: {userInfo.hasGarden}</Text>
         <Text style={styles.userInfoTitle}>Own listings:</Text>
         {listings.map(item => (
-          <View style={styles.userListings}>
+          <TouchableOpacity style={styles.userListings} onPress={() => handleNavigation('Profile')}>
             <Feedcard
               key={item.listing_id}
               image={item.animal_image_link}
@@ -88,7 +88,7 @@ const Profile = () => {
               price={item.price}
               timeOfAdding={item.timeOfAdding}
             />
-          </View>
+          </TouchableOpacity>
         ))}
         <View style={styles.circle_container}>
           <TouchableOpacity

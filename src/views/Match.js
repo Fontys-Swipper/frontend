@@ -10,6 +10,7 @@ const screen_widht = Dimensions.get("window").width
 
 const Match = ({navigation}) => {
     const [postitionX, setPositionX] = useState(new Animated.Value(0))
+    const [animalData, setAnimalData] = useState()
 
     const updatePosition = (pos) => {
         setPositionX(pos)
