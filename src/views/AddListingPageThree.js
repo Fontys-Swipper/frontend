@@ -5,7 +5,7 @@ import SelectImage from '../components/SelectImage';
 import Btn_solid_regular from '../components/buttons/Btn_solid_regular';
 import Btn_back_arrow from '../components/buttons/Btn_back_arrow';
 import InputField from '../components/InputField';
-
+import AddListingPageTwo from './AddListingPageTwo';
 import TopBar from '../components/TopBar';
 import NavigationBarContainer from '../components/NavigationBarContainer';
 import DescriptionBox from '../components/DescriptionBox';
@@ -28,6 +28,13 @@ const AddListingPageThree = ({navigation}) => {
           body: JSON.stringify({
             images: selectedImages,
             url,
+            name,
+            gender,
+            type,
+            kind,
+            species,
+            age,
+            size,
           }),
         },
       );
@@ -46,7 +53,7 @@ const AddListingPageThree = ({navigation}) => {
         height: '100%',
         width: '100%',
         justifyContent: 'space-around',
-        backgroundColor: COLORS.background,
+        backgroundColor: COLORS.white,
       }}>
       <View style={{flex: 1}}>
         <TopBar style={{position: 'absolute'}} />

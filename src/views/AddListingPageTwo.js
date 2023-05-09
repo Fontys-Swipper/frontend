@@ -12,21 +12,10 @@ import TopBar from '../components/TopBar';
 import Btn_back_arrow from '../components/buttons/Btn_back_arrow';
 import {ScrollView} from 'react-native-gesture-handler';
 
-const speciesSize = [
-  {key: '1', value: 'Tiny'},
-  {key: '2', value: 'Small'},
-  {key: '3', value: 'Medium'},
-  {key: '4', value: 'Big'},
-];
-const SpeciesGender = [
-  {key: '1', value: 'Male'},
-  {key: '2', value: 'Female'},
-  {key: '3', value: 'Unknown'},
-];
-
 const AddListingPageTwo = ({navigation}) => {
-  const [size, setSize] = useState('');
   const [gender, setGender] = useState('');
+  const [size, setSize] = useState('');
+
   return (
     <SafeAreaView
       style={{
@@ -34,7 +23,7 @@ const AddListingPageTwo = ({navigation}) => {
         width: 'auto',
         flex: 1,
         position: 'relative',
-        backgroundColor: COLORS.background,
+        backgroundColor: COLORS.white,
       }}>
       <View>
         <TopBar style={{position: 'absolute'}} />
@@ -52,14 +41,14 @@ const AddListingPageTwo = ({navigation}) => {
           <View style={{marginBottom: 31}}>
             <DropDown
               placehoder="Size"
-              choice={speciesSize}
+              choice={['Tiny', 'Small', 'Medium', 'Large']}
               setSelected={val => setSize(val)}
             />
           </View>
           <View style={{marginBottom: 31}}>
             <DropDown
               placehoder="Gender"
-              choice={SpeciesGender}
+              choice={['Male', 'Female', 'Unknown']}
               setSelected={val => setGender(val)}
             />
           </View>
@@ -73,7 +62,12 @@ const AddListingPageTwo = ({navigation}) => {
             <Btn_solid_regular
               title="Next"
               // eslint-disable-next-line no-undef
-              onPress={() => navigation.navigate('AddListing3')}
+              onPress={() =>
+                navigation.navigate('AddListing3', {
+                  setGender,
+                  setSize,
+                })
+              }
             />
           </View>
         </View>

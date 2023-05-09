@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {AsyncStorage} from 'react-native';
 import {View, Text, KeyboardAvoidingView} from 'react-native';
 import DropDown from '../components/DropDown';
 import InputField from '../components/InputField';
@@ -9,87 +10,229 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import TextHeading from './TextHeading';
 import TopBar from '../components/TopBar';
 import Btn_back_arrow from '../components/buttons/Btn_back_arrow';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView, Alert} from 'react-native-gesture-handler';
+import DescriptionBox from '../components/DescriptionBox';
+import SelectImage from '../components/SelectImage';
 
-const speciesData = [
-  {key: '2', value: 'Dog'},
-  {key: '3', value: 'Cat'},
-];
-const kindsData = [
-  {key: '2', value: 'Golden Retriever'},
-  {key: '2', value: 'Huskey'},
-  {key: '2', value: 'Labrador'},
-  {key: '2', value: 'Bulldog'},
-  {key: '3', value: ' British Shorthair'},
-  {key: '3', value: 'Maine coon'},
-  {key: '3', value: 'Tiger'},
-  {key: '3', value: 'Lion'},
-  {key: '3', value: 'Golden Retriever'},
-  {key: '3', value: 'Huskey'},
-  {key: '2', value: 'Labrador'},
-  {key: '2', value: 'Bulldog'},
-];
 const AddListingPageOne = ({navigation}) => {
   // eslint-disable-next-line no-undef
+  const [view, setView] = useState(1);
   const [species, setSpecies] = useState('');
-  const [kind, setKinds] = useState('');
+  const [animalBreed, setAnimalBreed] = useState('');
+  const [animalName, setAnimalname] = useState('');
+  const [age, setAge] = useState();
+  const [isMale, setIsmale] = useState(true);
+  const [animalSize, setAnimalsize] = useState('');
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [animalImageLink, setAnimalImageLink] = useState('');
+  const [address, setAddress] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState();
 
-  return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        position: 'absolute',
-        height: '100%',
-        width: '100%',
-        justifyContent: 'space-around',
-        backgroundColor: COLORS.background,
-      }}>
-      <TopBar style={{position: 'absolute'}} />
-      <Btn_back_arrow onPress={() => navigation.navigate('Home')} />
-      <ScrollView>
-        <View
-          style={{
-            flex: 1,
-          }}>
+  const handlePostRequest = () => {
+    const requestBody = {
+      view,
+      species,
+      animalBreed,
+      animalName,
+      age,
+      isMale,
+      animalSize,
+      selectedImages,
+      animalImageLink,
+      address,
+      description,
+      price,
+    };
+
+    fetch('https://swipperresource.azurewebsites.net/api/Listing', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+  };
+
+  if (view == 1) {
+    return (
+      <SafeAreaView
+        style={{
+          flex: 1,
+          position: 'absolute',
+          height: '100%',
+          width: '100%',
+          justifyContent: 'space-around',
+          backgroundColor: COLORS.white,
+        }}>
+        <TopBar style={{position: 'absolute'}} />
+        <Btn_back_arrow onPress={() => navigation.navigate('Home')} />
+        <ScrollView>
+          <View
+            style={{
+              flex: 1,
+            }}>
+            <View>
+              <TextHeading text_title="Add Listing" />
+            </View>
+            <View style={{marginBottom: 33}}>
+              <DropDown
+                placehoder="Type"
+                choice={['Dog']}
+                setSelected={val => {
+                  setSpecies(val);
+                }}
+                value={species}
+              />
+            </View>
+            <View style={{marginBottom: 24, alignSelf: 'center'}}>
+              <InputField
+                text_title="Breed"
+                onChangeText={newText => setAnimalBreed(newText)}
+                value={animalBreed}
+              />
+            </View>
+            <View style={{marginBottom: 28, alignSelf: 'center'}}>
+              <InputField
+                text_title="Name"
+                onChangeText={newText => setAnimalname(newText)}
+                value={animalName}
+              />
+            </View>
+            <View style={{marginBottom: 28, alignSelf: 'center'}}>
+              <InputField
+                text_title="Age"
+                onChangeText={newText => setAge(newText)}
+                value={age}
+              />
+            </View>
+            <View style={{alignSelf: 'center'}}>
+              <Btn_solid_regular
+                title="Next"
+                // eslint-disable-next-line no-undef
+                onPress={() => setView(2)}
+              />
+            </View>
+          </View>
+        </ScrollView>
+        {/* <NavigationBarContainer style={{position: 'absolute'}} /> */}
+      </SafeAreaView>
+    );
+  } else if (view == 2) {
+    //Second view of Addlisting
+    return (
+      <SafeAreaView
+        style={{
+          height: '100%',
+          width: 'auto',
+          flex: 1,
+          position: 'relative',
+          backgroundColor: COLORS.white,
+        }}>
+        <View>
+          <TopBar style={{position: 'absolute'}} />
+          <Btn_back_arrow onPress={() => setView(1)} />
+        </View>
+        <ScrollView>
+          <View
+            style={{
+              flex: 1,
+            }}>
+            <View>
+              <TextHeading text_title="Add Listing" />
+            </View>
+
+            <View style={{marginBottom: 31}}>
+              <DropDown
+                placehoder="Size"
+                choice={['Tiny', 'Small', 'Medium', 'Large']}
+                setSelected={val => setAnimalsize(val)}
+                value={animalSize}
+              />
+            </View>
+            <View style={{marginBottom: 31}}>
+              <DropDown
+                placehoder="Gender"
+                choice={['Male', 'Female', 'Unknown']}
+                setSelected={val => setIsmale(val)}
+                value={isMale}
+              />
+            </View>
+            <View style={{marginBottom: 28}}>
+              <DescriptionBox
+                palceholder="Give some information about animal...."
+                text_title="Description"
+                onChangeText={newText => setDescription(newText)}
+                value={description}
+              />
+            </View>
+            <View style={{alignSelf: 'center'}}>
+              <Btn_solid_regular
+                title="Next"
+                // eslint-disable-next-line no-undef
+                onPress={() => setView(3)}
+              />
+            </View>
+          </View>
+        </ScrollView>
+        {/* <NavigationBarContainer style={{position: 'absolute'}} /> */}
+      </SafeAreaView>
+    );
+  } else {
+    return (
+      <SafeAreaView
+        style={{
+          flex: 1,
+          position: 'absolute',
+          height: '100%',
+          width: '100%',
+          justifyContent: 'space-around',
+          backgroundColor: COLORS.white,
+        }}>
+        <View style={{flex: 1}}>
+          <TopBar style={{position: 'absolute'}} />
+          <Btn_back_arrow onPress={() => setView(2)} />
+
           <View>
             <TextHeading text_title="Add Listing" />
-          </View>
-          <View style={{marginBottom: 33}}>
-            <DropDown
-              placehoder="Type"
-              choice={speciesData}
-              setSelected={val => {
-                setSpecies(val);
-              }}
+            <View>
+              <InputField
+                text_title="Address"
+                onChangeText={newText => setAddress(newText)}
+                value={address}
+              />
+            </View>
+            <SelectImage
+              selectedImages={selectedImages}
+              setSelectedImages={setSelectedImages}
             />
           </View>
-          <View style={{marginBottom: 24}}>
-            <DropDown
-              search="true"
-              searchPlaceholder="search for breed... "
-              placehoder="Breed"
-              choice={kindsData.filter(breed => breed.key === species)}
-              setSelected={val => setKinds(val)}
+          <View>
+            <InputField
+              text_title="Price"
+              onChangeText={newtext => setPrice(newtext)}
+              value={price}
             />
           </View>
-          <View style={{marginBottom: 24, alignSelf: 'center'}}>
-            <InputField text_title="Name" />
-          </View>
-          <View style={{marginBottom: 28, alignSelf: 'center'}}>
-            <InputField text_title="Age" />
-          </View>
-          <View style={{alignSelf: 'center'}}>
-            <Btn_solid_regular
-              title="Next"
-              // eslint-disable-next-line no-undef
-              onPress={() => navigation.navigate('AddListing2')}
+          <View>
+            <InputField
+              text_title="Input the url"
+              value={animalImageLink}
+              onChangeText={newtext => setAnimalImageLink(newtext)}
             />
+          </View>
+          <View
+            style={{alignSelf: 'center', marginTop: 600, position: 'absolute'}}>
+            <Btn_solid_regular title="Add" onPress={handlePostRequest} />
           </View>
         </View>
-      </ScrollView>
-      {/* <NavigationBarContainer style={{position: 'absolute'}} /> */}
-    </SafeAreaView>
-  );
+        {/* <NavigationBarContainer style={{ position: 'absolute' }} /> */}
+      </SafeAreaView>
+    );
+  }
 };
 
 export default AddListingPageOne;
