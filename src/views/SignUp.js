@@ -81,7 +81,8 @@ const SignUp = ({navigation}) => {
     if(view == 1){ // First view of sign up
         return(
             <View style={styles.container}>
-                <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={require('../../assets/images/malinois-g4dd9f780d_1920.jpg')}/>    
+                <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={{uri:'https://cdn.pixabay.com/photo/2018/04/18/21/36/malinois-3331687_1280.jpg'}}/>    
+
                     <LoginTopBar text="Create your own account" onPress={() => navigation.navigate('Start')}/>
                     <ScrollView style={styles.inputContainer} contentContainerStyle={styles.scrollContainer}>  
                         <InputField text_title="Username" text_color={COLORS.white} onChangeText={newText => setUsername(newText)} value={username} />
@@ -97,7 +98,8 @@ const SignUp = ({navigation}) => {
     }else if (view == 2){ //Second view of sign up
         return (
             <View style={styles.container}>
-                <ImageBackground style={[styles.backgroundImage, {marginTop: 70,}]} resizeMode="cover" source={require('../../assets/images/cat-g2ff4963cc_1920.jpg')}/>
+                <ImageBackground style={[styles.backgroundImage, {marginTop: 70,}]} resizeMode="cover" source={{uri: 'https://cdn.pixabay.com/photo/2020/09/17/13/59/cat-5579221_1280.jpg'}}/>
+
                 <LoginTopBar text="Create your own account" onPress={() => setView(1)}/>
                 <ScrollView style={styles.inputContainer} contentContainerStyle={styles.scrollContainer}>  
                     <InputField text_title="First name" text_color={COLORS.white} onChangeText={newText => setFirstName(newText)} value={firstName} />
