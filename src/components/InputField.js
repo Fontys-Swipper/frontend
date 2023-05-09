@@ -8,9 +8,10 @@ const InputField = ({
   onChangeText,
   defaultValue,
   value,
-  icon, 
-  multiline = false, 
-  numberOfLines
+  icon,
+  multiline = false,
+  numberOfLines,
+  keyboardtype = 'none',
 }) => {
   const [text, setText] = React.useState('');
 
@@ -27,9 +28,10 @@ const InputField = ({
           value={value}
           onChangeText={onChangeText}
           defaultValue={defaultValue}
-          multiline = {multiline}
+          multiline={multiline}
           numberOfLines={4}
-          textAlignVertical={multiline? 'top': 'center'}
+          textAlignVertical={multiline ? 'top' : 'center'}
+          inputMode={keyboardtype}
         />
         {/* If no icon is given the margins are 0 so whole space is available for text input*/}
         <View
@@ -55,7 +57,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     borderTopEndRadius: 6,
     borderTopStartRadius: 6,
-
   },
   input: {
     fontFamily: 'Roboto-Light',
@@ -64,13 +65,15 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
   },
-  innerContainer: ({multiline}) => [{
-    height: multiline? 58: 35,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-    paddingVertival: 10,
-  }],
+  innerContainer: ({multiline}) => [
+    {
+      height: multiline ? 58 : 35,
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 15,
+      paddingVertival: 10,
+    },
+  ],
   iconContainer: {
     marginHorizontal: 6,
     alignItems: 'center',

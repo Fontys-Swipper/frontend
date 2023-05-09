@@ -1,7 +1,7 @@
-import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
-import { COLORS } from "../../assets/colors";
-import dogimage from "../../assets/images/dog_image.jpg"
+import React from 'react';
+import {View, Image, Text, StyleSheet} from 'react-native';
+import {COLORS} from '../../assets/colors';
+import dogimage from '../../assets/images/dog_image.jpg';
 
 const Feedcard = ({image = image, name = 'Name', price = '€€', type = 'Type', age = 'Age', timeOfAdding = 'Time Of Adding'}) => {
     return (
