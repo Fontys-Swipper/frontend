@@ -1,21 +1,41 @@
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 import { COLORS } from "../../assets/colors";
 import dogimage from "../../assets/images/dog_image.jpg"
+import {useNavigation} from '@react-navigation/native';
 
-const Favoritecard = ({image = dogimage, name = 'Name'}) => {
+const Favoritecard = ({
+    route = 'Route',
+    animalObject = animalData,
+    image = image,
+    name = 'Name'
+}) => {
+    const navigation = useNavigation();
+
+    const showAnimalProfile = (screenName, data) => {
+      navigation.navigate(screenName, data);
+    };
+
     return (
         <View style={[styles.container]}>
-            <Image source={image} style={[styles.image]}/>
+            <Image source={{uri: image}} style={[styles.image]}/>
             <View style={{marginTop: 12}}>
                 <View style={{flexDirection: "row"}}>
+                    <Pressable
+                        onPress={() =>
+                        showAnimalProfile('DetailView', {
+                            animalData: animalObject,
+                            route: route,
+                        })
+                    }>
                     <Text adjustsFontSizeToFit numberOfLines={1} 
                     style={[styles.nametext]}>{name}</Text>
+                    </Pressable>
                 </View>
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -35,6 +55,8 @@ const styles = StyleSheet.create({
         maxHeight: 50,
         maxWidth: 50,  
         borderRadius: 25,
+        height: 50,
+        width: 50,
     },
     nametext: {
         fontFamily: "RobotoSlab-SemiBold",

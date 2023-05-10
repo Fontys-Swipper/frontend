@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, TouchableOpacity, StyleSheet, Text, Image, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -6,12 +6,28 @@ import {COLORS} from '../../assets/colors';
 import logo from '../../assets/images/swipper-logo.png';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
-import { RemoveUserId } from '../utils/UserApi';
+import { GetUserId, RemoveUserId } from '../utils/UserApi';
+import { useRoute } from '@react-navigation/native';
 
 const TopBar = () => {
   const navigation = useNavigation();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userId, setUserId] = useState()
+  const [routeName, setcurrentRoute] = useState('')
+
+  const route = useRoute()
+
+  useEffect(() => {
+    setcurrentRoute(route.name)
+    GetUserId()
+      .then(response => {
+        setUserId(response)
+      })
+      .catch(error => {
+        setMessage(error);
+      });
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -21,6 +37,11 @@ const TopBar = () => {
     toggleMenu();
     navigation.navigate(screenName);
   };
+
+  const handleProfileNavigation = (screenName, id) => {
+    toggleMenu();
+    navigation.navigate(screenName, id, routeName);
+  }
 
   const logOutAlert = () =>
     Alert.alert('Logging out', 'Click OK to log out', [
@@ -45,7 +66,7 @@ const TopBar = () => {
       <Text style={styles.logo}>Swipper</Text>
       {isMenuOpen && (
         <View style={styles.menu}>
-          <TouchableOpacity onPress={() => handleNavigation('Profile')}>
+          <TouchableOpacity onPress={() => handleProfileNavigation('Profile', {id: userId, currentRoute: routeName})}>
             <Text style={styles.menuItem}>Profile</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleNavigation('AddListing1')}>

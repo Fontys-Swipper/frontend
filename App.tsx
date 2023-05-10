@@ -7,9 +7,7 @@ import Start from './src/views/Start';
 import Login from './src/views/Login';
 import NavigationBarContainer from './src/components/NavigationBarContainer';
 import AddListingPageOne from './src/views/AddListingPageOne';
-import AddListingPageTwo from './src/views/AddListingPageTwo';
 import SignUp from './src/views/SignUp';
-import AddListingPageThree from './src/views/AddListingPageThree';
 import Profile from './src/views/Profile';
 import Settings from './src/views/Settings';
 import UserInformation from './src/views/UserInformation';
@@ -52,7 +50,8 @@ const App = () => {
         <Stack.Screen name="UserInfo" component={UserInformation} />
         <Stack.Screen name="TermsOfService" component={TermsOfService} />
         <Stack.Screen name="ChangeMail" component={ChangeMail} />
-        <Stack.Screen name="ChangePassword" component={ChangePassword} /> 
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
+        <Stack.Screen name="DetailView" component={DetailView} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );
