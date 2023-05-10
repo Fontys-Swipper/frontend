@@ -17,13 +17,13 @@ import Feedcard from '../components/Feedcard';
 import {GetUser, GetUserId} from '../utils/UserApi.js';
 import {get_listing_byowner} from '../utils/listing.js';
 
-const Profile = id => {
+const Profile = ({route}) => {
   const [listings, setListings] = useState([]);
   const [userInfo, setUserInfo] = useState();
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
-    get_listing_byowner(id.route.params.id)
+    get_listing_byowner(route.params.id)
       .then(response => {
         setListings(response.data);
       })
@@ -31,7 +31,7 @@ const Profile = id => {
         console.log(error);
       });
 
-    GetUser(id.route.params.id)
+    GetUser(route.params.id)
       .then(response => {
         setUserInfo(response.data);
         console.log(response.data);
@@ -53,7 +53,7 @@ const Profile = id => {
   return (
     <View>
       <ScrollView style={{marginTop: 54}}>
-        <Btn_back_arrow />
+        <Btn_back_arrow onPress={() => navigation.navigate(route.params.currentRoute)} />
         {isLoading ? (
           <Text style={styles.userInfoTitle}>Retrieving Data ... </Text>
         ) : (
@@ -134,10 +134,10 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   userListings: {
-    flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 10,
     marginEnd: 20,
+    width: "100%"
   },
   circle_container: {
     flex: 1,
