@@ -3,10 +3,10 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import { COLORS } from "../../assets/colors";
 import dogimage from "../../assets/images/dog_image.jpg"
 
-const Favoritecard = ({image = dogimage, name = 'Name'}) => {
+const Favoritecard = ({image = image, name = 'Name'}) => {
     return (
         <View style={[styles.container]}>
-            <Image source={image} style={[styles.image]}/>
+            <Image source={{uri: image}} style={[styles.image]}/>
             <View style={{marginTop: 12}}>
                 <View style={{flexDirection: "row"}}>
                     <Text adjustsFontSizeToFit numberOfLines={1} 
@@ -35,6 +35,8 @@ const styles = StyleSheet.create({
         maxHeight: 50,
         maxWidth: 50,  
         borderRadius: 25,
+        height: 50,
+        width: 50,
     },
     nametext: {
         fontFamily: "RobotoSlab-SemiBold",
