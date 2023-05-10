@@ -48,10 +48,10 @@ const sortingTypes = [
 ];
 
 
-const Feed = ({navigation}) => {
+const Feed = ({navigation, listingData}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [species, setSpecies] = useState('Species');
-  const [gender, setGender] = useState('Gender');
+  const [isMale, setIsMale] = useState();
   const [location, setLocation] = useState('');
   const [sorting, setSorting] = useState('');
   const [allData, setAllData] = useState([]);
@@ -65,6 +65,8 @@ const Feed = ({navigation}) => {
       }).catch(error => {
         console.log(error)
       })
+    }).catch(error => {
+      console.log(error)
     })
   },[])
 
@@ -76,9 +78,9 @@ const Feed = ({navigation}) => {
         return item.animalSpecies === species;
       });
     }
-    if (gender != 'Gender') {
+    if (isMale != null) {
       filteredData = filteredData.filter(item => {
-        return item.gender === gender;
+        return item.isMale === isMale;
       });
     }
     if (sorting) {
@@ -99,6 +101,11 @@ const Feed = ({navigation}) => {
     }
     setData(filteredData);
   };
+
+  //Check if male for filtering data
+  const checkIfMale=() =>{
+    return isMale ? 'Male' : 'Female'
+  }
 
   return (
     <View style={styles.container}>
@@ -126,6 +133,7 @@ const Feed = ({navigation}) => {
         />
       </View>
 
+      {/* Top bar */}
       <View style={{position: 'absolute', top: 0, left: 0, width: '100%'}}>
         <TopBar />
       </View>
@@ -140,7 +148,7 @@ const Feed = ({navigation}) => {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <ScrollView contentContainerStyle={styles.modalScrollView}>
+            <ScrollView style={{width:'100%'}} contentContainerStyle={styles.modalScrollView}>
               <DropDown
                 placehoder={sorting ? sorting : 'Sort'}
                 choice={sortingTypes}
@@ -152,9 +160,17 @@ const Feed = ({navigation}) => {
                 setSelected={val => setSpecies(val)}
               />
               <DropDown
-                placehoder={gender != 'Gender' ? gender : 'Gender'}
+                placehoder={isMale == null ? 'Gender' : checkIfMale()}
                 choice={genderData}
-                setSelected={val => setGender(val)}
+                setSelected={val => {
+                  if(val == 'Gender'){
+                    setIsMale(null)
+                  }else if (val == 'Male') {
+                    setIsMale(true);
+                  } else {
+                    setIsMale(false);
+                  }
+                }}
               />
               <InputField
                 text_title="Location"
@@ -162,7 +178,7 @@ const Feed = ({navigation}) => {
                 onChangeText={newText => setLocation(newText)}
                 icon={
                   <MaterialIcons
-                    animal_name="search"
+                    name="search"
                     size={20}
                     color={COLORS.black}
                   />
