@@ -330,7 +330,7 @@ const Feed = ({navigation}) => {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <ScrollView contentContainerStyle={styles.modalScrollView}>
+            <ScrollView style={{width:'100%'}} contentContainerStyle={styles.modalScrollView}>
               <DropDown
                 placehoder={sorting ? sorting : 'Sort'}
                 choice={sortingTypes}
@@ -352,7 +352,7 @@ const Feed = ({navigation}) => {
                 onChangeText={newText => setLocation(newText)}
                 icon={
                   <MaterialIcons
-                    animal_name="search"
+                    name="search"
                     size={20}
                     color={COLORS.black}
                   />
@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
     },
     modalScrollView:{
-
+      alignItems: 'center'
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -411,7 +411,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         width: 300,
         height: '80%',
-        backgroundColor: COLORS.background,
+        backgroundColor: COLORS.white,
         borderRadius: 4,
         borderColor: COLORS.primary,
         borderWidth: 2,

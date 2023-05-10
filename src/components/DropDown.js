@@ -13,7 +13,7 @@ const DropDown = ({
   //const [selected, setSelected] = React.useState('');
 
   return (
-    <View>
+    <View style={{}}>
       <SelectList
         placeholder={placehoder}
         searchPlaceholder={searchPlaceholder}
@@ -51,6 +51,7 @@ const DropDown = ({
           borderBottomWidth: 1,
           borderRadius: 0,
           paddingLeft: 15,
+          minWidth: 258,
         }}
         setSelected={setSelected}
         data={choice}
