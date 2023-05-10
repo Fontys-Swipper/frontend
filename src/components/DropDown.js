@@ -9,6 +9,7 @@ const DropDown = ({
   search = '',
   setSelected,
   textColor = COLORS.black,
+  backgroundColor = COLORS.white,
 }) => {
   //const [selected, setSelected] = React.useState('');
 
@@ -19,7 +20,7 @@ const DropDown = ({
         searchPlaceholder={searchPlaceholder}
         search={search}
         dropdownStyles={{
-          backgroundColor: COLORS.white,
+          backgroundColor: backgroundColor,
           borderColor: COLORS.primary,
           borderWidth: 0,
           marginRight: '16%',
