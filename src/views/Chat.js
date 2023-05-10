@@ -7,7 +7,7 @@ import { COLORS } from "../../assets/colors.js"
 const Chat = ({navigation}) => {
     return (
       <View style={styles.container}>
-        <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={require('../../assets/images/rabbit.jpg')}>
+        <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={{uri: 'https://cdn.pixabay.com/photo/2020/02/29/18/59/rabbit-4890861_1280.jpg'}}>
           <View style={styles.innerContainer}>
               <Text style={styles.text}>Work in progress!</Text>
               <Text style={styles.textPara}>We are working hard to offer you more features in our next update :D</Text>

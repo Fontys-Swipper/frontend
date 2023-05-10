@@ -16,18 +16,18 @@ import { useNavigation } from '@react-navigation/native';
       <View style={{flex: 1}}>
         <ScrollView>
           <View style={styles.container}>
-              <Image style={styles.first_container} source={require('../../assets/images/malinois-g4dd9f780d_1920.jpg')}/>
+              <Image style={styles.first_container} source={{uri:'https://cdn.pixabay.com/photo/2018/04/18/21/36/malinois-3331687_1280.jpg'}}/>
                 <View style={styles.second_container}>
                     <Text style={styles.text}>Find animals you like</Text>
                     <View style={styles.circle_container}>
                       <TouchableOpacity onPress={() => handleNavigation('Feed')} style={styles.circle}>
-                        <Image source={require('../../assets/images/dog-gba5dc7061_1920.jpg')} style={styles.image_circle}/>
+                        <Image source={{uri:'https://cdn.pixabay.com/photo/2020/10/27/19/46/dog-5691733_1280.jpg'}} style={styles.image_circle}/>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => handleNavigation('Feed')} style={styles.circle}>
-                        <Image source={require('../../assets/images/cat-g2ff4963cc_1920.jpg')} style={styles.image_circle}/>
+                        <Image source={{uri:'https://cdn.pixabay.com/photo/2020/09/17/13/59/cat-5579221_1280.jpg'}} style={styles.image_circle}/>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => handleNavigation('Feed')} style={styles.circle}>
-                        <Image source={require('../../assets/images/rabbit.jpg')} style={styles.image_circle}/>
+                        <Image source={{uri:'https://cdn.pixabay.com/photo/2020/02/29/18/59/rabbit-4890861_1280.jpg'}} style={styles.image_circle}/>
                       </TouchableOpacity>
                     </View>
                 </View>
@@ -57,12 +57,13 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: COLORS.white,
       // height: 810,
-      paddingTop: 64,
-      paddingBottom: 30
+      paddingTop: 95,
+      paddingBottom: 126
     },
     first_container: {
-      height: 159,
-      width: 365,
+      marginTop: 70,
+      height: /*159*/ '25%',
+      width: '93%',
       borderRadius: 4,
       justifyContent: 'center',
       alignItems: 'center',
@@ -74,8 +75,8 @@ const styles = StyleSheet.create({
       borderRadius: 4,
     },
     second_container: {
-      height: 435, 
-      width: 365,
+      height: '67%' /*435*/, 
+      width: '93%',
       backgroundColor: '#F6F1DD',
       top: 9,
       borderRadius: 4,
@@ -84,9 +85,9 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'space-between',
-      gap: 25,
+      gap: 14,
       marginTop: 40,
-      marginHorizontal: 25
+      marginHorizontal: 20
     },
     circle: {
       height: 140,
@@ -99,8 +100,8 @@ const styles = StyleSheet.create({
       borderRadius: 70,
     },
     third_container: {
-      height: 199,
-      width: 365,
+      height: /*199*/ '30%',
+      width: '93%',
       backgroundColor: COLORS.secondary,
       top: 18,
       borderRadius: 4

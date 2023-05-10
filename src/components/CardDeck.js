@@ -442,54 +442,54 @@ export default class AnimalCards extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: COLORS.background,
-    borderRadius: 5,
-    borderWidth: 3,
-    borderColor: COLORS.primary,
-    height: 489,
-    width: 262,
-    position: 'absolute',
-    marginTop: screen_height / 5.5,
-  },
-  image: {
-    alignSelf: 'center',
-    marginTop: 5,
-    width: 248,
-    height: 400,
-    maxHeight: 400,
-    maxWidth: 248,
-  },
-  row: {
-    flexDirection: 'row',
-  },
-  textcontainer: {
-    flex: 2,
-    marginLeft: 12,
-    alignSelf: 'center',
-  },
-  nametext: {
-    fontFamily: 'RobotoSlab-SemiBold',
-    fontSize: 20,
-    maxWidth: 140,
-  },
-  infotext: {
-    fontFamily: 'Roboto-Medium',
-  },
-  price: {
-    fontFamily: 'Roboto-Medium',
-    fontSize: 15,
-    alignSelf: 'center',
-    maxWidth: 50,
-  },
-  buttoncontainer: {
-    flex: 0.7,
-    marginTop: 5,
-  },
-  favoriteIcon: {
-    position: 'absolute',
-    zIndex: 10,
-    top: 170,
-    right: 70,
-  },
-});
+    container: {       
+        backgroundColor: COLORS.background,
+        borderRadius: 5,
+        borderWidth: 3,
+        borderColor: COLORS.primary,
+        height: "63%",
+        width: "66.5%",
+        position: "absolute",
+        marginTop: screen_height/5.5,
+    },
+    image: {
+        alignSelf: "center",
+        marginTop: 5,
+        width: "98%",
+        height: "85%",
+        // maxHeight: 400,
+        // maxWidth: 248
+    },
+    row: {
+        flexDirection: "row",
+    },
+    textcontainer: {
+        flex: 2, 
+        marginLeft: 12,
+        alignSelf: "center"
+    },
+    nametext: {
+        fontFamily: "RobotoSlab-SemiBold",
+        fontSize: 20,
+        maxWidth: 140,
+    },
+    infotext: {
+        fontFamily: "Roboto-Medium"
+    },
+    price: {
+        fontFamily: "Roboto-Medium", 
+        fontSize: 15,
+        alignSelf: "center",
+        maxWidth: 50,
+    },
+    buttoncontainer: {
+        flex: 0.7, 
+        marginTop: 5,
+    },
+    favoriteIcon: {
+        position: "absolute", 
+        zIndex: 10, 
+        top: 170, 
+        right: 70, 
+    },
+})
