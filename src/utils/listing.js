@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const base_url = 'https://swipperresource.azurewebsites.net/api/listing';
-const likeanimal = 'https://swipperresource.azurewebsites.net/api/LikeAnimal';
+const base_url = "https://swipperresource.azurewebsites.net/api/listing"
+const likeanimal = "https://swipperresource.azurewebsites.net/api/LikeAnimal"
+const listingsForUser = "https://swipperresource.azurewebsites.net/api/GetListingsForUser"
 
 //Get all listing
 export async function get_all_listings() {
@@ -30,5 +31,9 @@ export async function delete_listing(id) {
 
 //Add animal to users liked animals by id
 export async function like_animal(userId, listingId) {
-    return axios.post('https://swipperresource.azurewebsites.net/api/LikeAnimal', null, {params: { userId: userId, animalId: listingId}})
+    return axios.post(likeanimal+"?userId="+userId+"&animalId="+listingId)
+}
+
+export async function get_listings_forUser(ownerId) {
+    return axios.get(listingsForUser+"?id="+ownerId)
 }

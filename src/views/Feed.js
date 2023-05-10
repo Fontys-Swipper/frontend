@@ -19,7 +19,8 @@ import DropDown from '../components/DropDown';
 import Btn_solid_big from '../components/buttons/Btn_solid_big';
 import InputField from '../components/InputField.js';
 import Btn_floating_round from '../components/buttons/Btn_floating_round';
-import {get_all_listings} from '../utils/listing';
+import { get_listings_forUser } from '../utils/listing';
+import { GetUserId } from '../utils/UserApi';
 
 //Dummy data for species dropdown
 const speciesData = [
@@ -46,196 +47,6 @@ const sortingTypes = [
   {key: '4', value: 'Price: High to low'},
 ];
 
-//Imges for dummy data
-image1 =
-  'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*';
-image2 = require('../../assets/images/dog_image.jpg');
-image3 = require('../../assets/images/dog-gba5dc7061_1920.jpg');
-image4 = require('../../assets/images/jack-russell-g49275d8de_1920.jpg');
-image5 = require('../../assets/images/malinois-g4dd9f780d_1920.jpg');
-image6 = require('../../assets/images/labrador-retriever-gb2d619e6b_1920.jpg');
-cat = require('../../assets/images/cat-g2ff4963cc_1920.jpg');
-rabbit = require('../../assets/images/rabbit.jpg');
-
-//Dummy data for feed
-const listingData = [
-  {
-    listing_id: 1,
-    animal_species: 'Dog',
-    animal_image_link: image1,
-    animal_name: 'Bella',
-    price: 50,
-    type: 'Akita',
-    age: 'Young',
-    timeOfAdding: '12/04/2023',
-    gender: 'Female',
-  },
-  {
-    listing_id: 2,
-    animal_species: 'Dog',
-    animal_image_link: image2,
-    animal_name: 'Max',
-    price: 500,
-    type: 'Dog',
-    age: 'Adult',
-    timeOfAdding: '12/04/2023',
-    gender: 'Male',
-  },
-  {
-    listing_id: 3,
-    animal_species: 'Dog',
-    animal_image_link: image3,
-    animal_name: 'Luna',
-    price: 100,
-    type: 'Dog',
-    age: 'Young',
-    timeOfAdding: '24/04/2023',
-    gender: 'Female',
-  },
-  {
-    listing_id: 4,
-    animal_species: 'Dog',
-    animal_image_link: image4,
-    animal_name: 'Charlie',
-    price: 200,
-    type: 'Jack Russell',
-    age: 'Young',
-    timeOfAdding: '23/04/2023',
-    gender: 'Male',
-  },
-  {
-    listing_id: 5,
-    animal_species: 'Dog',
-    animal_image_link: image5,
-    animal_name: 'Lucy',
-    price: 1000,
-    type: 'Malinois',
-    age: 'Old',
-    timeOfAdding: '16/04/2023',
-    gender: 'Female',
-  },
-  {
-    listing_id: 6,
-    animal_species: 'Dog',
-    animal_image_link: image6,
-    animal_name: 'Cooper',
-    price: 750,
-    type: 'Labrador Retriever',
-    age: 'Young',
-    timeOfAdding: '01/04/2023',
-    gender: 'Male',
-  },
-  {
-    listing_id: 7,
-    animal_species: 'Dog',
-    animal_image_link: image1,
-    animal_name: 'Daisy',
-    price: 250,
-    type: 'Akita',
-    age: 'Adult',
-    timeOfAdding: '13/04/2023',
-    gender: 'Female',
-  },
-  {
-    listing_id: 8,
-    animal_species: 'Dog',
-    animal_image_link: image2,
-    animal_name: 'Milo',
-    price: 325,
-    type: 'Dog',
-    age: 'Young',
-    timeOfAdding: '06/04/2023',
-    gender: 'Male',
-  },
-  {
-    listing_id: 9,
-    animal_species: 'Dog',
-    animal_image_link: image5,
-    animal_name: 'Luna',
-    price: 1000,
-    type: 'Malinois',
-    age: 'Young',
-    timeOfAdding: '24/04/2023',
-    gender: 'Female',
-  },
-  {
-    listing_id: 10,
-    animal_species: 'Dog',
-    animal_image_link: image6,
-    animal_name: 'Charlie',
-    price: 2000,
-    type: 'Labrador Retriever',
-    age: 'Young',
-    timeOfAdding: '23/04/2023',
-    gender: 'Male',
-  },
-  {
-    listing_id: 11,
-    animal_species: 'Cat',
-    animal_image_link: cat,
-    animal_name: 'Mia',
-    price: 250,
-    type: 'Cat',
-    age: 'Old',
-    timeOfAdding: '13/04/2023',
-    gender: 'Female',
-  },
-  {
-    listing_id: 12,
-    animal_species: 'Cat',
-    animal_image_link: cat,
-    animal_name: 'Oliver',
-    price: 325,
-    type: 'Cat',
-    age: 'Young',
-    timeOfAdding: '06/04/2023',
-    gender: 'Male',
-  },
-  {
-    listing_id: 13,
-    animal_species: 'Cat',
-    animal_image_link: cat,
-    animal_name: 'Kitty',
-    price: 1000,
-    type: 'Cat',
-    age: 'Young',
-    timeOfAdding: '24/04/2023',
-    gender: 'Female',
-  },
-  {
-    listing_id: 14,
-    animal_species: 'Cat',
-    animal_image_link: cat,
-    animal_name: 'Leo',
-    price: 2000,
-    type: 'Cat',
-    age: 'Adult',
-    timeOfAdding: '23/04/2023',
-    gender: 'Male',
-  },
-  {
-    listing_id: 15,
-    animal_species: 'Rabbit',
-    animal_image_link: rabbit,
-    animal_name: 'Floppy',
-    price: 200,
-    type: 'Rabbit',
-    age: 'Young',
-    timeOfAdding: '23/04/2023',
-    gender: 'Male',
-  },
-  {
-    listing_id: 16,
-    animal_species: 'Rabbit',
-    animal_image_link: rabbit,
-    animal_name: 'Bun Bun',
-    price: 100,
-    type: 'Rabbit',
-    age: 'Young',
-    timeOfAdding: '02/04/2023',
-    gender: 'Female',
-  },
-];
 
 const Feed = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -247,11 +58,13 @@ const Feed = ({navigation}) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    get_all_listings().then(result =>{
-      setData(result.data)
-      setAllData(result.data)
-    }).catch(error => {
-      console.log(error)
+    GetUserId().then(result => {
+      get_listings_forUser(result).then(result =>{
+        setData(result.data)
+        setAllData(result.data)
+      }).catch(error => {
+        console.log(error)
+      })
     })
   },[])
 

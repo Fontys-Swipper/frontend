@@ -13,8 +13,9 @@ import {
 import {COLORS} from '../../assets/colors';
 import Btn_like from './buttons/Btn_like';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {get_all_listings, like_animal} from '../utils/listing';
+import {get_listings_forUser, like_animal} from '../utils/listing';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {GetUserId} from "../utils/UserApi"
 
 const screen_widht = Dimensions.get('window').width;
 const screen_height = Dimensions.get('window').height;
@@ -190,16 +191,19 @@ export default class AnimalCards extends React.Component {
     });
   }
 
-  getAnimals() {
-    get_all_listings()
-      .then(result => {
-        this.setState({animals: result.data});
-        this.setState({isLoading: false});
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+    getAnimals() {
+        GetUserId().then(result => {
+            get_listings_forUser(result).then(result => {
+                this.setState({animals: result.data})
+                this.setState({isLoading: false})
+            }).catch(error => {
+                console.log(error)
+            })            
+        }).catch(error => {
+            console.log(error)
+        })
+
+    }
 
   componentDidMount() {
     this.getAnimals();
