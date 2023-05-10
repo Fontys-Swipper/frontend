@@ -1,5 +1,5 @@
-import React, { useState } from "react"; 
-import {Text, View, StyleSheet, Button, ImageBackground} from "react-native"
+import React, {useState} from 'react';
+import {Text, View, StyleSheet, Button, ImageBackground} from 'react-native';
 import {Dimensions} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -10,8 +10,8 @@ import Btn_solid_regular from "../components/buttons/Btn_solid_regular.js";
 import { AuthenticateUser, StoreUserId } from "../utils/UserApi.js";
 
 const Login = ({navigation}) => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
     const authenticateUser = () => {
         user = {
@@ -61,36 +61,34 @@ const Login = ({navigation}) => {
 export default Login;
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        marginBottom: 20,
-    },
-    container: {
-        flex: 1,
-    },
-    backgroundImage: {
-        flex: 1,
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
-    },
-    innerContainer: {
-        flex: 1,
-        backgroundColor: COLORS.black + 'b3',
-        justifyContent: "space-between",
-        alignItems: 'center'
-    },
-    buttonsContainer: {
-        alignItems: "center",
-        marginBottom: 100,
-    },
-    text: {
-        fontFamily: 'Gluten-SemiBold',
-        fontSize: 34,
-        color: COLORS.background,
-        marginTop: 50,
-    }
-
-})
-
+  inputContainer: {
+    marginBottom: 20,
+  },
+  container: {
+    flex: 1,
+  },
+  backgroundImage: {
+    flex: 1,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  },
+  innerContainer: {
+    flex: 1,
+    backgroundColor: COLORS.black + 'b3',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  buttonsContainer: {
+    alignItems: 'center',
+    marginBottom: 100,
+  },
+  text: {
+    fontFamily: 'Gluten-SemiBold',
+    fontSize: 34,
+    color: COLORS.background,
+    marginTop: 50,
+  },
+});
