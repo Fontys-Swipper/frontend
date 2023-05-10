@@ -16,7 +16,7 @@ export async function get_listing(id) {
 
 //Get users listing by ownerId
 export async function get_listing_byowner(ownerId) {
-  return axios.get(base_url + '/GetListingByOwner/' + ownerId);
+    return axios.get("https://swipperresource.azurewebsites.net/api/GetListingByOwner?ownerId="+ownerId)
 }
 
 //Add new listing to the database
