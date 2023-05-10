@@ -460,7 +460,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         marginTop: 5,
         width: "98%",
-        height: "85%",
+        height: "82%",
         // maxHeight: 400,
         // maxWidth: 248
     },

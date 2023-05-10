@@ -6,6 +6,7 @@ import TextHeading from './TextHeading';
 import Favoritecard from "../components/Favoritecard";
 
 import {favorite_animal } from '../utils/listing';
+import { GetUserId } from "../utils/UserApi";
 
 //Images for dummy data
 image1 = require('../../assets/images/akita.jpg');
@@ -29,9 +30,13 @@ const Favorites = ({navigation}) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    favorite_animal(7).then(result =>{
-      setData(result.data)
-      // console.log(data)
+    GetUserId().then(result => {
+      favorite_animal(result).then(result =>{
+        setData(result.data)
+        // console.log(data)
+      }).catch(error => {
+        console.log(error)
+      })
     }).catch(error => {
       console.log(error)
     })
