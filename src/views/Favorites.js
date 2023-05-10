@@ -5,8 +5,7 @@ import { COLORS } from "../../assets/colors";
 import TextHeading from './TextHeading';
 import Favoritecard from "../components/Favoritecard";
 
-import { get_all_listings, favorite_animal } from '../utils/listing';
-import Feedcard from "../components/Feedcard";
+import {favorite_animal } from '../utils/listing';
 
 //Images for dummy data
 image1 = require('../../assets/images/akita.jpg');
@@ -49,6 +48,8 @@ const Favorites = ({navigation}) => {
                 if(item != null && item.animalImageLink != null){
                   return (
                     <Favoritecard
+                      route={'Favorites'}
+                      animalObject={item}
                       key={index}
                       image={item.animalImageLink}
                       name={item.animalName}
