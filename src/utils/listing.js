@@ -15,7 +15,7 @@ export async function get_listing(id) {
 
 //Get users listing by ownerId
 export async function get_listing_byowner(ownerId) {
-    return axios.get(base_url+"/GetListingByOwner/"+ownerId)
+    return axios.get("https://swipperresource.azurewebsites.net/api/GetListingByOwner?ownerId="+ownerId)
 }
 
 //Add new listing to the database
@@ -30,5 +30,5 @@ export async function delete_listing(id) {
 
 //Add animal to users liked animals by id
 export async function like_animal(userId, listingId) {
-    return axios.post(likeanimal+"?userId="+userId+"&animalId="+listingId)
+    return axios.post('https://swipperresource.azurewebsites.net/api/LikeAnimal', null, {params: { userId: userId, animalId: listingId}})
 }
