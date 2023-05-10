@@ -5,10 +5,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AnimalCards from "../components/CardDeck";
 import { COLORS } from "../../assets/colors";
 import LinearGradient from "react-native-linear-gradient";
+import {useNavigation} from '@react-navigation/native';
 
 const screen_widht = Dimensions.get("window").width
 
-const Match = ({navigation}) => {
+const Match = () => {
+    const navigation = useNavigation();
     const [postitionX, setPositionX] = useState(new Animated.Value(0))
 
     const updatePosition = (pos) => {
@@ -30,7 +32,7 @@ const Match = ({navigation}) => {
     return (
         <SafeAreaView>   
             <View style={[styles.container]}>
-                <AnimalCards postitionX={updatePosition}/>
+                <AnimalCards postitionX={updatePosition} navigation={navigation} />
             </View>
             <Animated.View 
                 style={[styles.leftBorder, {opacity: leftBorderOpacity}]}>

@@ -42,8 +42,8 @@ const App = () => {
           options={{title: 'Start'}}
         />
         <Stack.Screen name="AddListing1" component={AddListingPageOne} />
-        <Stack.Screen name="AddListing2" component={AddListingPageTwo} />
-        <Stack.Screen name="AddListing3" component={AddListingPageThree} />
+        {/* <Stack.Screen name="AddListing2" component={AddListingPageTwo} /> */}
+        {/* <Stack.Screen name="AddListing3" component={AddListingPageThree} /> */}
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Profile" component={Profile} />
@@ -52,7 +52,8 @@ const App = () => {
         <Stack.Screen name="UserInfo" component={UserInformation} />
         <Stack.Screen name="TermsOfService" component={TermsOfService} />
         <Stack.Screen name="ChangeMail" component={ChangeMail} />
-        <Stack.Screen name="ChangePassword" component={ChangePassword} /> 
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
+        <Stack.Screen name="DetailView" component={DetailView} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );
