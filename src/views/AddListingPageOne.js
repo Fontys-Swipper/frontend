@@ -177,6 +177,7 @@ const AddListingPageOne = ({navigation}) => {
                 // value={animalSize} */}
               {/* /> */}
               <DropDown
+                backgroundColor={COLORS.background}
                 placehoder={animalSize ? animalSize : 'Animal size'}
                 choice={animal_Size}
                 setSelected={val => setAnimalsize(val)}
@@ -184,6 +185,7 @@ const AddListingPageOne = ({navigation}) => {
             </View>
             <View style={{marginBottom: 31}}>
               <DropDown
+                backgroundColor={COLORS.background}
                 placehoder={isMale ? 'Male' : 'Female'}
                 choice={animal_gender}
                 setSelected={val => {
