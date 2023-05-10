@@ -57,6 +57,16 @@ const SignUp = ({navigation}) => {
             "ownAnimals": ""
         }
 
+        //Check if all fields are filled, if not throw error
+        function validateData(){
+            for (const x in newUser) {
+                if(!newUser[x] && x != 'hasPet' && x != 'hasGarden' && x != 'companyName' && x != 'likedAnimals' && x != 'ownAnimals'){
+                    console.log('Fill all the information: '+ x)
+                    throw new Error('Please fill the all fields')
+                }
+            }
+        }
+
         //Create new user
         try {
             validateData()
@@ -87,18 +97,14 @@ const SignUp = ({navigation}) => {
 
                         <View style={styles.buttonsContainer}>
                             <Btn_solid_regular onPress={() => setView(2)} title="Next"/>
-                            {/* <Btn_outline_big onPress={() => navigation.navigate('Start')} title="Back"/> */}
                         </View>
                     </ScrollView>
-                {/* </View> */}
             </View> 
         )
     }else if (view == 2){ //Second view of sign up
         return (
             <View style={styles.container}>
                 <ImageBackground style={[styles.backgroundImage, {marginTop: 70,}]} resizeMode="cover" source={require('../../assets/images/cat-g2ff4963cc_1920.jpg')}/>
-                {/* <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={require('../../assets/images/malinois-g4dd9f780d_1920.jpg')}/>     */}
-                {/* <View style={styles.innerContainer}> */}
                 <LoginTopBar text="Create your own account" onPress={() => setView(1)}/>
                 <ScrollView style={styles.inputContainer} contentContainerStyle={styles.scrollContainer}>  
                     <InputField text_title="First name" text_color={COLORS.white} onChangeText={newText => setFirstName(newText)} value={firstName} />
@@ -108,31 +114,25 @@ const SignUp = ({navigation}) => {
 
                     <View style={styles.buttonsContainer}>
                         <Btn_solid_regular onPress={() => setView(3)} title="Next"/>
-                        {/* <Btn_outline_big onPress={() => navigation.navigate('Start')} title="Back"/> */}
                     </View>
                 </ScrollView>
-                {/* </View> */}
             </View> 
         )
     }else {
         return(
             <View style={styles.container}>
                 <ImageBackground style={[styles.backgroundImage, {marginTop: 70}]} resizeMode="cover" source={require('../../assets/images/cat-g2ff4963cc_1920.jpg')}/>
-                {/* <ImageBackground style={styles.backgroundImage} resizeMode="cover" source={require('../../assets/images/malinois-g4dd9f780d_1920.jpg')}/>     */}
-                {/* <View style={styles.innerContainer}> */}
                 <LoginTopBar text="Create your own account" onPress={() => setView(2)}/>
                 <ScrollView style={[styles.inputContainer,]} contentContainerStyle={styles.scrollContainer}>  
                     <SwitchInput text_title='Do you have a pet?' text_color={COLORS.white} isEnabled={hasPet} toggleSwitch={() => setHasPet(!hasPet)}/>
                     <SwitchInput text_title='Do you have a garden?' text_color={COLORS.white} isEnabled={hasGarden} toggleSwitch={() => setHasGarden(!hasGarden)}/>
                     <DropDown placehoder={living_space ? living_space : 'Living space'} textColor={COLORS.white} choice={living_spaceTypes} setSelected={val => setLiving_space(val)}/>
                     <InputField text_title="Description" text_color={COLORS.white} onChangeText={newText => setDescription(newText)} value={description} multiline={true}/>
-                    {/* <DropDown/> */}
+                    <Text style={styles.warningText} >{warning}</Text>
                     <View style={styles.buttonsContainer}>
                         <Btn_solid_regular onPress={() => CreateUser()} title="Sign up"/>
-                        {/* <Btn_outline_big onPress={() => navigation.navigate('Start')} title="Back"/> */}
                     </View>
                 </ScrollView>
-                {/* </View> */}
             </View> 
         )
     }
@@ -179,6 +179,11 @@ const styles = StyleSheet.create({
         fontSize: 34,
         color: COLORS.background,
         marginTop: 50,
+    },
+    warningText: {
+        color:'red',
+        fontFamily: 'Roboto-Medium',
+        fontSize: 17
     }
 
 })
