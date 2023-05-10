@@ -14,7 +14,6 @@ import Feedcard from '../components/Feedcard';
 import {COLORS} from '../../assets/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 import DropDown from '../components/DropDown';
 import Btn_solid_big from '../components/buttons/Btn_solid_big';
@@ -49,15 +48,14 @@ const sortingTypes = [
 ];
 
 
-const Feed = ({navigation}) => {
+const Feed = ({navigation, listingData}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [species, setSpecies] = useState('Species');
-  const [gender, setGender] = useState('Gender');
+  const [isMale, setIsMale] = useState();
   const [location, setLocation] = useState('');
   const [sorting, setSorting] = useState('');
   const [allData, setAllData] = useState([]);
   const [data, setData] = useState([]);
-  const tabBarHeight = useBottomTabBarHeight();
 
   useEffect(() => {
     GetUserId().then(result => {
@@ -78,9 +76,9 @@ const Feed = ({navigation}) => {
         return item.animalSpecies === species;
       });
     }
-    if (gender != 'Gender') {
+    if (isMale != null) {
       filteredData = filteredData.filter(item => {
-        return item.gender === gender;
+        return item.isMale === isMale;
       });
     }
     if (sorting) {
@@ -106,6 +104,11 @@ const Feed = ({navigation}) => {
     setData(filteredData);
   };
 
+  //Check if male for filtering data
+  const checkIfMale=() =>{
+    return isMale ? 'Male' : 'Female'
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={[styles.contentContainer]}>
@@ -117,6 +120,7 @@ const Feed = ({navigation}) => {
             name={item.animalName}
             price={item.price}
             type={item.animalSpecies}
+            isMale={item.isMale}
             age={item.age+" Years old"}
             timeOfAdding={item.listingDate.substring(0,10)}
           />
@@ -130,6 +134,7 @@ const Feed = ({navigation}) => {
         />
       </View>
 
+      {/* Top bar */}
       <View style={{position: 'absolute', top: 0, left: 0, width: '100%'}}>
         <TopBar />
       </View>
@@ -156,9 +161,17 @@ const Feed = ({navigation}) => {
                 setSelected={val => setSpecies(val)}
               />
               <DropDown
-                placehoder={gender != 'Gender' ? gender : 'Gender'}
+                placehoder={isMale == null ? 'Gender' : checkIfMale()}
                 choice={genderData}
-                setSelected={val => setGender(val)}
+                setSelected={val => {
+                  if(val == 'Gender'){
+                    setIsMale(null)
+                  }else if (val == 'Male') {
+                    setIsMale(true);
+                  } else {
+                    setIsMale(false);
+                  }
+                }}
               />
               <InputField
                 text_title="Location"
