@@ -26,20 +26,22 @@ Welcome to Swipper, the platform that connects animal enthusiasts! This project 
 1. **Clone the Repository:**
    git clone https://github.com/Fontys-Swipper/frontend.git
 
-2. **Navigate to the Project:
-cd AnimalHub
+2. **Navigate to the Project:**
+   cd AnimalHub
 
-3. **Install Dependencies:
-npm install
+3. **Install Dependencies:**
+   npm install
 
-4. **Run the App:
-npx react-native run-android   # For Android
+4. **Run the App:**
+   npx react-native run-android   # For Android
 
 5. **Explore and Contribute:
-https://github.com/JoneMus
-https://github.com/nismq
-https://github.com/Clarks90100
-https://github.com/RajatRijal
-https://github.com/WellyBelly
+<ul>
+<li> https://github.com/JoneMus </li>
+<li> https://github.com/nismq </li>
+<li> https://github.com/Clarks90100 </li>
+<li> https://github.com/RajatRijal </li>
+<li> https://github.com/WellyBelly </li>
+</ul>
 
 
