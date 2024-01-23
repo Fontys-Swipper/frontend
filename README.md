@@ -24,7 +24,7 @@ Welcome to Swipper, the platform that connects animal enthusiasts! This project 
 ## Getting Started
 
 1. **Clone the Repository:**
-   git clone https://github.com/your-username/AnimalHub.git
+   git clone https://github.com/Fontys-Swipper/frontend.git
 
 2. **Navigate to the Project:
 cd AnimalHub
